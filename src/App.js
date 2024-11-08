@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import {
     BrowserRouter,
     Routes,
@@ -9,6 +9,7 @@ import {
 import Dashboard from "./pages/dashboard/dashboard";
 import Login from "./pages/login/login";
 import Deadlines from "./pages/deadlines/deadlines";
+import Course from "./pages/course/course"
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route element={<Navbar />}>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/deadlines" element={<Deadlines />}/>
+                    <Route path="/courses/:name" element={<Course />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
