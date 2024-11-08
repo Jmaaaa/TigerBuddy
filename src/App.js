@@ -1,27 +1,29 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Routes,
     Route,
+    Navigate
 } from "react-router-dom";
-import Home from "./pages";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboard/dashboard";
 import Login from "./pages/login/login";
 import Deadlines from "./pages/deadlines/deadlines";
 
 function App() {
     return (
-        <Router>
-            <Navbar />
+        <BrowserRouter>
             <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/" element={<Navigate to="/login" replace/>} />
                 <Route path="/login" element={<Login />}/>
-                <Route path="/deadlines" element={<Deadlines />}/>
+                <Route element={<Navbar />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/deadlines" element={<Deadlines />}/>
+                </Route>
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
+
 
 export default App;
