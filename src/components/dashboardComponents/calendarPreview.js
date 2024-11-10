@@ -8,7 +8,7 @@ const CalendarPreview = () => {
         // Grab assignments due on the server.
         let weekData = [];
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 12; i++) {
             let curDay = new Date(today);
             curDay.setDate(today.getDate() + i);
             let assignments = [];
@@ -25,7 +25,7 @@ const CalendarPreview = () => {
 
                 dueDate.setHours(23, 59, 59);
                 assignments.push({
-                    name: "Assignment 3 sdhfgsldjfhghjlg",
+                    name: "Assignment 3",
                     due: dueDate,
                     submitted: false
                 });
@@ -45,7 +45,7 @@ const CalendarPreview = () => {
             <div className="row w-100 h-100 flex-sm-column flex-lg-row">
             {thisWeek && thisWeek.map((data, idx) => {
                 return (
-                <div className="col-md-4 col-lg-3 col-xl-2 p-1" key={idx} style={{height: '8rem'}}>
+                <div className="col-md-3 col-lg-2 p-1" key={idx} style={{height: '8rem'}}>
                     <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
                         <span className="flex-shrink-0 mb-1">
                             {data.day.getDate()}
