@@ -7,10 +7,10 @@ const CourseCard = ({course}) => {
 
     return(
         <Link to={`../courses/${code}`}>
-        <div>
-            <h3>{name}</h3>
-            <p>Grade: {grade}</p>
-        </div>
+            <div className="border p-2 m-2">
+                <h3>{name}</h3>
+                <p>Grade: {grade}</p>
+            </div>
         </Link>
     );
 };

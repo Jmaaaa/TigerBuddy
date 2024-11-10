@@ -1,5 +1,5 @@
 import React from "react";
-import CourseCard from "./courseCard";
+import CourseCard from "../components/courseCard";
 
 const Dashboard = () => {
     
@@ -12,14 +12,19 @@ const Dashboard = () => {
 
 
     return (
-        <div>
+        <div className="d-flex flex-column">
             <h1>
                 Welcome to the dashboard
             </h1>
+            <div className="d-flex flex-row">
+                <div>
+                    {courses.map((course) => (
+                        <CourseCard key={course.id} course={course}/>
+                    ))}
+                </div>
+            </div>
             <div>
-                {courses.map((course) => (
-                    <CourseCard key={course.id} course={course}/>
-                ))}
+
             </div>
         </div>
     );

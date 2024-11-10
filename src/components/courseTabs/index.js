@@ -1,0 +1,5 @@
+export {default as CourseAnnouncements } from "./courseAnnouncements"
+export {default as CourseAssignments } from "./courseAssignments"
+export {default as CourseGrades } from "./courseGrades"
+export {default as CourseHome } from "./courseHome"
+export {default as CourseModules } from "./courseModules"

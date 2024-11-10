@@ -1,0 +1,5 @@
+export {default as Course } from "./course"
+export {default as Dashboard } from "./dashboard"
+export {default as Deadlines } from "./deadlines/deadlines"
+export {default as Login } from "./login/login"
+export {default as Grades } from "./grades"
