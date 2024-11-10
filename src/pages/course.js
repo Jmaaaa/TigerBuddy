@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
+import { courseData } from "../components/data";
 
 const Course = () => {
     const { name } = useParams();
@@ -20,7 +21,7 @@ const Course = () => {
                     <Link to={"./grades"} className="p-2">Grades</Link>
                 </div>
                 <div className="p-3 w-100">
-                    <Outlet/>
+                <Outlet context={{ courseGrades: courseData[name] || [] }} />
                 </div>
             </div>
 

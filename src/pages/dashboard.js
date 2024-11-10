@@ -5,9 +5,9 @@ const Dashboard = () => {
     
     const courses = [
         {id: 1, code:"ABC1000", name: "Course A", grade: "100% (A+)"},
-        {id: 2, code:"ABC1001", name: "Course B", grade: "100% (A+)"},
-        {id: 3, code:"ABC1002", name: "Course C", grade: "100% (A+)"},
-        {id: 4, code:"ABC1003", name: "Course D", grade: "100% (A+)"},
+        {id: 2, code:"ABC2345", name: "Course B", grade: "100% (A+)"},
+        {id: 3, code:"ABC3333", name: "Course C", grade: "100% (A+)"},
+        {id: 4, code:"ABC1111", name: "Course D", grade: "100% (A+)"},
     ]
 
 
