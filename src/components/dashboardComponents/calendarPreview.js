@@ -25,7 +25,7 @@ const CalendarPreview = () => {
 
                 dueDate.setHours(23, 59, 59);
                 assignments.push({
-                    name: "Assignment 3 sdhfgsldjfhghjlg",
+                    name: "Assignment 3",
                     due: dueDate,
                     submitted: false
                 });
