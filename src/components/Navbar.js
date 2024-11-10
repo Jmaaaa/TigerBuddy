@@ -5,8 +5,8 @@ const Navbar = () => {
     return (
         <>
             <div className="d-flex p-2 bg-purple sticky-top">
-                <h1 className="text-white">Tiger Buddy</h1>
-                <div className="d-flex ml-auto">
+                <h1 className="text-white me-auto">Tiger Buddy</h1>
+                <div className="d-flex">
                     <Link to="/dashboard" className="m-2 p-2 text-white">Dashboard</Link>
                     <Link to="/deadlines" className="m-2 p-2 text-white">Deadlines</Link>
                     <Link to="/grades" className="m-2 p-2 text-white">Grades</Link>
