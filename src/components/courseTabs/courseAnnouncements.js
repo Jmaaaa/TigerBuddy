@@ -4,7 +4,7 @@ const CourseAnnouncements = () => {
     
     return (
         <h1>
-            Welcome to the announcments
+            Welcome to the announcements
         </h1>
     );
 };

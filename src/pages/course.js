@@ -6,8 +6,8 @@ const Course = () => {
     
     return (
         <>
-            <div className="p-5 border">
-                <h1>
+            <div className="p-5 border d-flex align-items-center bg-light h-10">
+                <h1 className="m-2">
                     {name}
                 </h1>
             </div>
