@@ -12,14 +12,14 @@ const Dashboard = () => {
 
 
     return (
-        <>
-            <div className="p-5 border d-flex align-items-center bg-light h-10">
-                <h1 className="m-2">
+        <div className="d-flex flex-column h-100">
+            <div className="border d-flex align-items-center bg-light" style={{height: "20%"}}>
+                <h1 className="">
                     Welcome to the dashboard
                 </h1>
             </div>
-            <div className="d-flex flex-row p-3">
-                <div className="d-flex flex-column">
+            <div className="d-flex flex-row p-3 " style={{height: "80%"}}>
+                <div className="d-flex flex-column w-25">
                     {courses.map((course) => (
                         <CourseCard key={course.id} course={course}/>
                     ))}
@@ -55,7 +55,7 @@ const Dashboard = () => {
 
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -27,60 +27,62 @@ const Grades = () => {
             <div className="p-4 d-flex align-items-center h-10 bg-light">
                 <h1 className="m-5" >Grade Summary</h1>
             </div>
-            <table className="w-75 mt-5  border container">
-                <thead className="border-bottom bg">
-                    <tr>
-                        <th scope="col" className="p-2">Course</th>
-                        <th scope="col" className="p-2">Instructor</th>
-                        <th scope="col" className="p-2">Grade</th>
-                        <th scope="col" className="p-2">Hours</th>
-                        <th scope="col" className="p-2">Points</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {grades.map((grade,index) => (
-                        <React.Fragment key={index}> 
-                            <tr data-bs-toggle="collapse" 
-                            data-bs-target={`#${index}-subtable`}
-                            className="border">
-                                <td className="p-2">{grade.code}</td>
-                                <td className="p-2">{grade.instructor}</td>
-                                <td className="p-2">{grade.grade}</td>
-                                <td className="p-2">{grade.hours}</td>
-                                <td className="p-2">{grade.points}</td>
-                            </tr>
-                            <tr className="bg-light">
-                                <td colSpan={5} className="p-0">
-                                    <div className="collapse" id={`${index}-subtable`}>
-                                        <div className="d-flex">
-                                            <table className="border bg-white m-1 w-100">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col" className="p-2">Grade Item</th>
-                                                        <th scope="col" className="p-2">Weight</th>
-                                                        <th scope="col" className="p-2">Grade</th>
-                                                        <th scope="col" className="p-2">Range</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {courseData[grade.code].map((item, index) => (
-                                                        <tr key={index}>
-                                                            <td className="p-2">{item.assignment}</td>
-                                                            <td className="p-2">-</td>
-                                                            <td className="p-2">{item.grade}</td>
-                                                            <td className="p-2">-</td>
-                                                        </tr>   
-                                                    ))}
-                                                </tbody>
-                                            </table>
+            <div className="d-flex justify-content-center p-5">
+                <table className="border w-75 mb-5">
+                    <thead className="border-bottom bg">
+                        <tr>
+                            <th scope="col" className="p-2">Course</th>
+                            <th scope="col" className="p-2">Instructor</th>
+                            <th scope="col" className="p-2">Grade</th>
+                            <th scope="col" className="p-2">Hours</th>
+                            <th scope="col" className="p-2">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {grades.map((grade,index) => (
+                            <React.Fragment key={index}> 
+                                <tr data-bs-toggle="collapse" 
+                                data-bs-target={`#${index}-subtable`}
+                                className="border">
+                                    <td className="p-2">{grade.code}</td>
+                                    <td className="p-2">{grade.instructor}</td>
+                                    <td className="p-2">{grade.grade}</td>
+                                    <td className="p-2">{grade.hours}</td>
+                                    <td className="p-2">{grade.points}</td>
+                                </tr>
+                                <tr className="bg-light">
+                                    <td colSpan={5} className="p-0">
+                                        <div className="collapse" id={`${index}-subtable`}>
+                                            <div className="d-flex">
+                                                <table className="border bg-white m-1 w-100">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" className="p-2">Grade Item</th>
+                                                            <th scope="col" className="p-2">Weight</th>
+                                                            <th scope="col" className="p-2">Grade</th>
+                                                            <th scope="col" className="p-2">Range</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {courseData[grade.code].map((item, index) => (
+                                                            <tr key={index}>
+                                                                <td className="p-2">{item.assignment}</td>
+                                                                <td className="p-2">-</td>
+                                                                <td className="p-2">{item.grade}</td>
+                                                                <td className="p-2">-</td>
+                                                            </tr>   
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </React.Fragment>
-                    ))}
-                </tbody>
-            </table>
+                                    </td>
+                                </tr>
+                            </React.Fragment>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 };
