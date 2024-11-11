@@ -1,8 +1,11 @@
 import React from "react"
-import { courseData } from "../data";
+import { courseData, getAverage, getLetterGrade } from "../data";
 
 const CourseGradeTable = ({code}) => {
-        console.log(code);
+
+    const letterGrade = getLetterGrade(getAverage(code));
+
+
     return(
         
         <div className="d-flex">
@@ -11,8 +14,8 @@ const CourseGradeTable = ({code}) => {
                     <tr>
                         <th scope="col" className="p-2">Grade Item </th>
                         <th scope="col" className="p-2">Weight</th>
-                        <th scope="col" className="p-2">Grade</th>
                         <th scope="col" className="p-2">Range</th>
+                        <th scope="col" className="p-2">Grade</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,10 +23,14 @@ const CourseGradeTable = ({code}) => {
                         <tr key={index}>
                             <td className="p-2">{item.assignment}</td>
                             <td className="p-2">-</td>
-                            <td className="p-2">{item.grade}</td>
-                            <td className="p-2">-</td>
+                            <td className="p-2"></td>
+                            <td className="p-2"> {item.percent}% ({item.grade})</td>
                         </tr>   
                     ))}
+                    <tr>
+                        <td className="p-2" colSpan={3}>Course Total</td>
+                        <td className="p-2">{letterGrade}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -1,16 +1,14 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { courseData } from "../components/data";
+import { courseData,getAverage,getLetterGrade } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
 
 const Grades = () => {
     
-    const grades = [
-        {id: 1, code:"ABC1000", instructor: "First Name Last Name", grade: "100% (A+)", hours: "-", points: "-"},
-        {id: 2, code:"ABC2345", instructor: "First Name Last Name", grade: "100% (A+)", hours: "-", points: "-"},
-        {id: 3, code:"ABC3333", instructor: "First Name Last Name", grade: "100% (A+)", hours: "-", points: "-"},
-        {id: 4, code:"ABC1111", instructor: "First Name Last Name", grade: "100% (A+)", hours: "-", points: "-"},
-    ];
+    const gradeList = Object.keys(courseData).map((course) => ({
+        code: course,
+        grade: getLetterGrade(getAverage(course)),
+    }));
     
 
     const navigate = useNavigate();
@@ -40,7 +38,7 @@ const Grades = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {grades.map((grade,index) => (
+                        {gradeList.map((grade,index) => (
                             <React.Fragment key={index}> 
                                 <tr data-bs-toggle="collapse" 
                                 data-bs-target={`#${index}-subtable`}

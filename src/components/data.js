@@ -15,22 +15,40 @@ export const deadlinesData = {
 
 export const courseData = {
     "ABC1000": [
-        { assignment: "Homework 1", grade: "A" },
-        { assignment: "Quiz 1", grade: "B" },
+        { assignment: "Homework 1", grade: "A", percent: 95, weight: 10},
+        { assignment: "Quiz 1", grade: "B", percent: 86, weight: 20 },
     ],
     "ABC2345": [
-        { assignment: "Essay Draft", grade: "A-" },
-        { assignment: "Project 1", grade: "B+" },
+        { assignment: "Essay Draft", grade: "A-", percent: 92, weight: 10},
+        { assignment: "Project 1", grade: "B+", percent: 88, weight: 20},
     ],
     "ABC3333": [
-        { assignment: "Lab", grade: "A" },
-        { assignment: "Project 1", grade: "B-" },
+        { assignment: "Lab", grade: "A", percent: 96, weight: 10 },
+        { assignment: "Project 1", grade: "B-", percent: 81, weight: 30 },
     ],
     "ABC1111": [
-        { assignment: "Program 0", grade: "B+" },
-        { assignment: "Project 1", grade: "B+" },
+        { assignment: "Program 0", grade: "B+", percent: 87, weight: 5},
+        { assignment: "Project 1", grade: "B+", percent: 88, weight: 15 },
     ],
 }
+
+export const getAverage = (code) => courseData[code].reduce((acc, item) => acc + item.percent, 0)/courseData[code].length;
+export const getLetterGrade = ((grade) => {
+    if(grade>=97) return `${grade}% (A+)`;
+    if(grade>=93) return `${grade}% (A)`;
+    if(grade>=90) return `${grade}% (A-)`;
+    if(grade>=87) return `${grade}% (B+)`;
+    if(grade>=83) return `${grade}% (B)`;
+    if(grade>=80) return `${grade}% (B-)`;
+    if(grade>=77) return `${grade}% (C+)`;
+    if(grade>=73) return `${grade}% (C)`;
+    if(grade>=70) return `${grade}% (C-)`;
+    if(grade>=67) return `${grade}% (D+)`;
+    if(grade>=63) return `${grade}% (D)`;
+    if(grade>=60) return `${grade}% (D-)`;
+    return `${grade}% (F)`;
+});
+
 //generated sample course overviews 
 export const overviewData = {
     "ABC1000" : [
