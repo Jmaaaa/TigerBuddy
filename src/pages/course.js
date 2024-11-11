@@ -7,8 +7,8 @@ const Course = () => {
     
     return (
         <>
-            <div className="p-5 border d-flex align-items-center bg-light h-10">
-                <h1 className="m-2">
+            <div className=" border d-flex align-items-center bg-light" style={{height: "20%"}}>
+                <h1 className="mx-5">
                     {name}
                 </h1>
             </div>

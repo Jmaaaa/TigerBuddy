@@ -1,23 +1,15 @@
 import React from "react";
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
+import CourseGradeTable from "./courseGradeTable";
 
 const CourseGrades = () => {
     const { courseGrades } = useOutletContext();
+    const { name: courseName } = useParams();
     
     return (
        <div>
             <h1>Welcome to the Grades</h1>
-            {courseGrades.length > 0 ? (
-                <ul>
-                    {courseGrades.map((grade, index) => (
-                        <li key={index}>
-                            {grade.assignment}: {grade.grade}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No grades available for this course.</p>
-            )}
+            <CourseGradeTable code={courseName}/>
         </div>
     );
 };
