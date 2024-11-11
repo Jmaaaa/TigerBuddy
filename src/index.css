@@ -26,5 +26,13 @@ code {
 }
 
 .bg-purple{
-  background-color: blueviolet;
+  background-color: #461D7C;
+}
+
+.color-gold{
+  color: #FFBD59;
+}
+
+.color-purple{
+  color: #461D7C
 }
