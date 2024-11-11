@@ -62,3 +62,54 @@ export const overviewData = {
         { officeHours: "Fridays 3 PM - 5 PM (in-person and virtual)."}
     ]
 }
+//generated announcements to list in course announcements page
+export const courseAnnouncementsData = {
+    "ABC1000": [
+        {
+            title: "Assignment 3 Released",
+            announcement: "The third assignment has been released and is due on November 20th. Please make sure to review the instructions carefully and reach out with any questions.",
+            date: "2024-11-10",
+        },
+        {
+            title: "Guest Lecture This Week",
+            announcement: "We are excited to host a guest lecture by Dr. Alice Johnson on the topic of 'Data Ethics in Machine Learning'. Join us on November 15th at 2 PM.",
+            date: "2024-11-08",
+        },
+    ],
+    "ABC2345": [
+        {
+            title: "Creative Writing Contest",
+            announcement: "Enter your best short story or poem in our class-wide creative writing contest! Submissions are due by December 1st.",
+            date: "2024-11-05",
+        },
+        {
+            title: "Peer Review Reminder",
+            announcement: "Don't forget to complete your peer reviews by this Friday. This is a critical part of your participation grade.",
+            date: "2024-11-07",
+        },
+    ],
+    "ABC3333": [
+        {
+            title: "Marketing Project Updates",
+            announcement: "Project 1 has been extended by one week due to popular demand. The new submission date is November 25th.",
+            date: "2024-11-09",
+        },
+        {
+            title: "Midterm Exam Results",
+            announcement: "Midterm exam results are now available on the course portal. Please review your scores and reach out during office hours for any concerns.",
+            date: "2024-11-06",
+        },
+    ],
+    "ABC1111": [
+        {
+            title: "New Coding Challenge Posted",
+            announcement: "A new optional coding challenge has been posted. This is a great opportunity to sharpen your JavaScript skills. Due by November 30th.",
+            date: "2024-11-04",
+        },
+        {
+            title: "Class Schedule Change",
+            announcement: "Next week's class will be moved to Friday due to a public holiday on Wednesday. Please check the schedule for updated times.",
+            date: "2024-11-01",
+        },
+    ],
+};

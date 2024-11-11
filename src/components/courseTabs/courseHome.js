@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { overviewData } from "../../components/data.js"; // Corrected variable name
+import { overviewData } from "../../components/data.js"; 
 import './courseHome.css';
 
 const CourseHome = () => {
-    const { name: courseName } = useParams(); // Assuming the route provides a `courseId` parameter
+    const { name: courseName } = useParams();
 
-    // Fetch the overview data for the given courseId
+
     const courseOverview = overviewData[courseName] || [];
 
     return (
