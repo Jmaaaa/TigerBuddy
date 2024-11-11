@@ -29,15 +29,15 @@ h1 {
 }
 
 .login-input:hover {
-    border-color: #6200ff; /* Optional color change on hover */
-    border-bottom: 2px solid #6200ff;
+    border-color: #461D7C; /* Optional color change on hover */
+    border-bottom: 2px solid #461D7C;
 }
 
 .login-button {
     padding: 0.8rem;
     font-size: 1rem;
     color: #fff;
-    background-color: #6200ff;
+    background-color: #461D7C;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -45,6 +45,6 @@ h1 {
 }
 
 .login-button:hover {
-    background-color: #6200ff7e; /* Darker shade for hover */
+    background-color: #271045; /* Darker shade for hover */
     text-decoration: underline;
 }
