@@ -1,15 +1,8 @@
 import React from "react";
 import { CourseCard, AnnouncementCard, CalendarPreview, FeedbackCard} from "../components/dashboardComponents";
+import { courseCodes } from "../components/data";
 
 const Dashboard = () => {
-    
-    const courses = [
-        {id: 1, code:"ABC1000", name: "Course A", grade: "100% (A+)"},
-        {id: 2, code:"ABC2345", name: "Course B", grade: "100% (A+)"},
-        {id: 3, code:"ABC3333", name: "Course C", grade: "100% (A+)"},
-        {id: 4, code:"ABC1111", name: "Course D", grade: "100% (A+)"},
-    ]
-
 
     return (
         <div className="d-flex flex-column h-100">
@@ -21,8 +14,8 @@ const Dashboard = () => {
             </div>
             <div className="d-flex flex-row p-3 " style={{height: "80%"}}>
                 <div className="d-flex flex-column w-25">
-                    {courses.map((course) => (
-                        <CourseCard key={course.id} course={course}/>
+                    {courseCodes.map((code,index) => (
+                        <CourseCard key={index} code={code}/>
                     ))}
                 </div>
                 <div className="d-flex flex-column p-3 w-100">

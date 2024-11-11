@@ -1,3 +1,17 @@
+export const courseCodes = [
+    "ABC1000",
+    "ABC2345",
+    "ABC3333",
+    "ABC1111",
+];
+
+export const nameData = {
+    "ABC1000" : "CourseA",
+    "ABC2345" : "CourseB",
+    "ABC3333" : "CourseC",
+    "ABC1111" : "CourseD",
+}
+
 export const deadlinesData = {
     "ABC1000": [
         { id: 1, dateDue: "2024-11-15", timeDue: "23:59", course: "Course A", assignment: "Homework 3", submitted: false },

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import courseImage from "../../assets/courseImage.png"
+import { getAverage, getLetterGrade, nameData } from "../data";
 
-const CourseCard = ({course}) => {
-    const {code, name, grade} = course;
+const CourseCard = ({code}) => {
+    const name = nameData[code];
+    const grade = getLetterGrade(getAverage(code));
 
 
     return(
@@ -13,7 +15,7 @@ const CourseCard = ({course}) => {
                 <div className="overflow-hidden h-50" style={{backgroundImage: `url(${courseImage})`}}>
                 </div>
                 <div className="m-2 h-50">
-                    <h4 className="m-0">{name}</h4>
+                    <h4 className="m-0">{code} - {name}</h4>
                     <p className="m-0">Grade: {grade}</p>
                 </div>
             </div>

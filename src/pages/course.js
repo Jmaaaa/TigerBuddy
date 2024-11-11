@@ -1,15 +1,16 @@
 import React from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
-import { courseData } from "../components/data";
+import { courseData, nameData } from "../components/data";
 
 const Course = () => {
     const { name } = useParams();
+    const courseName = nameData[name];
     
     return (
         <>
             <div className=" border d-flex align-items-center bg-light" style={{height: "20%"}}>
                 <h1 className="mx-5">
-                    {name}
+                    {name} - {courseName}
                 </h1>
             </div>
             <div className="d-flex flex-row h-100">
