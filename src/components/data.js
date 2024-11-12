@@ -76,28 +76,28 @@ export const overviewData = {
         { description: " Gain a foundational understanding of data science concepts, including data wrangling, exploratory data analysis, visualization, and machine learning basics."},
         { keyTopics : "Python for data analysis, data visualization with Matplotlib & Seaborn, basic statistics, machine learning introduction."},
         { outcomes : " By the end of this course, students will be able to perform data analysis, create visualizations, and build simple machine learning models."},
-        { instructor: " Dr. Terrion Arnold."},
+        { instructor: " Dr. Kasey Davies"},
         { officeHours: "Mondays & Wednesdays 2 PM - 4 PM (virtual appointments available)."}
     ],
     "ABC2345" : [
         { description: "Unleash your creativity and improve your writing craft through a series of guided exercises, peer feedback, and workshops focusing on various literary forms."},
         { keyTopics : " Short stories, poetry, character development, narrative voice, editing and revision."},
         { outcomes : " Students will complete and present a polished portfolio of original written works by the end of the course."},
-        { instructor: "Prof. Henry To'oTo'o."},
+        { instructor: "Prof. Zach Hendrix"},
         { officeHours: "Thursdays 11 AM - 1 PM, or by appointment."}
     ],
     "ABC3333" : [
         { description: "Explore marketing theories and practices used in business settings, focusing on strategy development, consumer behavior, digital marketing, and brand management."},
         { keyTopics : "Market research, segmentation, marketing mix (4Ps), branding strategies, digital campaigns."},
         { outcomes : "Students will develop comprehensive marketing plans and present marketing strategies for case studies."},
-        { instructor: "Dr. Garrett Nuss"},
+        { instructor: "Dr. Aisha Brewer"},
         { officeHours: "Tuesdays 10 AM - 12 PM."}
     ],
     "ABC1111" : [
         { description: " A beginner’s journey into web development, focusing on building static and interactive websites using HTML, CSS, and JavaScript."},
         { keyTopics : "HTML & CSS basics, responsive design, JavaScript fundamentals, form handling."},
         { outcomes : "By course completion, students will create and publish their own website and understand core web technologies."},
-        { instructor: "Prof. Jayden Daniels"},
+        { instructor: "Prof. Athena Duke"},
         { officeHours: "Fridays 3 PM - 5 PM (in-person and virtual)."}
     ]
 }
