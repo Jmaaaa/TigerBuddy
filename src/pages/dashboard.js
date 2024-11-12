@@ -7,7 +7,7 @@ const Dashboard = () => {
     return (
         <div className="d-flex flex-column h-100">
             <div className=" d-flex align-items-center bg-light" 
-            style={{height: "20%"}}>
+            style={{height: "15%"}}>
                 <h1 className="mx-5">
                     Welcome to the dashboard
                 </h1>
