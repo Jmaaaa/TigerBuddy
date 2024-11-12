@@ -71,7 +71,7 @@ const CalendarPreview = () => {
             <div className="row w-100 h-100 flex-sm-column flex-lg-row">
             {thisWeek && thisWeek.map((data, idx) => {
                 return (
-                <div className="col-md-3 col-lg-2 p-1" key={idx} style={{height: '8rem'}}>
+                <div className="col-md-3 col-lg-2 p-1" key={idx}>
                     <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
                         <span className="flex-shrink-0 mb-1 user-select-none">
                             {data.day.getDate()}
