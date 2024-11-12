@@ -85,10 +85,12 @@ const CalendarPreview = () => {
                                 }).format(assign.due);
 
                                 return (
-                                    <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} key={aindex} style={{fontSize:"12px", userSelect:"none"}}>
-                                        <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
-                                        <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
-                                    </div>
+                                    <a href={`/courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
+                                        <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
+                                            <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
+                                            <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
+                                        </div>
+                                    </a>
                                 );
                             })}
                         </div>
