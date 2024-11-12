@@ -22,9 +22,14 @@ const AssignmentPage = () => {
         }
       };
     
-    const onButtonClick = () => {
+    const onUploadClick = () => {
         inputFile.current.click();
     };
+
+    const onSubmitClick = () => {
+        
+    };
+
 
     console.log("imageimage", image);
     return (
@@ -57,11 +62,11 @@ const AssignmentPage = () => {
                     onChange={handleFileUpload}
                     type="file"
                 />
-                <button onClick={onButtonClick}>Upload File</button>
-                <p>{image? "yes": "no"}</p>
+                <button onClick={onUploadClick}>Upload File</button>
+                <p>{image? `${image.name} uploaded`: ""}</p>
             </div>
             <div>Comment</div>
-            <button>Submit</button>
+            <button onClick={onSubmitClick}>Submit</button>
         </div>
     );
 };
