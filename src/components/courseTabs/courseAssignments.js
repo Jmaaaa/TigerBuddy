@@ -7,18 +7,33 @@ const CourseAssignments = () => {
     const assignments = deadlinesData[courseName] || [];
 
     return (
-        <div>
-            <h1>Assignments for {courseName}</h1>
-            <ul>
-                {assignments.map((assignment) => (
-                    <li key={assignment.id}>
-                        <Link to={`./${assignment.assignment}`} className="text-reset text-decoration-none">
-                            <strong>{assignment.assignment}</strong> - Due: {assignment.dateDue} at {assignment.timeDue} 
-                            <span> - {assignment.submitted ? "Submitted" : "Not Submitted"}</span>
+        <div className="container mt-4">
+            <h1 className="mb-4">Assignments for {courseName}</h1>
+            {assignments.length > 0 ? (
+                <div className="list-group">
+                    {assignments.map((assignment) => (
+                        <Link
+                            key={assignment.id}
+                            to={`./${assignment.assignment}`}
+                            className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        >
+                            <div>
+                                <strong>{assignment.assignment}</strong>
+                                <p className="mb-0 text-muted">
+                                    Due: {assignment.dateDue} at {assignment.timeDue}
+                                </p>
+                            </div>
+                            <span
+                                className={`badge ${assignment.submitted ? 'badge-success' : 'badge-warning'} badge-pill`}
+                            >
+                                {assignment.submitted ? "Submitted" : "Not Submitted"}
+                            </span>
                         </Link>
-                    </li>
-                ))}
-            </ul>
+                    ))}
+                </div>
+            ) : (
+                <p>No assignments available for this course.</p>
+            )}
         </div>
     );
 };

@@ -1,72 +1,74 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { nameData } from "../data";
+import { nameData, deadlinesData } from "../../components/data"; 
 
 const AssignmentPage = () => {
-    const {name:code, assignmentName } = useParams();
+    const { name: code, assignmentName } = useParams();
     const name = nameData[code];
+    const assignment = deadlinesData[code]?.find((item) => item.assignment === assignmentName) || {};
 
     const [image, setImage] = useState("");
     const inputFile = useRef(null);
 
-    const handleFileUpload = e => {
+    const handleFileUpload = (e) => {
         const { files } = e.target;
         if (files && files.length) {
-          const filename = files[0].name;
-    
-          var parts = filename.split(".");
-          const fileType = parts[parts.length - 1];
-          console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.
-    
-          setImage(files[0]);
+            setImage(files[0]);
         }
-      };
-    
+    };
+
     const onUploadClick = () => {
         inputFile.current.click();
     };
 
     const onSubmitClick = () => {
-        
+        // Submission logic here
     };
 
-
-    console.log("imageimage", image);
     return (
-        <div>
+        <div className="container mt-4">
             <h1>{code} / Assignments / {assignmentName}</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Due Date:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Submission Status:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Grade:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Description</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <input
-                    style={{ display: "none" }}
-                    ref={inputFile}
-                    onChange={handleFileUpload}
-                    type="file"
-                />
-                <button onClick={onUploadClick}>Upload File</button>
-                <p>{image? `${image.name} uploaded`: ""}</p>
+            <div className="card mb-4">
+                <div className="card-body">
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Due Date:</th>
+                                <td>{assignment.dateDue || "N/A"}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Submission Status:</th>
+                                <td>{assignment.submitted ? "Submitted" : "Not Submitted"}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Grade:</th>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Description:</th>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div className="mt-3">
+                        <input
+                            style={{ display: "none" }}
+                            ref={inputFile}
+                            onChange={handleFileUpload}
+                            type="file"
+                        />
+                        <button className="btn btn-primary" onClick={onUploadClick}>
+                            Upload File
+                        </button>
+                        {image && <p className="mt-2">{image.name} uploaded</p>}
+                    </div>
+                    <div className="mt-3">
+                        <button className="btn btn-success" onClick={onSubmitClick}>
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div>Comment</div>
-            <button onClick={onSubmitClick}>Submit</button>
         </div>
     );
 };
