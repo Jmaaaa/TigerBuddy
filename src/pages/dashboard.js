@@ -20,18 +20,18 @@ const Dashboard = () => {
                 </div>
                 <div className="d-flex flex-column p-3 w-100">
                     <div className="d-flex flex-row h-50">
-                        <div className="w-50">
-                            <h1 className="m-2">
-                            Recent Announcements
-                            </h1>
-                            <div className="p-2">
+                        <div className="w-50 d-flex flex-column">
+                            <h2 className="m-2">
+                            Announcements
+                            </h2>
+                            <div className="p-2 d-flex flex-column overflow-scroll">
                                 <AnnouncementCard/>
                             </div>
                         </div>
                         <div>
-                            <h1 className="m-2">
-                            Recent Feedback
-                            </h1>
+                            <h2 className="m-2">
+                            Feedback
+                            </h2>
                             <div className="p-2">
                                 <FeedbackCard/>
 
@@ -39,9 +39,9 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <h1 className="m-2">
+                        <h2 className="m-2">
                         Upcoming Schedule
-                        </h1>
+                        </h2>
                         <div>
                             <CalendarPreview/>
                         </div>
