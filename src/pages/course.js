@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link, Outlet } from 'react-router-dom';
 import { courseData, nameData } from "../components/data";
+import courseImage from "../assets/courseImage.jpg"
 
 const Course = () => {
     const { name } = useParams();
@@ -8,8 +9,8 @@ const Course = () => {
     
     return (
         <>
-            <div className=" border d-flex align-items-center bg-light" style={{height: "20%"}}>
-                <h1 className="mx-5">
+            <div className="d-flex align-items-center bg-light" style={{height: "20%", backgroundImage: `url(${courseImage})`, backgroundPosition: "auto 100%"}}>
+                <h1 className="mx-5 text-white" style={{textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"}}>
                     {name} - {courseName}
                 </h1>
             </div>
