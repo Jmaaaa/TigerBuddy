@@ -3,9 +3,14 @@ import { courseAnnouncementsData, courseData, nameData, profData } from "../data
 import feedbackImg from "../../assets/feedback.png";
 
 const FeedbackCard = () => {
+    const [gotFeedback, setGotFeedback] = useState(false);
     const [feedback, setFeedback] = useState([]);
 
     useEffect(() => {
+        if (gotFeedback)
+            return;
+        setGotFeedback(true);
+
         let allFeedback = [];
         for (const [course, data] of Object.entries(courseData)) {
             for (const feedback of data) {
@@ -18,14 +23,6 @@ const FeedbackCard = () => {
                 });
             }
         }
-
-    
-        allFeedback.push({
-            title: "Assignment 1",
-            course: "ABC2345",
-            id: 2,
-            text: "Good job!"
-        });
 
         setFeedback(allFeedback);
     });
