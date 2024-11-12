@@ -25,11 +25,13 @@ const Course = () => {
             </div>
             <div className="d-flex flex-row w-100" style={{minHeight: "80%"}}>
                 <div className="d-flex flex-column p-3 border-right bg-light" style={{width: "12%"}}>
-                    {Object.entries(pages).map(([name, path], idx) => {
-                        return (
-                            <Link to={`./${path}`} className={`${(curPage.endsWith(path) ? 'text-secondary' : '')} p-2 text-decoration-none`}><h5>{name}</h5></Link>
-                        );
-                    })}
+                    {Object.entries(pages).map(([name, path], idx) => (
+                            <Link key={idx} to={`./${path}`} 
+                            className={`${(curPage.endsWith(path) ? 'text-primary' : 'text-secondary')} p-2 text-decoration-none`}>
+                                <h5>{name}</h5>
+                            </Link>
+                        
+                    ))}
 
                 </div>
                 <div className="p-3 w-75">
