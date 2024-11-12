@@ -6,10 +6,10 @@ export const courseCodes = [
 ];
 
 export const nameData = {
-    "ABC1000" : "CourseA",
-    "ABC2345" : "CourseB",
-    "ABC3333" : "CourseC",
-    "ABC1111" : "CourseD",
+    "ABC1000" : "Course A",
+    "ABC2345" : "Course B",
+    "ABC3333" : "Course C",
+    "ABC1111" : "Course D",
 }
 
 export const profData = {

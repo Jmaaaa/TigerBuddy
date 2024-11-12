@@ -18,13 +18,13 @@ const Dashboard = () => {
                         <CourseCard key={index} code={code}/>
                     ))}
                 </div>
-                <div className="d-flex flex-column p-3 w-100">
-                    <div className="flex-grow-1 d-flex flex-row h-50">
+                <div className="d-flex flex-column px-3 w-100">
+                    <div className="flex-grow-1 d-flex flex-row h-50 mb-1">
                         <div className="w-50 d-flex flex-column">
                             <h2 className="m-2">
                             Announcements
                             </h2>
-                            <div className="p-2 d-flex flex-column overflow-auto">
+                            <div className="p-2 d-flex flex-column overflow-auto border-top border-bottom">
                                 <AnnouncementCard/>
                             </div>
                         </div>
@@ -32,12 +32,12 @@ const Dashboard = () => {
                             <h2 className="m-2">
                             Feedback
                             </h2>
-                            <div className="p-2 d-flex flex-column overflow-auto">
+                            <div className="p-2 d-flex flex-column overflow-auto border-top border-bottom">
                                 <FeedbackCard/>
                             </div>
                         </div>
                     </div>
-                    <div className="flex-shrink-0 mt-4">
+                    <div className="flex-shrink-0 mt-1">
                         <h2 className="m-2 mb-3">
                         Upcoming Schedule
                         </h2>
