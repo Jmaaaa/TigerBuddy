@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deadlinesData } from "../data";
 
-const CalendarPreview = () => {
+const CalendarPreview = ({ small=false }) => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
     const [today, setToday] = useState(new Date());
     const [thisWeek, setThisWeek] = useState([]);
@@ -67,11 +67,11 @@ const CalendarPreview = () => {
     }, [today]);
 
     return (
-        <div className="container-fluid px-4">
-            <div className="row w-100 h-100 flex-sm-column flex-lg-row">
+        <div className={`container-fluid ${!small && "px-4"} ${small && "pt-4"}`}>
+            <div className="row flex-sm-column flex-lg-row">
             {thisWeek && thisWeek.map((data, idx) => {
                 return (
-                <div className="col-md-3 col-lg-2 p-1" key={idx}>
+                <div className={`${!small && "col-md-3 col-lg-2"} ${small && "col-3"} p-1`} key={idx}>
                     <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
                         <span className="flex-shrink-0 mb-1 user-select-none">
                             {data.day.getDate()}

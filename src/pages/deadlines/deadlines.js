@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import DeadlineCard from "./deadlineCard.js";
 //import { courseData } from "../../components/data.js"; 
 import "./deadlines.css"
+import CalendarPreview from "../../components/dashboardComponents/calendarPreview.js";
 
 const Deadlines = () => {
     const [selectedClass, setSelectedClass] = useState("all");
@@ -38,6 +39,10 @@ const Deadlines = () => {
                 {filteredDeadlines.map((deadline) => (
                     <DeadlineCard key={deadline.id} deadline={deadline} />
                 ))}
+            </div>
+
+            <div className="w-100">
+                <CalendarPreview small={true} />
             </div>
         </div>
     );
