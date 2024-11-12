@@ -161,3 +161,101 @@ export const AssignmentData = {
         }
     ]
 }
+
+//generated data for course module page
+export const courseModules = {
+    "ABC1000": [
+        {
+            moduleId: 1,
+            title: "Introduction to Data Science",
+            description: "Overview of data science concepts, tools, and ethical considerations.",
+            content: [
+                { type: "video", title: "Data Science Overview" },
+                { type: "reading", title: "Chapter 1: What is Data Science?" },
+                { type: "discussion", title: "Ethical Considerations in Data Science" }
+            ],
+            completed: false
+        },
+        {
+            moduleId: 2,
+            title: "Data Wrangling and Cleaning",
+            description: "Techniques for cleaning and transforming data for analysis.",
+            content: [
+                { type: "video", title: "Data Cleaning Techniques" },
+                { type: "reading", title: "Best Practices for Data Preparation" },
+                { type: "interactive", title: "Data Cleaning Simulation" }
+            ],
+            completed: false
+        }
+    ],
+    "ABC2345": [
+        {
+            moduleId: 1,
+            title: "Foundations of Creative Writing",
+            description: "Introduction to creative writing and basic literary forms.",
+            content: [
+                { type: "reading", title: "Elements of Fiction" },
+                { type: "video", title: "Creative Writing Basics" }
+            ],
+            completed: true
+        },
+        {
+            moduleId: 2,
+            title: "Character Development",
+            description: "Building compelling characters and creating character arcs.",
+            content: [
+                { type: "video", title: "Creating Characters Readers Love" },
+                { type: "exercise", title: "Character Sketch Practice" },
+                { type: "discussion", title: "Memorable Characters in Literature" }
+            ],
+            completed: false
+        }
+    ],
+    "ABC3333": [
+        {
+            moduleId: 1,
+            title: "Marketing Fundamentals",
+            description: "Explore marketing principles and the marketing mix (4Ps).",
+            content: [
+                { type: "reading", title: "Marketing 101" },
+                { type: "video", title: "Introduction to the 4Ps" }
+            ],
+            completed: true
+        },
+        {
+            moduleId: 2,
+            title: "Consumer Behavior",
+            description: "Understanding consumer needs, motivations, and behavior.",
+            content: [
+                { type: "video", title: "Understanding Consumer Psychology" },
+                { type: "caseStudy", title: "Successful Branding Examples" }
+            ],
+            completed: false
+        }
+    ],
+    "ABC1111": [
+        {
+            moduleId: 1,
+            title: "Introduction to Web Development",
+            description: "Basics of HTML, CSS, and JavaScript for building web pages.",
+            content: [
+                { type: "video", title: "HTML and CSS Basics" },
+                { type: "reading", title: "Building Your First Web Page" },
+                { type: "interactive", title: "HTML/CSS Practice" }
+            ],
+            completed: true
+        },
+        {
+            moduleId: 2,
+            title: "Responsive Design and Layouts",
+            description: "Techniques for creating responsive and mobile-friendly web pages.",
+            content: [
+                { type: "video", title: "Responsive Design Principles" },
+                { type: "reading", title: "Media Queries and Flexbox" },
+                { type: "discussion", title: "Challenges in Responsive Design" }
+            ],
+            completed: false
+        }
+    ]
+};
+
