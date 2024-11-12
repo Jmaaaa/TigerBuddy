@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { courseData,getAverage,getLetterGrade } from "../components/data";
+import { courseData,getAverage,getLetterGrade,profData } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
-
+import "./grades.css"
 const Grades = () => {
     
     const gradeList = Object.keys(courseData).map((course) => ({
@@ -42,7 +42,8 @@ const Grades = () => {
                             <React.Fragment key={index}> 
                                 <tr data-bs-toggle="collapse" 
                                 data-bs-target={`#${index}-subtable`}
-                                className="border">
+                                className="border hoverable"
+                                style={{cursor: "pointer"}}>
                                     <td className="p-2">{grade.code}</td>
                                     <td className="p-2">{grade.instructor}</td>
                                     <td className="p-2">{grade.grade}</td>

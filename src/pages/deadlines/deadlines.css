@@ -19,7 +19,7 @@ h2 {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
-    border: 1px solid #6200ff;
+    border: 1px solid #461D7C;
     background-color: #f0f8ff;
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -27,7 +27,7 @@ h2 {
 
 .class-buttons button.active,
 .class-buttons button:hover {
-    background-color: #6200ff;
+    background-color: #461D7C;
     color: #fff;
 }
 

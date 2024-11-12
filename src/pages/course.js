@@ -14,15 +14,15 @@ const Course = () => {
                     {name} - {courseName}
                 </h1>
             </div>
-            <div className="d-flex flex-row h-100">
-                <div className="d-flex flex-column p-3 border-right">
-                    <Link to={"./home"} className="p-2">Home</Link>
-                    <Link to={"./announcements"} className="p-2">Announcments</Link>
-                    <Link to={"./modules"} className="p-2">Modules</Link>
-                    <Link to={"./assignments"} className="p-2">Assignments</Link>
-                    <Link to={"./grades"} className="p-2">Grades</Link>
+            <div className="d-flex flex-row w-100" style={{minHeight: "80%"}}>
+                <div className="d-flex flex-column p-3 border-right bg-light" style={{width: "12%"}}>
+                    <Link to={"./home"} className="p-2 text-decoration-none"><h5>Home</h5></Link>
+                    <Link to={"./announcements"} className="p-2 text-decoration-none"><h5>Announcments</h5></Link>
+                    <Link to={"./modules"} className="p-2 text-decoration-none"><h5>Modules</h5></Link>
+                    <Link to={"./assignments"} className="p-2 text-decoration-none"><h5>Assignments</h5></Link>
+                    <Link to={"./grades"} className="p-2 text-decoration-none"><h5>Grades</h5></Link>
                 </div>
-                <div className="p-3 w-100">
+                <div className="p-3 w-75">
                 <Outlet context={{ courseGrades: courseData[name] || [] }} />
                 </div>
             </div>
