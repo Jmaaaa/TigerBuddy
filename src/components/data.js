@@ -36,40 +36,47 @@ export const deadlinesData = {
 
 export const courseData = {
     "ABC1000": [
-        { assignment: "Homework 1", grade: "A", percent: 95, weight: 10},
-        { assignment: "Quiz 1", grade: "B", percent: 86, weight: 20 },
+        { assignment: "Homework 1", graded: true, percent: 95, weight: 10},
+        { assignment: "Quiz 1", graded: true, percent: 86, weight: 20 },
+        { assignment: "Quiz 2", graded: false, percent: 0, weight: 20 },
     ],
     "ABC2345": [
-        { assignment: "Essay Draft", grade: "A-", percent: 92, weight: 10},
-        { assignment: "Project 1", grade: "B+", percent: 88, weight: 20},
+        { assignment: "Essay Draft", graded: true, percent: 92, weight: 10},
+        { assignment: "Project 1", graded: true, percent: 88, weight: 20},
     ],
     "ABC3333": [
-        { assignment: "Lab", grade: "A", percent: 96, weight: 10 },
-        { assignment: "Project 1", grade: "B-", percent: 81, weight: 30 },
+        { assignment: "Lab", graded: true, percent: 96, weight: 10 },
+        { assignment: "Project 1", graded: true, percent: 81, weight: 30 },
     ],
     "ABC1111": [
-        { assignment: "Program 0", grade: "B+", percent: 87, weight: 5},
-        { assignment: "Project 1", grade: "B+", percent: 88, weight: 15 },
+        { assignment: "Program 0", graded: true, percent: 87, weight: 5},
+        { assignment: "Project 1", graded: true, percent: 88, weight: 15 },
     ],
 }
+const totalWeight = (code) => courseData[code].reduce((acc,item) => acc + (item.graded ? item.weight : 0), 0);
 
-export const getAverage = (code) => courseData[code].reduce((acc, item) => acc + item.percent, 0)/courseData[code].length;
-export const getLetterGrade = ((grade) => {
-    if(grade>=97) return `${grade}% (A+)`;
-    if(grade>=93) return `${grade}% (A)`;
-    if(grade>=90) return `${grade}% (A-)`;
-    if(grade>=87) return `${grade}% (B+)`;
-    if(grade>=83) return `${grade}% (B)`;
-    if(grade>=80) return `${grade}% (B-)`;
-    if(grade>=77) return `${grade}% (C+)`;
-    if(grade>=73) return `${grade}% (C)`;
-    if(grade>=70) return `${grade}% (C-)`;
-    if(grade>=67) return `${grade}% (D+)`;
-    if(grade>=63) return `${grade}% (D)`;
-    if(grade>=60) return `${grade}% (D-)`;
-    return `${grade}% (F)`;
+export const getCurrentWeight = ((weight, code)=>{
+    return (weight/totalWeight(code)*100).toFixed(1);
+})
+export const getGrade = ((grade) => {
+    if(grade>=97) return `${grade.toFixed(1)} (A+)`;
+    if(grade>=93) return `${grade.toFixed(1)} (A)`;
+    if(grade>=90) return `${grade.toFixed(1)} (A-)`;
+    if(grade>=87) return `${grade.toFixed(1)} (B+)`;
+    if(grade>=83) return `${grade.toFixed(1)} (B)`;
+    if(grade>=80) return `${grade.toFixed(1)} (B-)`;
+    if(grade>=77) return `${grade.toFixed(1)} (C+)`;
+    if(grade>=73) return `${grade.toFixed(1)} (C)`;
+    if(grade>=70) return `${grade.toFixed(1)} (C-)`;
+    if(grade>=67) return `${grade.toFixed(1)} (D+)`;
+    if(grade>=63) return `${grade.toFixed(1)} (D)`;
+    if(grade>=60) return `${grade.toFixed(1)} (D-)`;
+    return `${grade.toFixed(1)} (F)`;
 });
-
+export const getAverageGrade = ((code) => {
+    return getGrade(
+        courseData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0));
+});
 //generated sample course overviews 
 export const overviewData = {
     "ABC1000" : [

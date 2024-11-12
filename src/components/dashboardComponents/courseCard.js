@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import courseImage from "../../assets/courseImage.png"
-import { getAverage, getLetterGrade, profData } from "../data";
+import { getAverageGrade, profData } from "../data";
 
 const CourseCard = ({code}) => {
-    const grade = getLetterGrade(getAverage(code));
+    const grade = getAverageGrade(code);
     const professor = profData[code];
 
     return(

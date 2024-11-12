@@ -60,7 +60,7 @@ const AssignmentPage = () => {
                         <button className="btn btn-primary" onClick={onUploadClick}>
                             Upload File
                         </button>
-                        {image && <p className="mt-2">{image.name} uploaded</p>}
+                        {image && <p className="mt-2">&quot;{image.name}&quot; uploaded</p>}
                     </div>
                     <div className="mt-3">
                         <button className="btn btn-success" onClick={onSubmitClick}>
