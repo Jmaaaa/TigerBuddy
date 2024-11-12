@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { courseAnnouncementsData } from "../data";
+import { courseAnnouncementsData, nameData, profData } from "../data";
 import announcement from "../../assets/announcement.png";
 
 const AnnouncementCard = () => {
@@ -27,7 +27,6 @@ const AnnouncementCard = () => {
         {
             setAnnouncements(allAnnouncements);
         }
-        
     });
     
     return (
@@ -38,7 +37,7 @@ const AnnouncementCard = () => {
                         <div><img src={announcement} width="32" className="rounded"/></div>
                         <div className="d-flex flex-column ms-3">
                             <h5 className="mb-1">{data.title}</h5>
-                            <h6 className="mb-1">{data.course}</h6>
+                            <h6 className="mb-1">2024 {nameData[data.course]} for {profData[data.course]}</h6>
                             <p className="small mb-0">{data.text}</p>
                         </div>
                     </div>

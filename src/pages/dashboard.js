@@ -24,17 +24,16 @@ const Dashboard = () => {
                             <h2 className="m-2">
                             Announcements
                             </h2>
-                            <div className="p-2 d-flex flex-column overflow-scroll">
+                            <div className="p-2 d-flex flex-column overflow-auto">
                                 <AnnouncementCard/>
                             </div>
                         </div>
-                        <div>
+                        <div className="w-50 ps-4 d-flex flex-column">
                             <h2 className="m-2">
                             Feedback
                             </h2>
-                            <div className="p-2">
+                            <div className="p-2 d-flex flex-column overflow-auto">
                                 <FeedbackCard/>
-
                             </div>
                         </div>
                     </div>
