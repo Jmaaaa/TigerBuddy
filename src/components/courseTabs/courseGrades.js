@@ -1,14 +1,13 @@
 import React from "react";
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CourseGradeTable from "./courseGradeTable";
 
 const CourseGrades = () => {
-    const { courseGrades } = useOutletContext();
     const { name: courseName } = useParams();
     
     return (
-       <div>
-            <h1>Welcome to the Grades</h1>
+       <div className="container mt-4">
+            <h1>{courseName} / Grades</h1>
             <CourseGradeTable code={courseName}/>
         </div>
     );

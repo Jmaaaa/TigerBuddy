@@ -13,7 +13,7 @@ const CourseAnnouncements = () => {
 
     return (
         <div className="container mt-4">
-            <h1>Course Announcements</h1>
+            <h1 className="mb-4">{courseName} / Announcements</h1>
 
             {announcements.length > 0 ? (
                 <div className="list-group">

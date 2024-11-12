@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { courseData, profData, getAverageGrade } from "../components/data";
+import { courseData, profData, getAverageGrade, getGrade, getQualityPoints } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
 const Grades = () => {
     
     const gradeList = Object.keys(courseData).map((course) => ({
         code: course,
         grade: getAverageGrade(course),
+        hours: 3,
+        points: getQualityPoints(course)*3,
         instructor: profData[course],
     }));
 
@@ -56,8 +58,8 @@ const Grades = () => {
                                     <td className="p-2">{grade.code}</td>
                                     <td className="p-2">{grade.instructor}</td>
                                     <td className="p-2">{grade.grade}</td>
-                                    <td className="p-2">{grade.hours}</td>
-                                    <td className="p-2">{grade.points}</td>
+                                    <td className="p-2">{grade.hours.toFixed(1)}</td>
+                                    <td className="p-2">{grade.points.toFixed(1)}</td>
                                 </tr>
                                 <tr className="table-active">
                                     <td colSpan={5} className="p-0">

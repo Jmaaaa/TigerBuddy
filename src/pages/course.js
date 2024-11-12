@@ -23,7 +23,7 @@ const Course = () => {
                     {name} - {courseName}
                 </h1>
             </div>
-            <div className="d-flex flex-row w-100" style={{minHeight: "80%"}}>
+            <div className="d-inline-flex flex-row w-100" style={{minHeight: "80%"}}>
                 <div className="d-flex flex-column p-3 border-right bg-light" style={{width: "12%"}}>
                     {Object.entries(pages).map(([name, path], idx) => (
                             <Link key={idx} to={`./${path}`} 
@@ -35,7 +35,7 @@ const Course = () => {
 
                 </div>
                 <div className="p-3 w-75">
-                <Outlet context={{ courseGrades: courseData[name] || [] }} />
+                    <Outlet/>
                 </div>
             </div>
 

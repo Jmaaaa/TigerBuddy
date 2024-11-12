@@ -8,7 +8,7 @@ const CourseModulePage = () => {
 
     return (
         <div className="container mt-4">
-            <h1>Course Modules</h1>
+            <h1 className="mb-4">{courseName} / Modules</h1>
 
             {modules.length > 0 ? (
                 modules.map((module, index) => (

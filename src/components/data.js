@@ -73,9 +73,27 @@ export const getGrade = ((grade) => {
     if(grade>=60) return `${grade.toFixed(1)} (D-)`;
     return `${grade.toFixed(1)} (F)`;
 });
+
 export const getAverageGrade = ((code) => {
     return getGrade(
         courseData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0));
+});
+
+export const getQualityPoints = ((code) => {
+    const grade = courseData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0);
+    if(grade>=97) return 4.3;
+    if(grade>=93) return 4;
+    if(grade>=90) return 3.7;
+    if(grade>=87) return 3.3;
+    if(grade>=83) return 3;
+    if(grade>=80) return 2.7;
+    if(grade>=77) return 2.3;
+    if(grade>=73) return 2;
+    if(grade>=70) return 1.7;
+    if(grade>=67) return 1.3;
+    if(grade>=63) return 1;
+    if(grade>=60) return 0.7;
+    return 0;
 });
 //generated sample course overviews 
 export const overviewData = {

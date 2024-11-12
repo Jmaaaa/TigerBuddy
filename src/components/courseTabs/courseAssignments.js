@@ -8,7 +8,7 @@ const CourseAssignments = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">Assignments for {courseName}</h1>
+            <h1 className="mb-4">{courseName} / Assignments</h1>
             {assignments.length > 0 ? (
                 <div className="list-group">
                     {assignments.map((assignment) => (
