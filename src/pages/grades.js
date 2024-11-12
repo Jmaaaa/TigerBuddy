@@ -8,6 +8,7 @@ const Grades = () => {
     const gradeList = Object.keys(courseData).map((course) => ({
         code: course,
         grade: getLetterGrade(getAverage(course)),
+        instructor: profData[course],
     }));
     
 
@@ -16,7 +17,6 @@ const Grades = () => {
     const goToCourse = (code) => {
         navigate(`../courses/${code}`);
     };
-
 
     
 //grade.id % 2 === 0 ? "":"bg-light"
