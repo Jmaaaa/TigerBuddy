@@ -19,7 +19,7 @@ const Dashboard = () => {
                     ))}
                 </div>
                 <div className="d-flex flex-column p-3 w-100">
-                    <div className="d-flex flex-row h-50">
+                    <div className="flex-grow-1 d-flex flex-row h-50">
                         <div className="w-50 d-flex flex-column">
                             <h2 className="m-2">
                             Announcements
@@ -37,7 +37,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="flex-shrink-0">
                         <h2 className="m-2 mt-4">
                         Upcoming Schedule
                         </h2>
