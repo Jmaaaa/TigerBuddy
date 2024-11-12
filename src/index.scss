@@ -43,3 +43,7 @@ code {
 .animated-shadow:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+$primary: #461D7C;
+
+@import "bootstrap";
