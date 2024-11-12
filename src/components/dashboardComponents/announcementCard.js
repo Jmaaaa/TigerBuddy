@@ -33,6 +33,7 @@ const AnnouncementCard = () => {
         <div className="d-flex flex-column me-2">
             {announcements.map((data, idx) => {
                 return (
+                    <a href={`/courses/${data.course}/announcements`} className="text-decoration-none text-dark">
                     <div className="d-flex flex-row w-100 p-3 mb-2 bg-light bg-gradient rounded" key={idx}>
                         <div><img src={announcement} width="32" className="rounded"/></div>
                         <div className="d-flex flex-column ms-3">
@@ -41,6 +42,7 @@ const AnnouncementCard = () => {
                             <p className="small mb-0">{data.text}</p>
                         </div>
                     </div>
+                    </a>
                 );
             })}
         </div>

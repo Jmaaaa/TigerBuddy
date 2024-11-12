@@ -38,7 +38,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <h2 className="m-2">
+                        <h2 className="m-2 mt-4">
                         Upcoming Schedule
                         </h2>
                         <div>
