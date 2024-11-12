@@ -12,6 +12,13 @@ export const nameData = {
     "ABC1111" : "CourseD",
 }
 
+export const profData = {
+    "ABC1000" : "Kasey Davies",
+    "ABC2345" : "Zach Hendrix",
+    "ABC3333" : "Aisha Brewer",
+    "ABC1111" : "Athena Duke",
+}
+
 export const deadlinesData = {
     "ABC1000": [
         { id: 1, dateDue: "2024-11-15", timeDue: "23:59", course: "Course A", assignment: "Homework 3", submitted: false },
@@ -145,3 +152,12 @@ export const courseAnnouncementsData = {
         },
     ],
 };
+
+export const AssignmentData = {
+    "ABC3333": [
+        {
+            name: "Assignment 1",
+            due: ""
+        }
+    ]
+}

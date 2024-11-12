@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { deadlinesData } from "../../components/data.js";
 
 const CourseAssignments = () => {
@@ -12,8 +12,10 @@ const CourseAssignments = () => {
             <ul>
                 {assignments.map((assignment) => (
                     <li key={assignment.id}>
-                        <strong>{assignment.assignment}</strong> - Due: {assignment.dateDue} at {assignment.timeDue} 
-                        <span> - {assignment.submitted ? "Submitted" : "Not Submitted"}</span>
+                        <Link to={`./${assignment.assignment}`} className="text-reset text-decoration-none">
+                            <strong>{assignment.assignment}</strong> - Due: {assignment.dateDue} at {assignment.timeDue} 
+                            <span> - {assignment.submitted ? "Submitted" : "Not Submitted"}</span>
+                        </Link>
                     </li>
                 ))}
             </ul>
