@@ -34,26 +34,27 @@ export const deadlinesData = {
     ],
 };
 
-export const courseData = {
+export const assignmentData = {
     "ABC1000": [
-        { assignment: "Homework 1", graded: true, percent: 95, weight: 10},
-        { assignment: "Quiz 1", graded: true, percent: 86, weight: 20 },
-        { assignment: "Quiz 2", graded: false, percent: 0, weight: 20 },
+        { assignment: "Homework 1", submitted: true, graded: true, percent: 95, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
+        { assignment: "Quiz 1", submitted: true, graded: true, percent: 86, weight: 20, dateDue: "2024-11-8", timeDue: "23:59" },
+        { assignment: "Homework 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-15", timeDue: "23:59"},
+        { assignment: "Homework 3", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-22", timeDue: "23:59"}
     ],
     "ABC2345": [
-        { assignment: "Essay Draft", graded: true, percent: 92, weight: 10},
-        { assignment: "Project 1", graded: true, percent: 88, weight: 20},
+        { assignment: "Essay Draft", submitted: true, graded: true, percent: 92, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
+        { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 20, dateDue: "2024-11-7", timeDue: "23:59" },
     ],
     "ABC3333": [
-        { assignment: "Lab", graded: true, percent: 96, weight: 10 },
-        { assignment: "Project 1", graded: true, percent: 81, weight: 30 },
+        { assignment: "Lab", submitted: true, graded: true, percent: 96, weight: 10, dateDue: "2024-11-5", timeDue: "23:59"  },
+        { assignment: "Project 1", submitted: true, graded: true, percent: 81, weight: 30, dateDue: "2024-11-10", timeDue: "23:59"  },
     ],
     "ABC1111": [
-        { assignment: "Program 0", graded: true, percent: 87, weight: 5},
-        { assignment: "Project 1", graded: true, percent: 88, weight: 15 },
+        { assignment: "Program 0", submitted: true, graded: true, percent: 87, weight: 5, dateDue: "2024-11-6", timeDue: "23:59"  },
+        { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 15, dateDue: "2024-11-10", timeDue: "23:59" },
     ],
 }
-const totalWeight = (code) => courseData[code].reduce((acc,item) => acc + (item.graded ? item.weight : 0), 0);
+const totalWeight = (code) => assignmentData[code].reduce((acc,item) => acc + (item.graded ? item.weight : 0), 0);
 
 export const getCurrentWeight = ((weight, code)=>{
     return (weight/totalWeight(code)*100).toFixed(1);
@@ -76,11 +77,11 @@ export const getGrade = ((grade) => {
 
 export const getAverageGrade = ((code) => {
     return getGrade(
-        courseData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0));
+        assignmentData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0));
 });
 
 export const getQualityPoints = ((code) => {
-    const grade = courseData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0);
+    const grade = assignmentData[code].reduce((acc,item) => acc + item.percent * (item.weight/totalWeight(code)), 0);
     if(grade>=97) return 4.3;
     if(grade>=93) return 4;
     if(grade>=90) return 3.7;
@@ -177,15 +178,6 @@ export const courseAnnouncementsData = {
         },
     ],
 };
-
-export const AssignmentData = {
-    "ABC3333": [
-        {
-            name: "Assignment 1",
-            due: ""
-        }
-    ]
-}
 
 //generated data for course module page
 export const courseModules = {

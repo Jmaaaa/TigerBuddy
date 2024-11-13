@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const DeadlineCard = ({ deadline }) => {
-    const { dateDue, timeDue, course, assignment, submitted } = deadline;
+const DeadlineCard = ({ code, deadline }) => {
+    const course = code
+    const dateDue = deadline.dateDue;
+    const timeDue = deadline.timeDue;
+    const assignment = deadline.assignment;
+    const submitted = deadline.submitted;
     const [timeRemaining, setTimeRemaining] = useState("");
 
     useEffect(() => {

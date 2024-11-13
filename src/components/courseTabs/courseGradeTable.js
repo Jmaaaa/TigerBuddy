@@ -1,5 +1,5 @@
 import React from "react"
-import { courseData, getGrade, getCurrentWeight, getAverageGrade } from "../data";
+import { assignmentData, getGrade, getCurrentWeight, getAverageGrade } from "../data";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const CourseGradeTable = ({code}) => {
@@ -26,7 +26,7 @@ const CourseGradeTable = ({code}) => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {courseData[code].map((item, index) => (
+                    {assignmentData[code].map((item, index) => (
                         <tr key={index} onClick={() => goToAssignment(item.assignment)}>
                             <td className="p-2">{item.assignment}</td>
                             <td className="p-2">{item.weight}% ({item.graded? getCurrentWeight(item.weight,code) : 0}%)</td>

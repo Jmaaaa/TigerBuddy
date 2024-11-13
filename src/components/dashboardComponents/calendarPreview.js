@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deadlinesData } from "../data";
+import { assignmentData } from "../data";
 
 const CalendarPreview = ({ small=false }) => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
@@ -21,7 +21,7 @@ const CalendarPreview = ({ small=false }) => {
             let assignments = [];
 
             // Crappy linear search.
-            for (const [course, data] of Object.entries(deadlinesData)) {
+            for (const [key, data] of Object.entries(assignmentData)) {
                 for (const assignment of data) {
                     // console.log(JSON.stringify(assignment));
                     let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
@@ -29,7 +29,7 @@ const CalendarPreview = ({ small=false }) => {
                     if (due.getMonth() == curDay.getMonth() && due.getDate() == curDay.getDate() && due.getFullYear() == curDay.getFullYear()) {
                         assignments.push({
                             name: assignment.assignment,
-                            course: assignment.course,
+                            course: key,
                             due: due,
                             submitted: assignment.submitted
                         });

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { courseData, profData, getAverageGrade, getGrade, getQualityPoints } from "../components/data";
+import { assignmentData, profData, getAverageGrade, getQualityPoints } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
 const Grades = () => {
     
-    const gradeList = Object.keys(courseData).map((course) => ({
+    const gradeList = Object.keys(assignmentData).map((course) => ({
         code: course,
         grade: getAverageGrade(course),
         hours: 3,

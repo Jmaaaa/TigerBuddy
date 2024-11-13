@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { courseAnnouncementsData, courseData, nameData, profData } from "../data";
+import { courseAnnouncementsData, assignmentData, nameData, profData } from "../data";
 import feedbackImg from "../../assets/feedback.png";
 
 const FeedbackCard = () => {
@@ -12,7 +12,7 @@ const FeedbackCard = () => {
         setGotFeedback(true);
 
         let allFeedback = [];
-        for (const [course, data] of Object.entries(courseData)) {
+        for (const [course, data] of Object.entries(assignmentData)) {
             for (const feedback of data) {
                 allFeedback.push({
                     // date: new Date(announcement.date),
