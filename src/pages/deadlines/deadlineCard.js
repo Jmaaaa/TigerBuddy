@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DeadlineCard = ({ code, deadline }) => {
     const course = code
@@ -7,6 +8,11 @@ const DeadlineCard = ({ code, deadline }) => {
     const assignment = deadline.assignment;
     const submitted = deadline.submitted;
     const [timeRemaining, setTimeRemaining] = useState("");
+    const navigate = useNavigate();
+
+    const goToAssignment = (assignment) => {
+        navigate(`/courses/${code}/assignments/${assignment}`);
+    };
 
     useEffect(() => {
         const calculateCountdown = () => {
@@ -32,7 +38,7 @@ const DeadlineCard = ({ code, deadline }) => {
     }, [dateDue, timeDue]);
 
     return (
-        <div className="deadline-card">
+        <div className="deadline-card" onClick={() => goToAssignment(assignment)}>
             <h3>{assignment}</h3>
             <p>Due Date: {dateDue} at {timeDue} ({timeRemaining})</p>
             <p>Course: {course}</p>

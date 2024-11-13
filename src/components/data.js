@@ -1,3 +1,4 @@
+
 export const courseCodes = [
     "ABC1000",
     "ABC2345",
@@ -18,28 +19,34 @@ export const profData = {
     "ABC3333" : "Aisha Brewer",
     "ABC1111" : "Athena Duke",
 }
+ export const assignmentData = {
+        "ABC1000": [
+            { assignment: "Homework 1", submitted: true, graded: true, percent: 95, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
+            { assignment: "Quiz 1", submitted: true, graded: true, percent: 86, weight: 20, dateDue: "2024-11-8", timeDue: "23:59" },
+            { assignment: "Homework 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-15", timeDue: "23:59"},
+            { assignment: "Quiz 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-22", timeDue: "23:59"}
+        ],
+        "ABC2345": [
+            { assignment: "Essay Draft", submitted: true, graded: true, percent: 92, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
+            { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 20, dateDue: "2024-11-7", timeDue: "23:59" },
+            { assignment: "Essay 1", submitted: false, graded: false, percent: 0, weight: 20, dateDue: "2024-11-17", timeDue: "23:59"},
+            { assignment: "Project 2", submitted: false, graded: false, percent: 0, weight: 20, dateDue: "2024-11-22", timeDue: "23:59"}
+        ],
+        "ABC3333": [
+            { assignment: "Lab Report 1", submitted: true, graded: true, percent: 96, weight: 10, dateDue: "2024-11-5", timeDue: "23:59"  },
+            { assignment: "Project 1", submitted: true, graded: true, percent: 81, weight: 25, dateDue: "2024-11-13", timeDue: "23:59"  },
+            { assignment: "Lab Report 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-20", timeDue: "23:59"},
+            { assignment: "Project 2", submitted: false, graded: false, percent: 0, weight: 25, dateDue: "2024-11-30", timeDue: "23:59"}
+        ],
+        "ABC1111": [
+            { assignment: "Program 0", submitted: true, graded: true, percent: 87, weight: 5, dateDue: "2024-11-6", timeDue: "23:59"  },
+            { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 15, dateDue: "2024-11-10", timeDue: "23:59" },
+            { assignment: "Program 1", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-15", timeDue: "23:59"},
+            { assignment: "Program 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-27", timeDue: "23:59"}
+        ],
+};
 
 
-export const assignmentData = {
-    "ABC1000": [
-        { assignment: "Homework 1", submitted: true, graded: true, percent: 95, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
-        { assignment: "Quiz 1", submitted: true, graded: true, percent: 86, weight: 20, dateDue: "2024-11-8", timeDue: "23:59" },
-        { assignment: "Homework 2", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-15", timeDue: "23:59"},
-        { assignment: "Homework 3", submitted: false, graded: false, percent: 0, weight: 10, dateDue: "2024-11-22", timeDue: "23:59"}
-    ],
-    "ABC2345": [
-        { assignment: "Essay Draft", submitted: true, graded: true, percent: 92, weight: 10, dateDue: "2024-11-1", timeDue: "23:59" },
-        { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 20, dateDue: "2024-11-7", timeDue: "23:59" },
-    ],
-    "ABC3333": [
-        { assignment: "Lab", submitted: true, graded: true, percent: 96, weight: 10, dateDue: "2024-11-5", timeDue: "23:59"  },
-        { assignment: "Project 1", submitted: true, graded: true, percent: 81, weight: 30, dateDue: "2024-11-10", timeDue: "23:59"  },
-    ],
-    "ABC1111": [
-        { assignment: "Program 0", submitted: true, graded: true, percent: 87, weight: 5, dateDue: "2024-11-6", timeDue: "23:59"  },
-        { assignment: "Project 1", submitted: true, graded: true, percent: 88, weight: 15, dateDue: "2024-11-10", timeDue: "23:59" },
-    ],
-}
 const totalWeight = (code) => assignmentData[code].reduce((acc,item) => acc + (item.graded ? item.weight : 0), 0);
 
 export const getCurrentWeight = ((weight, code)=>{
