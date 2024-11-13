@@ -24,7 +24,7 @@ const CourseAssignments = () => {
                                 </p>
                             </div>
                             <span
-                                className={`badge ${assignment.submitted ? 'badge-success' : 'badge-warning'} badge-pill`}
+                                className={`badge ${assignment.submitted ? 'badge-success' : 'badge-warning'} badge-pill text-black`}
                             >
                                 {assignment.submitted ? "Submitted" : "Not Submitted"}
                             </span>
