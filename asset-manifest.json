@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/tigerbuddy/static/css/main.4f1d0e89.css",
-    "main.js": "/tigerbuddy/static/js/main.05031171.js",
+    "main.js": "/tigerbuddy/static/js/main.baff6a04.js",
     "static/js/453.a45e5a28.chunk.js": "/tigerbuddy/static/js/453.a45e5a28.chunk.js",
     "static/media/courseImage.jpg": "/tigerbuddy/static/media/courseImage.b2caebb65a58f001a132.jpg",
     "static/media/logo512.png": "/tigerbuddy/static/media/logo512.5b7c3fe7c21a753d8397.png",
     "static/media/courseImage.png": "/tigerbuddy/static/media/courseImage.32f29e9efa6a0b8b0c8e.png",
     "index.html": "/tigerbuddy/index.html",
     "main.4f1d0e89.css.map": "/tigerbuddy/static/css/main.4f1d0e89.css.map",
-    "main.05031171.js.map": "/tigerbuddy/static/js/main.05031171.js.map",
+    "main.baff6a04.js.map": "/tigerbuddy/static/js/main.baff6a04.js.map",
     "453.a45e5a28.chunk.js.map": "/tigerbuddy/static/js/453.a45e5a28.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4f1d0e89.css",
-    "static/js/main.05031171.js"
+    "static/js/main.baff6a04.js"
   ]
 }
