@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Routes,
     Route,
     Navigate
@@ -12,7 +12,7 @@ import { CourseAnnouncements, CourseAssignments, CourseHome, CourseGrades, Cours
 
 function App() {
     return (
-        <Router basename="/tigerbuddy">
+        <Router>
             <Routes>
                 <Route index element={<Navigate to="login" replace />}/>
                 <Route path="login" element={<Login />}/>

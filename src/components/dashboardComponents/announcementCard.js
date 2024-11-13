@@ -28,7 +28,7 @@ const AnnouncementCard = () => {
 
         // Don't recursive update.
         setAnnouncements(allAnnouncements);
-    });
+    },[gotAnnouncements]);
     
     return (
         <div className="d-flex flex-column me-2">
