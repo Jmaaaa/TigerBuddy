@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { assignmentData } from "../data";
+import { Link } from "react-router-dom";
 
 const CalendarPreview = ({ small=false }) => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
@@ -85,12 +86,12 @@ const CalendarPreview = ({ small=false }) => {
                                 }).format(assign.due);
 
                                 return (
-                                    <a href={`/courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
+                                    <Link to={`../courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
                                         <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
                                             <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
                                             <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
                                         </div>
-                                    </a>
+                                    </Link>
                                 );
                             })}
                         </div>
