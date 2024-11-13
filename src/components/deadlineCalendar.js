@@ -68,8 +68,8 @@ const DeadlineCalendar = () => {
 
     return (
         <div className={"container-fluid px-4 h-100"}>
-            {[...Array(7)].map((_, i) => (
-                <div key={i} className="row"  style={{height: "20%"}}>
+            {[...Array(5)].map((_, i) => (
+                <div key={i} className="row mt-1 d-flex"  style={{height: "22%"}}>
                 {thisWeek && thisWeek.slice(i*7, (i+1)*7).map((data, idx) => {
                     return (
                             <div key={idx} className="col-sm p-1">

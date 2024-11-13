@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { nameData, deadlinesData } from "../../components/data"; 
+import { nameData, assignmentData } from "../../components/data"; 
 
 const AssignmentPage = () => {
     const { name: code, assignmentName } = useParams();
     const name = nameData[code];
-    const assignment = deadlinesData[code]?.find((item) => item.assignment === assignmentName) || {};
+    const assignment = assignmentData[code]?.find((item) => item.assignment === assignmentName) || {};
 
     const [image, setImage] = useState("");
     const inputFile = useRef(null);

@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { deadlinesData } from "../../components/data.js";
+import { assignmentData } from "../../components/data.js";
 
 const CourseAssignments = () => {
     const { name: courseName } = useParams();
-    const assignments = deadlinesData[courseName] || [];
+    const assignments = assignmentData[courseName] || [];
 
     return (
         <div className="container mt-4">

@@ -9,7 +9,7 @@ const Deadlines = () => {
     const [selectedClass, setSelectedClass] = useState("all");
 
     const deadlines = courseCodes.reduce((acc, courseCode) => {
-        const pendingAssignments = assignmentData[courseCode].filter((assingment) => !assingment.submitted || !assingment.graded);
+        const pendingAssignments = assignmentData[courseCode].filter((assingment) => !assingment.graded);
         acc[courseCode] = pendingAssignments;
         return acc;
     },{});
@@ -26,11 +26,11 @@ const Deadlines = () => {
     return (
         <div className="h-100">
             <div className="d-flex align-items-center  bg-light" style={{height: "20%"}}>
-                <h1 className="mx-5" >Grade Summary</h1>
+                <h1 className="mx-5" >Deadlines</h1>
             </div>
             <div className="d-flex justify-content-center pt-4 pb-5"  style={{height: "70%"}}>
                 <div className="d-flex  gap-3 justify-content-center" style={{width: "90%"}}>
-                    <div className="d-block" style={{width: "35%"}}>
+                    <div className="d-block" style={{width: "32%"}}>
                         <div className="class-buttons">
                             <button onClick={() => handleClassFilter("all")} className={selectedClass === "all" ? "active" : ""}>All Classes</button>
                             {courseCodes.map((code,index)=>(
@@ -46,7 +46,7 @@ const Deadlines = () => {
                         </div>
 
                     </div>
-                    <div className="h-100" style={{width: "65%"}}>
+                    <div className="h-100" style={{width: "68%"}}>
                         <DeadlineCalendar/>
                     </div>
                 </div>
