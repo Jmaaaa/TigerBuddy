@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { courseAnnouncementsData, assignmentData, nameData, profData } from "../data";
+import { assignmentData, nameData, profData } from "../data";
 import feedbackImg from "../../assets/feedback.png";
 
 const FeedbackCard = () => {
@@ -25,14 +25,14 @@ const FeedbackCard = () => {
         }
 
         setFeedback(allFeedback);
-    });
+    },[gotFeedback]);
     
     return (
         <div className="d-flex flex-column me-2">
             {feedback.map((data, idx) => {
                 return (
                     <div className="d-flex flex-row w-100 p-3 mb-2 bg-light bg-gradient rounded" key={idx}>
-                        <div><img src={feedbackImg} width="32" className="rounded"/></div>
+                        <div><img src={feedbackImg} alt="feedback-icon" width="32" className="rounded"/></div>
                         <div className="d-flex flex-column ms-3">
                             <h5 className="mb-1">{data.title}</h5>
                             <h6 className="mb-1">2024 {nameData[data.course]} for {profData[data.course]}</h6>

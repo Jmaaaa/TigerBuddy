@@ -11,9 +11,9 @@ const CourseAssignments = () => {
             <h1 className="mb-4">{courseName} / Assignments</h1>
             {assignments.length > 0 ? (
                 <div className="list-group">
-                    {assignments.map((assignment) => (
+                    {assignments.map((assignment, index) => (
                         <Link
-                            key={assignment.id}
+                            key={index}
                             to={`./${assignment.assignment}`}
                             className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                         >

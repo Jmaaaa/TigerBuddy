@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { assignmentData, nameData } from "../components/data";
+import { nameData } from "../components/data";
 import courseImage from "../assets/courseImage.jpg"
 
 const Course = () => {

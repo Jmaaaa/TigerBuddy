@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { assignmentData, profData, getAverageGrade, getQualityPoints } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
 const Grades = () => {
@@ -22,12 +22,6 @@ const Grades = () => {
         })
     };
 
-    const navigate = useNavigate();
-
-    const goToCourse = (code) => {
-        navigate(`../courses/${code}`);
-    };
-
     
 //grade.id % 2 === 0 ? "":"bg-light"
 
@@ -40,7 +34,7 @@ const Grades = () => {
                 <table className="table border table-hover  w-75 mb-5">
                     <thead className="table-light">
                         <tr>
-                            <th scope="col" className="p-2">Course</th>
+                            <th scope="col" className="p-2 ">Course</th>
                             <th scope="col" className="p-2">Instructor</th>
                             <th scope="col" className="p-2">Grade</th>
                             <th scope="col" className="p-2">Hours</th>
@@ -65,6 +59,7 @@ const Grades = () => {
                                     <td colSpan={5} className="p-0">
                                         <div className="collapse" id={`${index}-subtable`}>
                                             <CourseGradeTable code={grade.code}/>
+                                            <p className="m-1 mx-3 p-0">(<Link to={`../courses/${grade.code}`}>Go to course page</Link>)</p>
                                         </div>
                                     </td>
                                 </tr>

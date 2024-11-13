@@ -27,7 +27,8 @@ const CourseGradeTable = ({code}) => {
                 </thead>
                 <tbody className="table-group-divider">
                     {assignmentData[code].map((item, index) => (
-                        <tr key={index} onClick={() => goToAssignment(item.assignment)}>
+                        <tr key={index} onClick={() => goToAssignment(item.assignment)} 
+                        style={{cursor: "pointer"}}>
                             <td className="p-2">{item.assignment}</td>
                             <td className="p-2">{item.weight}% ({item.graded? getCurrentWeight(item.weight,code) : 0}%)</td>
                             <td className="p-2">0-100</td>

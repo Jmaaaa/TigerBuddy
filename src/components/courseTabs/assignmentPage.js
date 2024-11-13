@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { nameData, assignmentData, getGrade } from "../../components/data"; 
+import { assignmentData, getGrade } from "../../components/data"; 
 
 const AssignmentPage = () => {
     const { name: code, assignmentName } = useParams();
-    const name = nameData[code];
     const assignment = assignmentData[code]?.find((item) => item.assignment === assignmentName) || {};
 
     const [image, setImage] = useState("");

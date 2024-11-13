@@ -3,7 +3,7 @@ import { assignmentData } from "../data";
 
 const CalendarPreview = ({ small=false }) => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
-    const [today, setToday] = useState(new Date());
+    const [today] = useState(new Date());
     const [thisWeek, setThisWeek] = useState([]);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const CalendarPreview = ({ small=false }) => {
                     // console.log(JSON.stringify(assignment));
                     let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
                     let due = new Date(dateStr);
-                    if (due.getMonth() == curDay.getMonth() && due.getDate() == curDay.getDate() && due.getFullYear() == curDay.getFullYear()) {
+                    if (due.getMonth() === curDay.getMonth() && due.getDate() === curDay.getDate() && due.getFullYear() === curDay.getFullYear()) {
                         assignments.push({
                             name: assignment.assignment,
                             course: key,
@@ -64,7 +64,7 @@ const CalendarPreview = ({ small=false }) => {
         }
 
         setThisWeek(weekData);
-    }, [today]);
+    }, [today, gotThisWeek]);
 
     return (
         <div className={`container-fluid ${!small && "px-4"} ${small && "pt-4"}`}>
