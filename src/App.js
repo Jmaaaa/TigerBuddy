@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import {
-    BrowserRouter,
+    BrowserRouter as Router,
     Routes,
     Route,
     Navigate
@@ -12,15 +12,15 @@ import { CourseAnnouncements, CourseAssignments, CourseHome, CourseGrades, Cours
 
 function App() {
     return (
-        <BrowserRouter basename="/tigerbuddy">
+        <Router basename="/tigerbuddy">
             <Routes>
-                <Route exact path="/" element={<Navigate to="login" replace/>} />
-                <Route path="/login" element={<Login />}/>
+                <Route index element={<Navigate to="login" replace />}/>
+                <Route path="login" element={<Login />}/>
                 <Route element={<Navbar />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/deadlines" element={<Deadlines />}/>
-                    <Route path="/grades" element={<Grades/>}/>
-                    <Route path="/courses/:name" element={<Course />}>
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="deadlines" element={<Deadlines />}/>
+                    <Route path="grades" element={<Grades/>}/>
+                    <Route path="courses/:name" element={<Course />}>
                         <Route index element={<Navigate to="home" replace />}/>
                         <Route path="home" element={<CourseHome />}/>
                         <Route path="announcements" element={<CourseAnnouncements />}/>
@@ -31,7 +31,7 @@ function App() {
                     </Route>
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </Router>
     );
 }
 
