@@ -5,6 +5,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
+const assignmentRoutes = require('./routes/assignment');
+const courseRoutes = require('./routes/course');
+const gradeRoutes = require('./routes/grade');
 
 const app = express();
 const PORT = 5000;
@@ -24,6 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/grades', gradeRoutes);
 
 // Start Server
 app.listen(PORT, () => {
