@@ -1,6 +1,16 @@
-## Message from Jake
+## (new) Message from Jake
+
+run `npm install`
+
+to launch the backend go into a terminal and enter `node .\server\server.js `
+to launch front end go into a terminal and enter `npm start`
+front and back ends need to be SEPARATE terminals!
+
+to login: username="email" and password="password"
 
 Here are some dependencies to install first
+
+admin HjrJbrDcnqaGSQA2
 
 ### Node.js 
 Download link: https://nodejs.org/dist/v22.11.0/node-v22.11.0-x64.msi

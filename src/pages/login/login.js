@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import logo512 from "../../assets/logo512.png"
 import "./login.css"
 
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Space for authentication logic
-        navigate("/dashboard"); 
+        try{
+            const response = await axios.post("/api/users/login",{
+                email,
+                password
+            });
+
+            if(response.status === 200) {
+                console.log("login successful");
+                localStorage.setItem('token', response.data.token);
+                navigate("/dashboard"); 
+            }
+        }
+        catch(err){
+            console.log("Login failed");
+        }
     };
 
     useEffect(() => {
@@ -33,8 +47,8 @@ const Login = () => {
                     <input
                         type="text"
                         placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="login-input"
                     />
                     <input
