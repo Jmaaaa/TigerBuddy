@@ -5,19 +5,27 @@ import logo512 from "../assets/logo512.png"
 const Navbar = () => {
     return (
         <>
-            <div className="sticky-top d-flex w-100 align-items-center bg-purple p-2 px-5" style={{height: "10%"}}>
-                <div className="d-flex flex-row align-items-center me-auto">
-                    <div className="d-flex mx-2">
-                        <h1 className="fw-bolder m-0"><span className="text-white">Tiger</span><span className="color-gold">Buddy</span></h1>
-                    </div>
-                    <img src={logo512} width="64" height="64" alt="logo"></img>
-                </div>
+            <div className="navbar navbar-expand-lg bg-primary sticky-top">
+                <div className="container-fluid">
+                    <a className="navbar-brand d-flex align-items-center" href="#/dashboard">
+                        <span className="h1 fw-bolder ms-5"><span className="text-white">Tiger</span><span className="color-gold">Buddy</span></span>
+                        <img src={logo512} width="64" height="64" alt="logo" className="ms-2"></img>
+                    </a>
 
-                <div>
-                    <Link to="/dashboard" className="m-2 p-2 text-white text-decoration-none">Dashboard</Link>
-                    <Link to="/deadlines" className="m-2 p-2 text-white text-decoration-none">Deadlines</Link>
-                    <Link to="/grades" className="m-2 p-2 text-white text-decoration-none">Grades</Link>
-                    <Link to="/login" className="m-2 p-2 text-white text-decoration-none">Sign Out</Link>
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <Link to="/dashboard" className="m-2 p-2 text-white text-decoration-none">Dashboard</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="/deadlines" className="m-2 p-2 text-white text-decoration-none">Deadlines</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="/grades" className="m-2 p-2 text-white text-decoration-none">Grades</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="/login" className="m-2 p-2 text-white text-decoration-none">Sign Out</Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div style={{height: "90%"}}> 
