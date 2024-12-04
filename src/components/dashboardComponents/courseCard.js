@@ -1,10 +1,34 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import courseImage from "../../assets/courseImage.png"
-import { getAverageGrade, profData } from "../data";
+import axios from 'axios';
 
-const CourseCard = ({course}) => {
-    const {name, code, instructor} = course;
+const CourseCard = ({course, userId}) => {
+    const {name, code, instructor, courseGrade} = course;
+
+
+    const thresholds = [
+        { min: 97, grade: 'A+' },
+        { min: 93, grade: 'A' },
+        { min: 90, grade: 'A-' },
+        { min: 87, grade: 'B+' },
+        { min: 83, grade: 'B' },
+        { min: 80, grade: 'B-' },
+        { min: 77, grade: 'C+' },
+        { min: 73, grade: 'C' },
+        { min: 70, grade: 'C-' },
+        { min: 67, grade: 'D+' },
+        { min: 63, grade: 'D' },
+        { min: 60, grade: 'D-' },
+        { min: 0, grade: 'F' }
+      ];
+
+    const getLetterGrade = (score) => {
+        const threshold = thresholds.find(threshold => score >= threshold.min);
+        return threshold ? threshold.grade : 'N/A'; 
+    };
+
+    const letterGrade = getLetterGrade(courseGrade);
 
     return(
         <Link to={`../courses/${code}`} className="h-100 m-2 text-reset text-decoration-none">
@@ -14,7 +38,7 @@ const CourseCard = ({course}) => {
                 </div>
                 <div className="m-2 h-50">
                     <h5 className="m-0 color-purple">{code} | {instructor}</h5>
-                    <p className="m-0 text-secondary">Grade: 100</p>
+                    <p className="m-0 text-secondary">Grade: {courseGrade.toFixed(1)} ({letterGrade})</p>
                 </div>
             </div>
         </Link>

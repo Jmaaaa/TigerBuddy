@@ -8,12 +8,13 @@ import axios from 'axios';
 const Dashboard = () => {
     const [courses, setCourses] = useState([]);
     const token = localStorage.getItem('token');
-    const decoded = jwtDecode(token);
+    const userId = jwtDecode(token).userId;
     
     useEffect(() => {
         const getUserInfo = async() => {
             try{
-                const response = await axios.get(`/api/courses/user/${decoded.userId}`);
+                const response = await axios.get(`/api/courses/user/${userId}`);
+                console.log(response.data);
                 setCourses(response.data);
             }
             catch(err){
@@ -21,7 +22,7 @@ const Dashboard = () => {
             }
         };
         getUserInfo();
-    },[decoded.userId]);
+    },[userId]);
 
     
 
@@ -36,7 +37,7 @@ const Dashboard = () => {
             <div className="d-flex flex-row p-3 " style={{height: "80%"}}>
                 <div className="d-flex flex-column w-25">
                     {courses.map((course,index) => (
-                        <CourseCard key={index} course={course}/>
+                        <CourseCard key={index} course={course} userId={userId}/>
                     ))}
                 </div>
                 <div className="d-flex flex-column px-3 w-100">
