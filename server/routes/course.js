@@ -13,4 +13,17 @@ router.post('/add', async (req,res) => {
     }
 });
 
+router.get('/user/:userId', async (req,res) => {
+    const { userId } = req.params;
+
+    try{
+        const courses = await Course.find({students: userId });
+        res.status(200).json(courses);
+    } 
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+
 module.exports = router;

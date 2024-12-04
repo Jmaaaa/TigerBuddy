@@ -1,8 +1,29 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { CourseCard, AnnouncementCard, CalendarPreview, FeedbackCard} from "../components/dashboardComponents";
 import { courseCodes } from "../components/data";
+import { jwtDecode  }  from 'jwt-decode';
+import axios from 'axios';
+
 
 const Dashboard = () => {
+    const [courses, setCourses] = useState([]);
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    
+    useEffect(() => {
+        const getUserInfo = async() => {
+            try{
+                const response = await axios.get(`/api/courses/user/${decoded.userId}`);
+                setCourses(response.data);
+            }
+            catch(err){
+                console.log(err);
+            }
+        };
+        getUserInfo();
+    },[decoded.userId]);
+
+    
 
     return (
         <div className="d-flex flex-column h-100">
@@ -14,8 +35,8 @@ const Dashboard = () => {
             </div>
             <div className="d-flex flex-row p-3 " style={{height: "80%"}}>
                 <div className="d-flex flex-column w-25">
-                    {courseCodes.map((code,index) => (
-                        <CourseCard key={index} code={code}/>
+                    {courses.map((course,index) => (
+                        <CourseCard key={index} course={course}/>
                     ))}
                 </div>
                 <div className="d-flex flex-column px-3 w-100">

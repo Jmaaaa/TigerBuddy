@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import courseImage from "../../assets/courseImage.png"
 import { getAverageGrade, profData } from "../data";
 
-const CourseCard = ({code}) => {
-    const grade = getAverageGrade(code);
-    const professor = profData[code];
+const CourseCard = ({course}) => {
+    const {name, code, instructor} = course;
 
     return(
         <Link to={`../courses/${code}`} className="h-100 m-2 text-reset text-decoration-none">
@@ -14,8 +13,8 @@ const CourseCard = ({code}) => {
                 <div className="overflow-hidden h-50" style={{backgroundImage: `url(${courseImage})`}}>
                 </div>
                 <div className="m-2 h-50">
-                    <h5 className="m-0 color-purple">{code} | {professor}</h5>
-                    <p className="m-0 text-secondary">Grade: {grade}</p>
+                    <h5 className="m-0 color-purple">{code} | {instructor}</h5>
+                    <p className="m-0 text-secondary">Grade: 100</p>
                 </div>
             </div>
         </Link>
