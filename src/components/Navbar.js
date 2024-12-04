@@ -12,18 +12,18 @@ const Navbar = () => {
                         <img src={logo512} width="64" height="64" alt="logo" className="ms-2"></img>
                     </a>
 
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav ms-auto me-5">
                         <li class="nav-item">
-                            <Link to="/dashboard" className="m-2 p-2 text-white text-decoration-none">Dashboard</Link>
+                            <Link to="/dashboard" className="nav-link text-white">Dashboard</Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/deadlines" className="m-2 p-2 text-white text-decoration-none">Deadlines</Link>
+                            <Link to="/deadlines" className="nav-link text-white">Deadlines</Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/grades" className="m-2 p-2 text-white text-decoration-none">Grades</Link>
+                            <Link to="/grades" className="nav-link text-white">Grades</Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/login" className="m-2 p-2 text-white text-decoration-none">Sign Out</Link>
+                            <Link to="/login" className="nav-link text-white">Sign Out</Link>
                         </li>
                     </ul>
                 </div>
