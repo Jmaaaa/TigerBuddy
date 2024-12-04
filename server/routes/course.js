@@ -77,7 +77,7 @@ router.get('/user/:userId', async (req,res) => {
             const totalWeight = gradedAssignments.reduce((acc, assignment) => acc + assignment.weight, 0);
             const weightedGrade = gradedAssignments.reduce((acc, assignment) => {
               const weight = assignment.weight;
-              const score = assignment.grades[0].score;
+              const score = assignment.grades[0].score || 0; // Fallback to 0 if no grade
               return acc + (score * (weight / totalWeight));
             }, 0);
 
