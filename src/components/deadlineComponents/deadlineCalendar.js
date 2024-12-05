@@ -8,9 +8,9 @@ const DeadlineCalendar = () => {
     const today = new Date();
     const [month, setMonth] =  useState(today.getMonth());
     const [year, setYear] = useState(today.getFullYear());
-    const firstDayOfMonth = new Date(year, month, 1);
-    const firstCalendarDay = new Date();
-    firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
+    // const firstDayOfMonth = new Date(year, month, 1);
+    // const firstCalendarDay = new Date();
+    // firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
 
     const weekDays = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"]
 
@@ -79,8 +79,8 @@ const DeadlineCalendar = () => {
     }, [today, gotThisWeek]);
 
     const setCalendar = () => {
-        firstDayOfMonth.setDate(year, month, 1);
-        firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
+        // firstDayOfMonth.setDate(year, month, 1);
+        // firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
     };
 
     const prevMonth = () => {
@@ -117,9 +117,18 @@ const DeadlineCalendar = () => {
                 {[...Array(5)].map((_,i) => (
                     <div key={i} className="row flex-nowrap">
                         {[...Array(7)].map((_,j) => {   
-                            
-                            const currentDay = new Date();
+                            const firstCalendarDay = new Date();
+                            firstCalendarDay.setMonth(month);
+                            firstCalendarDay.setYear(year);
+                            firstCalendarDay.setDate(1);
+                            if (firstCalendarDay.getDay() !== 0) {
+                                firstCalendarDay.setDate(firstCalendarDay.getDay() - 7);
+                            }
+
+                            const currentDay = new Date(firstCalendarDay);
                             currentDay.setDate(firstCalendarDay.getDate()+(7*i)+(j));
+
+                            // console.log(`cur month ${currentDay.getMonth()} should be ${month} for date ${currentDay} (first ${firstCalendarDay})`);
                             const dimmed = currentDay.getMonth() !== month;
                             return(
                                 <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "3rem"}}>
