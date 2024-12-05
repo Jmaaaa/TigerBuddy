@@ -6,38 +6,18 @@ const DeadlineCalendar = () => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
     const [thisWeek, setThisWeek] = useState([]);
     const today = new Date();
-    const month =  today.getMonth();
-    const year = today.getFullYear();
+    const [month, setMonth] =  useState(today.getMonth());
+    const [year, setYear] = useState(today.getFullYear());
     const firstDayOfMonth = new Date(year, month, 1);
     const firstCalendarDay = new Date();
     firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
 
-    const weekDays = [
-        "Sun",
-        "Mon",
-        "Tues",
-        "Wed",
-        "Thurs",
-        "Fri",
-        "Sat"
-    ]
+    const weekDays = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"]
 
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ]
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
     useEffect(() => {
+
 
         if (gotThisWeek)
             return;
@@ -98,10 +78,35 @@ const DeadlineCalendar = () => {
         setThisWeek(weekData);
     }, [today, gotThisWeek]);
 
+    const setCalendar = () => {
+        firstDayOfMonth.setDate(year, month, 1);
+        firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
+    };
+
+    const prevMonth = () => {
+        const prevMonth = month>0? month-1 : 11;
+        if(prevMonth === 11) setYear(year-1);
+        setMonth(prevMonth);
+        setCalendar();
+    };
+
+    const nextMonth = () => {
+        const nextMonth = month<11? month+1 : 0;
+        if(nextMonth === 0) setYear(year+1);
+        setMonth(nextMonth);
+        setCalendar();
+    };
+
     return (
-        <div className="row">
-            <div className="text-center">
-                <h2>{months[month]} {year}</h2>
+        <div className="row justify-content-center">
+            <div className=" text-center d-flex flex-row align-items-center justify-content-between gap-2" style={{maxWidth: "30rem"}}>
+                <button onClick={prevMonth} className="btn rounded-5 py-1">
+                    <i className="bi bi-arrow-left text-primary h1"></i>
+                </button>
+                <h2 className="m-0 text-primary">{months[month]} {year}</h2>
+                <button onClick={nextMonth} className="btn rounded-5 py-1">
+                    <i className="bi bi-arrow-right text-primary h1"></i>
+                </button>
             </div>
             <div className="container">
                 <div className="row flex-nowrap">
@@ -115,9 +120,14 @@ const DeadlineCalendar = () => {
                             
                             const currentDay = new Date();
                             currentDay.setDate(firstCalendarDay.getDate()+(7*i)+(j));
+                            const dimmed = currentDay.getMonth() !== month;
                             return(
                                 <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "3rem"}}>
-                                    <div className="border border-primary rounded-2 m-1 p-1 text-right flex-fill">{currentDay.getDate()}</div>
+                                    <div className={`card border-primary rounded-2 m-1 p-2 text-right flex-fill ${dimmed? "bg-dark-subtle":""}`}>
+                                        <div className="card-body p-0">
+                                            <h6 className="card-title">{currentDay.getDate()}</h6>
+                                        </div>
+                                    </div>
                                 </div>
 
                             );
