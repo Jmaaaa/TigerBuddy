@@ -122,7 +122,7 @@ const DeadlineCalendar = () => {
                             firstCalendarDay.setYear(year);
                             firstCalendarDay.setDate(1);
                             if (firstCalendarDay.getDay() !== 0) {
-                                firstCalendarDay.setDate(firstCalendarDay.getDay() - 7);
+                                firstCalendarDay.setDate(firstCalendarDay.getDate() - firstCalendarDay.getDay());
                             }
 
                             const currentDay = new Date(firstCalendarDay);
