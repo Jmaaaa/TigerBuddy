@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import DeadlineCard from "./deadlineCard.js";
 //import { courseData } from "../../components/data.js"; 
-import "./deadlines.css"
 import DeadlineCalendar from "../../components/deadlineCalendar.js"
 import { assignmentData, courseCodes } from "../../components/data.js";
 
@@ -24,31 +23,26 @@ const Deadlines = () => {
     );
 
     return (
-        <div className="h-100">
-            <div className="d-flex align-items-center  bg-light" style={{height: "20%"}}>
+        <div className="d-flex flex-column flex-fill">
+            <div className="container-fluid p-4 ps-5 d-flex align-items-center bg-light">
                 <h1 className="mx-5" >Deadlines</h1>
             </div>
-            <div className="d-flex justify-content-center pt-4 pb-5"  style={{height: "70%"}}>
-                <div className="d-flex  gap-3 justify-content-center" style={{width: "90%"}}>
-                    <div className="d-block" style={{width: "32%"}}>
-                        <div className="class-buttons">
-                            <button onClick={() => handleClassFilter("all")} className={selectedClass === "all" ? "active" : ""}>All Classes</button>
+            <div className="d-flex flex-row-reverse gap-2 flex-wrap my-4"style={{margin:"0 5%"}}>
+                <div className="container col d-flex flex-column">
+                    <DeadlineCalendar/>
+                </div>
+                <div className="container col d-flex flex-column gap-3" style={{maxWidth: "40rem"}}>
+                        <div className="d-flex-inline flex-row flex-wrap row gap-2">
+                            <button onClick={() => handleClassFilter("all")} className={`btn btn-outline-primary col ${selectedClass === "all" ? "active" : ""}`}>All</button>
                             {courseCodes.map((code,index)=>(
-                                <button key={index} onClick={() => handleClassFilter(code)} className={selectedClass === code ? "active" : ""}>{code}</button>
+                                <button key={index} onClick={() => handleClassFilter(code)} className={`btn btn-outline-primary col ${selectedClass === code ? "active" : ""}`}>{code}</button>
                             ))}
                         </div>
-                        <div className="deadlines-list">
-                            {filteredDeadlines.map((code) => (
-                                deadlines[code].map((deadline,index) =>
-                                <DeadlineCard key={index} code={code} deadline={ deadline}/>
-                                )
-                            ))}
-                        </div>
-
-                    </div>
-                    <div className="h-100" style={{width: "68%"}}>
-                        <DeadlineCalendar/>
-                    </div>
+                    {filteredDeadlines.map((code) => (
+                        deadlines[code].map((deadline,index) =>
+                            <DeadlineCard key={index} code={code} deadline={ deadline}/>
+                        )
+                    ))}
                 </div>
             </div>
         </div>

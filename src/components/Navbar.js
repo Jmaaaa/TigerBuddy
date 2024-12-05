@@ -13,16 +13,16 @@ const Navbar = () => {
                     </a>
 
                     <ul className="navbar-nav ms-auto me-4 d-flex flex-row gap-3 ">
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white">Dashboard</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link to="/deadlines" className="nav-link text-white">Deadlines</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link to="/grades" className="nav-link text-white">Grades</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link to="/login" className="nav-link text-white">Sign Out</Link>
                         </li>
                     </ul>

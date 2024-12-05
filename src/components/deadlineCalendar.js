@@ -4,10 +4,41 @@ import { Link } from "react-router-dom";
 
 const DeadlineCalendar = () => {
     const [gotThisWeek, setGotThisWeek] = useState(false);
-    const [today] = useState(new Date());
     const [thisWeek, setThisWeek] = useState([]);
+    const today = new Date();
+    const month =  today.getMonth();
+    const year = today.getFullYear();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const firstCalendarDay = new Date();
+    firstCalendarDay.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
+
+    const weekDays = [
+        "Sun",
+        "Mon",
+        "Tues",
+        "Wed",
+        "Thurs",
+        "Fri",
+        "Sat"
+    ]
+
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
 
     useEffect(() => {
+
         if (gotThisWeek)
             return;
         setGotThisWeek(true);
@@ -68,41 +99,68 @@ const DeadlineCalendar = () => {
     }, [today, gotThisWeek]);
 
     return (
-        <div className={"container-fluid px-4 h-100"}>
-            {[...Array(5)].map((_, i) => (
-                <div key={i} className="row mt-1 d-flex"  style={{height: "22%"}}>
-                {thisWeek && thisWeek.slice(i*7, (i+1)*7).map((data, idx) => {
-                    return (
-                            <div key={idx} className="col-sm p-1">
-                                <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
-                                    <span className="flex-shrink-0 mb-1 user-select-none">
-                                        {data.day.getDate()}
-                                    </span>
-                                    
-                                    <div className="flex-grow-1 d-flex flex-column justify-content-end w-100">
-                                        {data.assignments.map((assign, aindex) => {
-                                            const dueTime = new Intl.DateTimeFormat('en-US', {
-                                                hour: 'numeric',
-                                                minute: 'numeric'
-                                            }).format(assign.due);
-
-                                            return (
-                                                <Link to={`../courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
-                                                    <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
-                                                        <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
-                                                        <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
-                                                    </div>
-                                                </Link>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-                    );
-                })}
+        <div className="row">
+            <div className="text-center">
+                <h2>{months[month]} {year}</h2>
+            </div>
+            <div className="container">
+                <div className="row flex-nowrap">
+                    {weekDays.map((day,i)=>(
+                        <div key={i} className="col fw-bold text-center p-0">{day}</div>
+                    ))}
                 </div>
-            ))}
+                {[...Array(5)].map((_,i) => (
+                    <div key={i} className="row flex-nowrap">
+                        {[...Array(7)].map((_,j) => {   
+                            
+                            const currentDay = new Date();
+                            currentDay.setDate(firstCalendarDay.getDate()+(7*i)+(j));
+                            return(
+                                <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "3rem"}}>
+                                    <div className="border border-primary rounded-2 m-1 p-1 text-right flex-fill">{currentDay.getDate()}</div>
+                                </div>
+
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
         </div>
+        // <div className={"container-fluid px-4 h-100"}>
+        //     {[...Array(5)].map((_, i) => (
+        //         <div key={i} className="row mt-1 d-flex"  style={{height: "22%"}}>
+        //         {thisWeek && thisWeek.slice(i*7, (i+1)*7).map((data, idx) => {
+        //             return (
+        //                     <div key={idx} className="col-sm p-1">
+        //                         <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
+        //                             <span className="flex-shrink-0 mb-1 user-select-none">
+        //                                 {data.day.getDate()}
+        //                             </span>
+                                    
+        //                             <div className="flex-grow-1 d-flex flex-column justify-content-end w-100">
+        //                                 {data.assignments.map((assign, aindex) => {
+        //                                     const dueTime = new Intl.DateTimeFormat('en-US', {
+        //                                         hour: 'numeric',
+        //                                         minute: 'numeric'
+        //                                     }).format(assign.due);
+
+        //                                     return (
+        //                                         <Link to={`../courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
+        //                                             <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
+        //                                                 <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
+        //                                                 <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
+        //                                             </div>
+        //                                         </Link>
+        //                                     );
+        //                                 })}
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //             );
+        //         })}
+        //         </div>
+        //     ))}
+        // </div>
     );
 };
 

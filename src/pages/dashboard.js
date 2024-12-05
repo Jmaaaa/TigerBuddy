@@ -33,10 +33,10 @@ const Dashboard = () => {
                     Welcome to the dashboard
                 </h1>
             </div>
-            <div className="d-flex flex-row flex-wrap">
-                <div className=" d-flex flex-column ms-4" style={{minWidth: "20rem", minHeight: "40rem"}}>
+            <div className="d-flex flex-row flex-wrap col" style={{margin:"0 3%"}}>
+                <div className=" d-flex flex-column col" style={{minWidth: "20rem", minHeight: "40rem", maxWidth: "25rem"}}>
                     {courses.map((course,index) => (
-                        <CourseCard key={index} course={course} userId={userId} className="flex-fill"/>
+                        <CourseCard key={index} course={course} userId={userId} className="row"/>
                     ))}
                 </div>
                 <div className="d-flex flex-column col">

@@ -38,11 +38,13 @@ const DeadlineCard = ({ code, deadline }) => {
     }, [dateDue, timeDue]);
 
     return (
-        <div className="deadline-card" onClick={() => goToAssignment(assignment)}>
-            <h3>{assignment}</h3>
-            <p>Due Date: {dateDue} at {timeDue} ({timeRemaining})</p>
-            <p>Course: {course}</p>
-            <p>Status: {submitted ? "Submitted" : "Not Submitted"}</p>
+        <div className="card bg-light animated-shadow row" onClick={() => goToAssignment(assignment)}>
+            <div className="card-body">
+                <h3>{assignment}</h3>
+                <p>Due Date: {dateDue} at {timeDue} ({timeRemaining})</p>
+                <p>Course: {course}</p>
+                <p>Status: {submitted ? "Submitted" : "Not Submitted"}</p>
+            </div>
         </div>
     );
 };
