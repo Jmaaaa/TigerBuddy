@@ -114,7 +114,7 @@ const DeadlineCalendar = () => {
                         <div key={i} className="col fw-bold text-center p-0">{day}</div>
                     ))}
                 </div>
-                {[...Array(5)].map((_,i) => (
+                {[...Array(6)].map((_,i) => (
                     <div key={i} className="row flex-nowrap">
                         {[...Array(7)].map((_,j) => {   
                             const firstCalendarDay = new Date();
