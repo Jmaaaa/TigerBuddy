@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { assignmentData } from "./data";
+import { assignmentData } from "../data";
 import { Link } from "react-router-dom";
 
 const DeadlineCalendar = () => {
