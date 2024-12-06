@@ -6,7 +6,15 @@ const assignmentSchema = new Schema({
     description: { type: String },
     dueDate: { type: Date },
     weight: { type: Number },
-    grades: [{type: Schema.Types.ObjectId, ref: 'Grade'}]
+    grades: [{
+        score: { type: Number },
+        student: { type: Schema.Types.ObjectId, ref: 'User' },
+        feedback: { type: String },
+        submission: {
+            file: { type: String},
+            comments: [{ type: String }]
+        }
+    }]
 });
   
 const Assignment = mongoose.model('Assignment', assignmentSchema);

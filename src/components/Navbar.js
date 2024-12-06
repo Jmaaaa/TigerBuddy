@@ -28,7 +28,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            <div style={{height: "90%"}}> 
+            <div className="d-flex flex-column flex-fill"> 
                 <Outlet/>
             </div>
         </>
