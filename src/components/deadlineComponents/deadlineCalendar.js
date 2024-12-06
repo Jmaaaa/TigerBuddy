@@ -130,11 +130,12 @@ const DeadlineCalendar = () => {
 
                             // console.log(`cur month ${currentDay.getMonth()} should be ${month} for date ${currentDay} (first ${firstCalendarDay})`);
                             const dimmed = currentDay.getMonth() !== month;
+                            const itsToday = currentDay.getFullYear() === today.getFullYear() && currentDay.getMonth() === today.getMonth() && currentDay.getDate() === today.getDate();
                             return(
                                 <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "3rem"}}>
-                                    <div className={`card border-primary rounded-2 m-1 p-2 text-right flex-fill ${dimmed? "bg-dark-subtle":""}`}>
+                                    <div className={`card border-primary rounded-2 m-1 p-2 text-right flex-fill ${itsToday? "bg-primary-subtle": dimmed? "bg-dark-subtle":"" }  `}>
                                         <div className="card-body p-0">
-                                            <h6 className="card-title">{currentDay.getDate()}</h6>
+                                            <h6 className="card-title">{currentDay.getDate()} {itsToday? "Today":""}</h6>
                                         </div>
                                     </div>
                                 </div>
