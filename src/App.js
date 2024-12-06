@@ -20,7 +20,7 @@ function App() {
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="deadlines" element={<Deadlines />}/>
                     <Route path="grades" element={<Grades/>}/>
-                    <Route path="courses/:name" element={<Course />}>
+                    <Route path="courses/:code" element={<Course />}>
                         <Route index element={<Navigate to="home" replace />}/>
                         <Route path="home" element={<CourseHome />}/>
                         <Route path="announcements" element={<CourseAnnouncements />}/>

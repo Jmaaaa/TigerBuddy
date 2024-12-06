@@ -62,6 +62,18 @@ router.patch('/addHours',async (req,res)=> {
     }
 });
 
+router.get('/:code/:userId', async (req,res) => {
+    const { code, userId } = req.params;
+    try{
+        const course = await Course.findOne({code: code, students: userId});
+        res.status(200).json(course);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+});
+
 
 router.get('/user/:userId', async (req,res) => {
     const { userId } = req.params;

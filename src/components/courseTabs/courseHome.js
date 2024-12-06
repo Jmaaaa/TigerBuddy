@@ -4,7 +4,7 @@ import { overviewData } from "../../components/data.js";
 import './courseHome.css';
 
 const CourseHome = () => {
-    const { name: courseName } = useParams();
+    const { code: courseName } = useParams();
 
 
     const courseOverview = overviewData[courseName] || [];

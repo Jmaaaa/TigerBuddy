@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CourseGradeTable from "./courseGradeTable";
 
 const CourseGrades = () => {
-    const { name: courseName } = useParams();
+    const { code: courseName } = useParams();
     
     return (
        <div className="container mt-4">

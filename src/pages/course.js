@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { nameData } from "../components/data";
 import courseImage from "../assets/courseImage.jpg"
+import { jwtDecode  }  from 'jwt-decode';
+import axios from 'axios';
 
 const Course = () => {
-    const { name } = useParams();
-    const courseName = nameData[name];
+    const { code } = useParams();
+    const [course, setCourse] = useState({});
+    const token = localStorage.getItem('token');
+    const userId = jwtDecode(token).userId;
+    const courseName = nameData[code];
     
+    useEffect(() => {
+        const getUserInfo = async() => {
+            try{
+                const response = await axios.get(`/api/courses/${code}/${userId}`);
+                setCourse(response.data);
+            }
+            catch(err){
+                console.log(err);
+            }
+        };
+        getUserInfo();
+    },[userId]);
+
+
     const curPage = useLocation().pathname;
 
     const pages = [
@@ -21,7 +40,7 @@ const Course = () => {
         <div className="d-flex flex-column flex-fill">
             <div className="d-flex align-items-center bg-light" style={{backgroundImage: `url(${courseImage})`, backgroundPosition: "auto 100%"}}>
                 <h1 className="p-5 text-white" style={{textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"}}>
-                    {name} - {courseName}
+                    {code} - {course.name}
                 </h1>
             </div>
             <div className="d-flex flex-row flex-fill">
@@ -42,6 +61,7 @@ const Course = () => {
 
                 </div>
                 <div className="col" style={{margin:"0 2%"}}>
+                    <h1></h1>
                     <Outlet/>
                 </div>
             </div>

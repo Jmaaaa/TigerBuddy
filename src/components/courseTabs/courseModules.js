@@ -3,7 +3,7 @@ import { courseModules } from "../data";
 import { useParams } from "react-router-dom";
 
 const CourseModulePage = () => {
-    const { name: courseName } = useParams();
+    const { code: courseName } = useParams();
     const modules = courseModules[courseName] || [];
 
     return (

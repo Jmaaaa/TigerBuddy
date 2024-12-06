@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { assignmentData } from "../../components/data.js";
 
 const CourseAssignments = () => {
-    const { name: courseName } = useParams();
+    const { code: courseName } = useParams();
     const assignments = assignmentData[courseName] || [];
 
     return (

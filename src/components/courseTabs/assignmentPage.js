@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { assignmentData, getGrade } from "../../components/data"; 
 
 const AssignmentPage = () => {
-    const { name: code, assignmentName } = useParams();
+    const { code, assignmentName } = useParams();
     const assignment = assignmentData[code]?.find((item) => item.assignment === assignmentName) || {};
 
     const [image, setImage] = useState("");

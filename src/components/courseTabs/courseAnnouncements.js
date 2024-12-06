@@ -3,7 +3,7 @@ import { courseAnnouncementsData } from "../data";
 import { useParams } from "react-router-dom";
 
 const CourseAnnouncements = () => {
-    const { name: courseName } = useParams();
+    const { code: courseName } = useParams();
     const announcements = courseAnnouncementsData[courseName] || [];
     const [openIndex, setOpenIndex] = useState(null);
 
