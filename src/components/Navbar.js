@@ -28,7 +28,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            <div className="d-flex flex-column flex-fill"> 
+            <div className="d-flex flex-column flex-fill overflow-auto"> 
                 <Outlet/>
             </div>
         </>

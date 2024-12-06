@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { CourseCard, AnnouncementCard, CalendarPreview, FeedbackCard} from "../components/dashboardComponents";
-import { courseCodes } from "../components/data";
 import { jwtDecode  }  from 'jwt-decode';
 import axios from 'axios';
 

@@ -71,7 +71,7 @@ router.get('/user/:userId', async (req,res) => {
         const courses = await Course.find({students: userId })
         .populate({
             path:'assignments',
-            select: 'weight grades',
+            select: 'name weight grades',
         }).lean();
         
 
@@ -81,20 +81,24 @@ router.get('/user/:userId', async (req,res) => {
                 .map((assignment) => {
                 const grade = assignment.grades.find((grade) => grade.student.toString() === userId);
 
-                if(grade) return {score: grade.score, weight: assignment.weight}
-                return null;
+                if(grade) return {id: assignment._id, name: assignment.name, score: grade.score, weight: assignment.weight}
+                return {id: assignment._id, name: assignment.name, score: null, weight: assignment.weight};
                 })
-                .filter(Boolean);
 
 
-            const totalWeight = userGrades.reduce((acc, grade) => acc + grade.weight, 0);
+            const totalWeight = userGrades.reduce((acc, grade) => {
+                const {score, weight} = grade;
+                return acc + ((score===null)? 0 : weight);
+            },0);
             const weightedGrade = userGrades.reduce((acc, grade) => {
-              const weight = grade.weight;
-              const score = grade.score || 0; // Fallback to 0 if no grade
-              return acc + (score * (weight / totalWeight));
+              const {score, weight} = grade;
+              return acc + ((score===null)? 0 :(score * (weight / totalWeight)));
             }, 0);
 
-            return {id: course._id, name: course.name, code: course.code, instructor: course.instructor, hours: course.hours, courseGrade: weightedGrade};
+            return {id: course._id, name: course.name, code: course.code,
+                 instructor: course.instructor, hours: course.hours,
+                  totalWeight: totalWeight, courseGrade: weightedGrade ,
+                   assignments: userGrades};
         })
 
         res.status(200).json(detailedCourses);

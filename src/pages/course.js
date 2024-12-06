@@ -26,7 +26,7 @@ const Course = () => {
             </div>
             <div className="d-flex flex-row flex-fill">
                 <div className="d-flex flex-column p-3 bg-light border-end border-secondary-supress">
-                    <ul className="nav flex-column gap-2 sticky-top" style={{top: "9rem"}}>
+                    <ul className="nav flex-column gap-2 sticky-top">
                         {pages.map(({name,path,icon}, idx) => (
                             <li key={idx} className="nav-item">
                                 <Link to={`./${path}`} 

@@ -78,29 +78,32 @@ const Grades = () => {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        {courses.map(({code, instructor, courseGrade, hours},index) => (
-                            <React.Fragment key={index}> 
-                                <tr data-bs-toggle="collapse" 
-                                data-bs-target={`#${index}-subtable`}
-                                style={{cursor: "pointer"}}
-                                className={activeRows[index] ? "table-active" : ""}
-                                onClick={()=>toggleActive(index)}>
-                                    <td className="p-2">{code}</td>
-                                    <td className="p-2">{instructor}</td>
-                                    <td className="p-2">{courseGrade.toFixed(1)} ({getLetterGrade(courseGrade)})</td>
-                                    <td className="p-2">{hours.toFixed(1)}</td>
-                                    <td className="p-2">{(getPointGrade(courseGrade)*hours).toFixed(1)}</td>
-                                </tr>
-                                <tr className="table-active">
-                                    <td colSpan={5} className="p-0">
-                                        <div className="collapse" id={`${index}-subtable`}>
-                                            <CourseGradeTable code={code}/>
-                                            <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}`}>Go to course page</Link>)</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </React.Fragment>
-                        ))}
+                        {courses.map((course,index) => {
+                            const {code, instructor, courseGrade, hours} = course
+                            return (
+                                <React.Fragment key={index}> 
+                                    <tr data-bs-toggle="collapse" 
+                                    data-bs-target={`#${index}-subtable`}
+                                    style={{cursor: "pointer"}}
+                                    className={activeRows[index] ? "table-active" : ""}
+                                    onClick={()=>toggleActive(index)}>
+                                        <td className="p-2">{code}</td>
+                                        <td className="p-2">{instructor}</td>
+                                        <td className="p-2">{courseGrade.toFixed(1)} ({getLetterGrade(courseGrade)})</td>
+                                        <td className="p-2">{hours.toFixed(1)}</td>
+                                        <td className="p-2">{(getPointGrade(courseGrade)*hours).toFixed(1)}</td>
+                                    </tr>
+                                    <tr className="table-active">
+                                        <td colSpan={5} className="p-0">
+                                            <div className="collapse" id={`${index}-subtable`}>
+                                                <CourseGradeTable course={course}/>
+                                                <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}`}>Go to course page</Link>)</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </React.Fragment>
+                            )
+                        })}
                         
                     </tbody>
                     <tfoot className="table-group-divider">

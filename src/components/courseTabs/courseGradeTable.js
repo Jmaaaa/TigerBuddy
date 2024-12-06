@@ -1,9 +1,10 @@
 import React from "react"
-import { assignmentData, getGrade, getCurrentWeight, getAverageGrade } from "../data";
+import { assignmentData, getGrade, getAverageGrade } from "../data";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getLetterGrade } from "../../pages/grades";
 
-const CourseGradeTable = ({code}) => {
-
+const CourseGradeTable = ({course}) => {
+    const {code, assignments, totalWeight} = course;
     const letterGrade = getAverageGrade(code);
     const curPage = useLocation().pathname;
     const inCourses = curPage.startsWith("/courses") ? true : false;
@@ -26,15 +27,18 @@ const CourseGradeTable = ({code}) => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {assignmentData[code].map((item, index) => (
-                        <tr key={index} onClick={() => goToAssignment(item.assignment)} 
-                        style={{cursor: "pointer"}}>
-                            <td className="p-2">{item.assignment}</td>
-                            <td className="p-2">{item.weight}% ({item.graded? getCurrentWeight(item.weight,code) : 0}%)</td>
-                            <td className="p-2">0-100</td>
-                            <td className="p-2"> {item.graded? getGrade(item.percent): "-"}</td>
-                        </tr>   
-                    ))}
+                    {assignments.map((assignment, index) => {
+                        const{name, score, weight} = assignment;
+                        return(
+                            <tr key={index} onClick={() => goToAssignment(name)} 
+                            style={{cursor: "pointer"}}>
+                                <td className="p-2">{name}</td>
+                                <td className="p-2">{weight}% ({score!==null? (weight/totalWeight*100).toFixed(1) : 0}%)</td>
+                                <td className="p-2">0-100</td>
+                                <td className="p-2"> {score!==null? `${score} (${getLetterGrade(score)})` : "-"}</td>
+                            </tr>   
+                        )
+                })}
                 </tbody>
                 {inCourses && (
                     <tfoot className="table-light table-group-divider fw-bold">
