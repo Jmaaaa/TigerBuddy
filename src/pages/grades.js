@@ -97,7 +97,7 @@ const Grades = () => {
                                         <td colSpan={5} className="p-0">
                                             <div className="collapse" id={`${index}-subtable`}>
                                                 <CourseGradeTable course={course}/>
-                                                <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}`}>Go to course page</Link>)</p>
+                                                <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}/grades`} state={{course}}>Go to course page</Link>)</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -108,8 +108,7 @@ const Grades = () => {
                     </tbody>
                     <tfoot className="table-group-divider">
                         <tr className="table-light">
-                                <td colSpan={2}/>
-                                <th>Totals:</th>
+                                <th colSpan="3" style={{ position: "relative" }}><span className="invisible">.</span> <span style={{ position: "absolute", right: "0" }}>Totals:</span></th>
                                     {(() => {
                                         const totals = courses.reduce((acc, { courseGrade, hours }) => {
                                             acc.hours += hours;
@@ -119,7 +118,7 @@ const Grades = () => {
 
                                         return (
                                             <>
-                                                <th>{totals.hours.toFixed(1)}</th>
+                                                <th style={{ position: "relative" }} >{totals.hours.toFixed(1)} </th>
                                                 <th>{totals.points.toFixed(1)}</th>
                                             </>
                                         );
