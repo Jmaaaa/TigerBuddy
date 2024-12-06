@@ -25,9 +25,21 @@ router.post('/addMany', async (req, res) => {
 
 router.patch('/addGrades', async (req,res) => {
     try{
-        const [{assignmentId, student, score, feedback, submission }]= req.body;
-        
-        res.status(200).json({ message: 'Grades have been reset' });
+        const grades = req.body;
+        for(const{assignmentId, student, score, feedback, submission } of grades){
+            const newGrade = {score, student, feedback, submission};
+
+            const updatedAssignment = await Assignment.findByIdAndUpdate(
+                assignmentId,
+                {$push: {grades: newGrade}},
+                { new: true }
+            );
+
+            if (!updatedAssignment) {
+                return res.status(404).json({ message: `Assignment not found for ID: ${assignmentId}` });
+            }
+        }
+        res.status(200).json({ message: 'Grades added successfully' });
     }
     catch (err) {
         res.status(400).json(err);

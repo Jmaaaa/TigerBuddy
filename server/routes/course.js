@@ -63,21 +63,21 @@ router.get('/user/:userId', async (req,res) => {
         .populate({
             path:'assignments',
             select: 'weight grades',
-            populate: {
-                path: 'grades',
-                match: {student: userId},
-                select: 'score'
-            }
         }).lean();
         
 
         const detailedCourses = courses.map( (course) => {
-            const gradedAssignments = course.assignments.filter((assignment) => assignment.grades.length > 0);
 
-            const totalWeight = gradedAssignments.reduce((acc, assignment) => acc + assignment.weight, 0);
-            const weightedGrade = gradedAssignments.reduce((acc, assignment) => {
-              const weight = assignment.weight;
-              const score = assignment.grades[0].score || 0; // Fallback to 0 if no grade
+            const userGrades = course.assignments.map((assignment) => {
+                const grade = assignment.grades.find((grade) => grade.student === userId);
+                if(grade) return {score: grade.score, weight: grade.weight}
+            });
+
+
+            const totalWeight = userGrades.reduce((acc, grade) => acc + grade.weight, 0);
+            const weightedGrade = userGrades.reduce((acc, grade) => {
+              const weight = grade.weight;
+              const score = grade.score || 0; // Fallback to 0 if no grade
               return acc + (score * (weight / totalWeight));
             }, 0);
 
