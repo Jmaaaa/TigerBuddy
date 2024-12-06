@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { overviewData } from "../../components/data.js"; 
 import './courseHome.css';
 
-const CourseHome = () => {
+const CourseHome = ({course}) => {
     const { code: courseName } = useParams();
 
 
@@ -11,7 +11,6 @@ const CourseHome = () => {
 
     return (
         <div className="container mt-4">
-            <h1>{courseName} / Home</h1>
             <div className="course-homepage">
                 <h1>Welcome to {courseName}!</h1>
 

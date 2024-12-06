@@ -1,14 +1,14 @@
-import React from "react";
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import CourseGradeTable from "./courseGradeTable";
 
 const CourseGrades = () => {
-    const { code: courseName } = useParams();
-    
+    const location = useLocation();
+    const course = location.state?.course;
+
     return (
-       <div className="container mt-4">
-            <h1>{courseName} / Grades</h1>
-            <CourseGradeTable code={courseName}/>
+       <div>
+            <CourseGradeTable course={course}/>
         </div>
     );
 };

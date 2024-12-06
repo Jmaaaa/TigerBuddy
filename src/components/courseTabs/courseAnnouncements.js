@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { courseAnnouncementsData } from "../data"; 
 import { useParams } from "react-router-dom";
 
-const CourseAnnouncements = () => {
+const CourseAnnouncements = ({course}) => {
     const { code: courseName } = useParams();
     const announcements = courseAnnouncementsData[courseName] || [];
     const [openIndex, setOpenIndex] = useState(null);
@@ -13,8 +13,6 @@ const CourseAnnouncements = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">{courseName} / Announcements</h1>
-
             {announcements.length > 0 ? (
                 <div className="list-group">
                     {announcements.map((announcement, index) => (

@@ -1,11 +1,9 @@
 import React from "react"
-import { assignmentData, getGrade, getAverageGrade } from "../data";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getLetterGrade } from "../../pages/grades";
 
 const CourseGradeTable = ({course}) => {
-    const {code, assignments, totalWeight} = course;
-    const letterGrade = getAverageGrade(code);
+    const {code, assignments, totalWeight, courseGrade} = course;
     const curPage = useLocation().pathname;
     const inCourses = curPage.startsWith("/courses") ? true : false;
     const navigate = useNavigate();
@@ -27,10 +25,10 @@ const CourseGradeTable = ({course}) => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {assignments.map((assignment, index) => {
+                    {assignments.map((assignment, i) => {
                         const{name, score, weight} = assignment;
                         return(
-                            <tr key={index} onClick={() => goToAssignment(name)} 
+                            <tr key={i} onClick={() => goToAssignment(name)} 
                             style={{cursor: "pointer"}}>
                                 <td className="p-2">{name}</td>
                                 <td className="p-2">{weight}% ({score!==null? (weight/totalWeight*100).toFixed(1) : 0}%)</td>
@@ -43,8 +41,9 @@ const CourseGradeTable = ({course}) => {
                 {inCourses && (
                     <tfoot className="table-light table-group-divider fw-bold">
                         <tr>
-                            <td colSpan={3}>Course Total</td>
-                            <td>{letterGrade}</td>
+                            <td colSpan={2}></td>
+                            <td className="text-end">Course Total:</td>
+                            <td>{courseGrade.toFixed(1)} ({getLetterGrade(courseGrade)})</td>
                         </tr>
                     </tfoot>
                 )}

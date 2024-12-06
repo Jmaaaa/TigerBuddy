@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { nameData } from "../components/data";
 import courseImage from "../assets/courseImage.jpg"
 import { jwtDecode  }  from 'jwt-decode';
 import axios from 'axios';
@@ -10,12 +9,11 @@ const Course = () => {
     const [course, setCourse] = useState({});
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).userId;
-    const courseName = nameData[code];
     
     useEffect(() => {
         const getUserInfo = async() => {
             try{
-                const response = await axios.get(`/api/courses/${code}/${userId}`);
+                const response = await axios.get(`/api/courses/${code}/user/${userId}`);
                 setCourse(response.data);
             }
             catch(err){
@@ -23,10 +21,11 @@ const Course = () => {
             }
         };
         getUserInfo();
-    },[userId]);
+    },[code,userId]);
 
 
     const curPage = useLocation().pathname;
+    const pathStrings = ((decodeURIComponent(curPage).split('/'))).map(word=> word.charAt(0).toUpperCase() + word.slice(1));
 
     const pages = [
         { name: "Home", path: 'home', icon: 'house-fill'},
@@ -48,7 +47,7 @@ const Course = () => {
                     <ul className="nav flex-column gap-2 sticky-top">
                         {pages.map(({name,path,icon}, idx) => (
                             <li key={idx} className="nav-item">
-                                <Link to={`./${path}`} 
+                                <Link to={`./${path}`} state={{course}} 
                                 className={`nav-link ${(curPage.endsWith(path) ? 'text-primary' : 'text-secondary')} py-2 px-1 text-decoration-none`}>
                                     <div className="d-flex flex-row justify-content-left align-items-center gap-3">
                                         <i className={`bi bi-${icon} h4`}/>
@@ -60,9 +59,11 @@ const Course = () => {
                     </ul>
 
                 </div>
-                <div className="col" style={{margin:"0 2%"}}>
-                    <h1></h1>
-                    <Outlet/>
+                <div className="container">
+                    <div className="d-flex flex-column my-4 gap-3" style={{margin:"0 2%"}}>
+                        <h1>{pathStrings.pop()}</h1>
+                        <Outlet/>
+                    </div>
                 </div>
             </div>
 

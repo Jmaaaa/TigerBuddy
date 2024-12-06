@@ -64,8 +64,39 @@ router.patch('/addHours',async (req,res)=> {
 router.get('/:code/user/:userId', async (req,res) => {
     const { code, userId } = req.params;
     try{
-        const course = await Course.findOne({code: code, students: userId});
-        res.status(200).json(course);
+        const course = await Course.findOne({code: code, students: userId})
+            .populate({
+                path:'assignments',
+                select: 'name weight grades',
+            }).lean();
+
+        const userGrades = course.assignments
+            .map((assignment) => {
+                const grade = assignment.grades.find((grade) => grade.student.toString() === userId);
+
+                if(grade) return {id: assignment._id, name: assignment.name, score: grade.score, weight: assignment.weight}
+                return {id: assignment._id, name: assignment.name, score: null, weight: assignment.weight};
+            })
+
+
+        const totalWeight = userGrades.reduce((acc, grade) => {
+            const {score, weight} = grade;
+            return acc + ((score===null)? 0 : weight);
+        },0);
+        
+        const weightedGrade = userGrades.reduce((acc, grade) => {
+            const {score, weight} = grade;
+            return acc + ((score===null)? 0 :(score * (weight / totalWeight)));
+        }, 0);
+
+        const detailedCourse = {
+            id: course._id, name: course.name, code: course.code,
+            instructor: course.instructor, hours: course.hours,
+             totalWeight: totalWeight, courseGrade: weightedGrade ,
+              assignments: userGrades
+        };
+
+        res.status(200).json(detailedCourse);
     }
     catch (err) {
         console.log(err);

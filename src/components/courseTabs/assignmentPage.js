@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assignmentData, getGrade } from "../../components/data"; 
 
-const AssignmentPage = () => {
+const AssignmentPage = ({course}) => {
     const { code, assignmentName } = useParams();
     const assignment = assignmentData[code]?.find((item) => item.assignment === assignmentName) || {};
 
@@ -41,7 +41,6 @@ const AssignmentPage = () => {
 
     return (
         <div className="container mt-4">
-            <h1>{code} / Assignments / {assignmentName}</h1>
             <div className="card mb-4">
                 <div className="card-body">
                     <table className="table">

@@ -2,13 +2,12 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { assignmentData } from "../../components/data.js";
 
-const CourseAssignments = () => {
+const CourseAssignments = ({course}) => {
     const { code: courseName } = useParams();
     const assignments = assignmentData[courseName] || [];
 
     return (
-        <div className="container mt-4">
-            <h1 className="mb-4">{courseName} / Assignments</h1>
+        <div>
             {assignments.length > 0 ? (
                 <div className="list-group">
                     {assignments.map((assignment, index) => (

@@ -2,13 +2,12 @@ import React from "react";
 import { courseModules } from "../data"; 
 import { useParams } from "react-router-dom";
 
-const CourseModulePage = () => {
+const CourseModulePage = ({course}) => {
     const { code: courseName } = useParams();
     const modules = courseModules[courseName] || [];
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">{courseName} / Modules</h1>
 
             {modules.length > 0 ? (
                 modules.map((module, index) => (
