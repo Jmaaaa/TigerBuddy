@@ -5,6 +5,7 @@ const courseSchema = new Schema({
   name: { type: String, required: true, unique: true},
   code: { type: String, required: true, unique: true },
   instructor: { type: String, required: true },
+  hours: { type: Number },
   students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   homeInfo: { 
     description: { type: String },

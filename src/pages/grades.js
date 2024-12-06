@@ -1,17 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { assignmentData, profData, getAverageGrade, getQualityPoints } from "../components/data";
 import CourseGradeTable from "../components/courseTabs/courseGradeTable";
-const Grades = () => {
-    
-    const gradeList = Object.keys(assignmentData).map((course) => ({
-        code: course,
-        grade: getAverageGrade(course),
-        hours: 3,
-        points: getQualityPoints(course)*3,
-        instructor: profData[course],
-    }));
+import { jwtDecode  }  from 'jwt-decode';
+import axios from 'axios';
 
+const Grades = () => {
     const [activeRows,setActiveRows] = useState([]);
 
     const toggleActive = (index) => {
@@ -21,6 +15,24 @@ const Grades = () => {
             return updatedActiveRows;
         })
     };
+
+    const [courses, setCourses] = useState([]);
+    const token = localStorage.getItem('token');
+    const userId = jwtDecode(token).userId;
+    
+    useEffect(() => {
+        const getUserInfo = async() => {
+            try{
+                const response = await axios.get(`/api/courses/user/${userId}`);
+                console.log(response.data);
+                setCourses(response.data);
+            }
+            catch(err){
+                console.log(err);
+            }
+        };
+        getUserInfo();
+    },[userId]);
 
     
 //grade.id % 2 === 0 ? "":"bg-light"
@@ -42,24 +54,24 @@ const Grades = () => {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        {gradeList.map((grade,index) => (
+                        {courses.map((course,index) => (
                             <React.Fragment key={index}> 
                                 <tr data-bs-toggle="collapse" 
                                 data-bs-target={`#${index}-subtable`}
                                 style={{cursor: "pointer"}}
                                 className={activeRows[index] ? "table-active" : ""}
                                 onClick={()=>toggleActive(index)}>
-                                    <td className="p-2">{grade.code}</td>
-                                    <td className="p-2">{grade.instructor}</td>
-                                    <td className="p-2">{grade.grade}</td>
-                                    <td className="p-2">{grade.hours.toFixed(1)}</td>
-                                    <td className="p-2">{grade.points.toFixed(1)}</td>
+                                    <td className="p-2">{course.code}</td>
+                                    <td className="p-2">{course.instructor}</td>
+                                    <td className="p-2">{course.courseGrade.toFixed(1)}</td>
+                                    <td className="p-2"></td>
+                                    <td className="p-2"></td>
                                 </tr>
                                 <tr className="table-active">
                                     <td colSpan={5} className="p-0">
                                         <div className="collapse" id={`${index}-subtable`}>
-                                            <CourseGradeTable code={grade.code}/>
-                                            <p className="m-1 mx-3 p-0">(<Link to={`../courses/${grade.code}`}>Go to course page</Link>)</p>
+                                            <CourseGradeTable code={course.code}/>
+                                            <p className="m-1 mx-3 p-0">(<Link to={`../courses/${course.code}`}>Go to course page</Link>)</p>
                                         </div>
                                     </td>
                                 </tr>
