@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { assignmentData } from "../data";
 import { Link } from "react-router-dom";
+import { jwtDecode  }  from 'jwt-decode';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-const DeadlineCalendar = () => {
+const DeadlineCalendar = ({ deadlines }) => {
+    // const token = localStorage.getItem('token');
+    // const userId = jwtDecode(token).userId;
+    const [assignments, setAssignments] = useState([]);
+    const navigate = useNavigate();
+
     const [gotThisWeek, setGotThisWeek] = useState(false);
     const [thisWeek, setThisWeek] = useState([]);
     const today = new Date();
@@ -16,67 +24,36 @@ const DeadlineCalendar = () => {
 
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
+    
     useEffect(() => {
-
-
-        if (gotThisWeek)
-            return;
-        setGotThisWeek(true);
-
-        // Grab assignments due on the server.
-        let weekData = [];
-
-        for (let i = 0; i < 35; i++) {
-            let curDay = new Date(today);
-            curDay.setDate(today.getDate() + i);
-            
-            let assignments = [];
-
-            // Crappy linear search.
-            for (const [key, data] of Object.entries(assignmentData)) {
-                for (const assignment of data) {
-                    // console.log(JSON.stringify(assignment));
-                    let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
-                    let due = new Date(dateStr);
-                    if (due.getMonth() === curDay.getMonth() && due.getDate() === curDay.getDate() && due.getFullYear() === curDay.getFullYear()) {
-                        assignments.push({
-                            name: assignment.assignment,
-                            course: key,
-                            due: due,
-                            submitted: assignment.submitted
-                        });
+        const getUserInfo = async() => {
+            try{
+                // const response = await axios.get(`/api/courses/user/${userId}`);
+                let assignments = [];
+                for (const [code, course] of Object.entries(deadlines)) {
+                    for (const assignment of course) {
+                        let copy = assignment;
+                        copy.code = code;
+                        assignments.push(copy);
                     }
                 }
+
+                // console.log(JSON.stringify(assignments));
+                setAssignments(assignments);
+                // setCourses(response.data);
+                // console.log(JSON.stringify(response.data));
             }
-            // Fetch assignments for this day.
-            
-            /*
-            if (i === 3) {
-                let dueDate = curDay;
-                dueDate.setHours(12, 0, 0);
-                assignments.push({
-                    name: "Assignment 2",
-                    due: dueDate,
-                    submitted: false
-                });
-
-                dueDate.setHours(23, 59, 59);
-                assignments.push({
-                    name: "Assignment 3",
-                    due: dueDate,
-                    submitted: false
-                });
+            catch(err){
+                console.log(err);
             }
-            */
+        };
+        getUserInfo();
 
-            weekData.push({
-                day: curDay,
-                assignments: assignments
-            });
-        }
+    },[/*userId, */ deadlines]);
 
-        setThisWeek(weekData);
-    }, [today, gotThisWeek]);
+    const goToAssignment = (assignment) => {
+        navigate(`/courses/${assignment.code}/assignments/${assignment.name}`);
+    };
 
     const setCalendar = () => {
         // firstDayOfMonth.setDate(year, month, 1);
@@ -127,7 +104,25 @@ const DeadlineCalendar = () => {
 
                             const currentDay = new Date(firstCalendarDay);
                             currentDay.setDate(firstCalendarDay.getDate()+(7*i)+(j));
+                            
+                            let dayAssignments = [];
 
+                            // Crappy linear search.
+                            for (const assignment of assignments) {
+                                // console.log(JSON.stringify(assignment));
+                                let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
+                                let due = new Date(dateStr);
+                                if (due.getMonth() === currentDay.getMonth() && due.getDate() === currentDay.getDate() && due.getFullYear() === currentDay.getFullYear()) {
+                                    dayAssignments.push({
+                                        name: assignment.assignment,
+                                        // course: key,
+                                        due: due,
+                                        submitted: assignment.submitted
+                                    });
+                                    // console.log("added assignment");
+                                }
+                            }
+                            
                             // console.log(`cur month ${currentDay.getMonth()} should be ${month} for date ${currentDay} (first ${firstCalendarDay})`);
                             const dimmed = currentDay.getMonth() !== month;
                             const itsToday = currentDay.getFullYear() === today.getFullYear() && currentDay.getMonth() === today.getMonth() && currentDay.getDate() === today.getDate();
@@ -136,6 +131,13 @@ const DeadlineCalendar = () => {
                                     <div className={`card border-primary rounded-2 m-1 p-2 text-right flex-fill ${itsToday? "bg-primary-subtle": dimmed? "bg-dark-subtle":"" }  `}>
                                         <div className="card-body p-0">
                                             <h6 className="card-title">{currentDay.getDate()} {itsToday? "Today":""}</h6>
+
+                                            {dayAssignments.map((assignment, index) => {
+                                                return (<div onClick={() => goToAssignment(assignment)} key={index} className={`${(assignment.submitted ? "bg-light" : "bg-primary text-white")} mt-1 fw-bold user-select-none`} style={{ fontSize: '10px', padding: '0.25rem', borderRadius: '0.2rem', cursor: 'pointer' }}>
+                                                    
+                                                    {assignment.name}
+                                                </div>)
+                                            })}
                                         </div>
                                     </div>
                                 </div>

@@ -29,7 +29,7 @@ const Deadlines = () => {
             </div>
             <div className="d-flex flex-row-reverse gap-2 flex-wrap my-4 gap-5"style={{margin:"0 5%"}}>
                 <div className="container col d-flex flex-column">
-                    <DeadlineCalendar/>
+                    <DeadlineCalendar deadlines={deadlines}/>
                 </div>
                 <div className="container col d-flex flex-column gap-3" style={{maxWidth: "40rem"}}>
                         <div className="d-flex-inline flex-row flex-wrap row gap-2">
