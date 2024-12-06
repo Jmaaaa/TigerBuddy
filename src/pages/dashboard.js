@@ -13,7 +13,6 @@ const Dashboard = () => {
         const getUserInfo = async() => {
             try{
                 const response = await axios.get(`/api/courses/user/${userId}`);
-                console.log(response.data);
                 setCourses(response.data);
             }
             catch(err){
@@ -35,7 +34,7 @@ const Dashboard = () => {
             <div className="d-flex flex-row flex-wrap col" style={{margin:"0 3%"}}>
                 <div className=" d-flex flex-column col" style={{minWidth: "20rem", minHeight: "40rem", maxWidth: "25rem"}}>
                     {courses.map((course,index) => (
-                        <CourseCard key={index} course={course} userId={userId} className="row"/>
+                        <CourseCard key={index} course={course} className="row"/>
                     ))}
                 </div>
                 <div className="d-flex flex-column col">

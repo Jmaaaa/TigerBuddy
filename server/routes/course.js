@@ -33,7 +33,6 @@ router.patch('/addAssignments', async (req,res) => {
 });
 
 router.get('/allAssignments', async (req,res) => {
-    const { userId } = req.params;
 
     try{
         const courses = await Course.find()
@@ -62,7 +61,7 @@ router.patch('/addHours',async (req,res)=> {
     }
 });
 
-router.get('/:code/:userId', async (req,res) => {
+router.get('/:code/user/:userId', async (req,res) => {
     const { code, userId } = req.params;
     try{
         const course = await Course.findOne({code: code, students: userId});
@@ -77,7 +76,6 @@ router.get('/:code/:userId', async (req,res) => {
 
 router.get('/user/:userId', async (req,res) => {
     const { userId } = req.params;
-
     try{
 
         const courses = await Course.find({students: userId })
