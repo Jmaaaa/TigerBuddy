@@ -1,6 +1,5 @@
 const express = require('express');
 const Course = require('../models/Course');
-const Assignment = require('../models/Assignment');
 const mongoose = require('mongoose');
 const router = express.Router();
 
@@ -53,6 +52,16 @@ router.get('/allAssignments', async (req,res) => {
     }
 });
 
+router.patch('/addHours',async (req,res)=> {
+    try{
+        await Course.updateMany({}, { $set: { hours: 3 } });
+        res.status(200).json("did it");
+    } 
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 
 router.get('/user/:userId', async (req,res) => {
     const { userId } = req.params;
@@ -68,10 +77,14 @@ router.get('/user/:userId', async (req,res) => {
 
         const detailedCourses = courses.map( (course) => {
 
-            const userGrades = course.assignments.map((assignment) => {
-                const grade = assignment.grades.find((grade) => grade.student === userId);
-                if(grade) return {score: grade.score, weight: grade.weight}
-            });
+            const userGrades = course.assignments
+                .map((assignment) => {
+                const grade = assignment.grades.find((grade) => grade.student.toString() === userId);
+
+                if(grade) return {score: grade.score, weight: assignment.weight}
+                return null;
+                })
+                .filter(Boolean);
 
 
             const totalWeight = userGrades.reduce((acc, grade) => acc + grade.weight, 0);
@@ -81,7 +94,7 @@ router.get('/user/:userId', async (req,res) => {
               return acc + (score * (weight / totalWeight));
             }, 0);
 
-            return {name: course.name, code: course.code, instructor: course.instructor, courseGrade: weightedGrade};
+            return {id: course._id, name: course.name, code: course.code, instructor: course.instructor, hours: course.hours, courseGrade: weightedGrade};
         })
 
         res.status(200).json(detailedCourses);
