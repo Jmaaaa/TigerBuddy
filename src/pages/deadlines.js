@@ -1,15 +1,46 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import DeadlineCard from "../components/deadlineComponents/deadlineCard.js";
 //import { courseData } from "../../components/data.js"; 
 import DeadlineCalendar from "../components/deadlineComponents/deadlineCalendar.js"
-import { assignmentData, courseCodes } from "../components/data.js";
+import { jwtDecode  }  from 'jwt-decode';
+import axios from 'axios';
 
 const Deadlines = () => {
+    const token = localStorage.getItem('token');
+    const userId = jwtDecode(token).userId;
+    const [courses, setCourses] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [courseCodes, setCourseCodes] = useState([]);
+
+
+    useEffect(() => {
+        const getUserInfo = async() => {
+            try{
+                const response = await axios.get(`/api/courses/user/${userId}`);
+                setCourses(response.data);
+                let codes=[];
+                for(const course of response.data) {
+                    codes.push(course.code);
+                }
+                setCourseCodes(codes);
+                setIsLoading(false);
+            }
+            catch(err){
+                console.log(err);
+                setIsLoading(false);
+            }
+        };
+        getUserInfo();
+
+    },[userId]);
+
+
     const [selectedClass, setSelectedClass] = useState("all");
 
-    const deadlines = courseCodes.reduce((acc, courseCode) => {
-        const pendingAssignments = assignmentData[courseCode].filter((assingment) => !assingment.graded);
-        acc[courseCode] = pendingAssignments;
+    const deadlines = courses.reduce((acc, course) => {
+        const pendingAssignments = course.assignments.filter((assignment) => 
+            new Date() < new Date(assignment.dueDate));
+        acc[course.code] = pendingAssignments;
         return acc;
     },{});
 
@@ -34,7 +65,7 @@ const Deadlines = () => {
                 <div className="container col d-flex flex-column gap-3" style={{maxWidth: "40rem"}}>
                         <div className="d-flex-inline flex-row flex-wrap row gap-2">
                             <button onClick={() => handleClassFilter("all")} className={`btn btn-outline-primary col ${selectedClass === "all" ? "active" : ""}`}>All</button>
-                            {courseCodes.map((code,index)=>(
+                            {courses.map(({code},index)=>(
                                 <button key={index} onClick={() => handleClassFilter(code)} className={`btn btn-outline-primary col ${selectedClass === code ? "active" : ""}`}>{code}</button>
                             ))}
                         </div>

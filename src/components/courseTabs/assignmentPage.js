@@ -76,7 +76,7 @@ const AssignmentPage = () => {
                             <tr className="align-items-center">
                                 <th className="col-2 ">Due Date:</th>
                                 <td className="col-4">
-                                    {dateDue.toLocaleString('en-US',{timeZone: "GMT"})}
+                                    {dateDue.toLocaleString('en-US',{timeZone: "CST"})}
                                     {late&&!submitted?(<span className='bg-danger text-white ms-3 px-2 py-1 rounded-pill'>Overdue</span>) : ("")}
                                 </td>
                             </tr>

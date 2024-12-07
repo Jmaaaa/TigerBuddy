@@ -3,20 +3,19 @@ import { useNavigate } from "react-router-dom";
 
 const DeadlineCard = ({ code, deadline }) => {
     const course = code
-    const dateDue = deadline.dateDue;
-    const timeDue = deadline.timeDue;
-    const assignment = deadline.assignment;
-    const submitted = deadline.submitted;
+    const{name, description, dueDate, grade} = deadline;
+    const dateDue = new Date(dueDate);
+    const submitted = (grade!==undefined && grade !==null && grade.submission !== null);
     const [timeRemaining, setTimeRemaining] = useState("");
     const navigate = useNavigate();
 
-    const goToAssignment = (assignment) => {
-        navigate(`/courses/${code}/assignments/${assignment}`);
+    const goToAssignment = () => {
+        navigate(`/courses/${code}/assignments/${name}`);
     };
 
     useEffect(() => {
         const calculateCountdown = () => {
-            const deadlineDate = new Date(`${dateDue}T${timeDue}`);
+            const deadlineDate = dateDue;
             const now = new Date();
             const timeDiff = deadlineDate - now;
 
@@ -35,13 +34,13 @@ const DeadlineCard = ({ code, deadline }) => {
         const intervalId = setInterval(calculateCountdown, 1000); // Update every second
 
         return () => clearInterval(intervalId);
-    }, [dateDue, timeDue]);
+    }, [dateDue]);
 
     return (
-        <div className="card bg-light animated-shadow row" onClick={() => goToAssignment(assignment)}>
+        <div className="card bg-light animated-shadow row" onClick={() => goToAssignment()}>
             <div className="card-body">
-                <h3>{assignment}</h3>
-                <p>Due Date: {dateDue} at {timeDue} ({timeRemaining})</p>
+                <h3>{name}</h3>
+                <p>Due Date: {dateDue.toLocaleString('en-US',{timeZone: "CST"})} ({timeRemaining})</p>
                 <p>Course: {course}</p>
                 <p>Status: {submitted ? "Submitted" : "Not Submitted"}</p>
             </div>
