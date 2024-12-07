@@ -1,5 +1,6 @@
 const express = require('express');
 const Assignment = require('../models/Assignment');
+const { route } = require('./course');
 const router = express.Router();
 
 router.post('/add', async (req,res) => {
@@ -45,5 +46,44 @@ router.patch('/addGrades', async (req,res) => {
         res.status(400).json(err);
     }
 });
+
+router.patch('/:assignmentId/user/:userId/submit', async (req,res) => {
+    const {assignmentId, userId} = req.params;
+    try{
+        const {file, comment} = req.body;
+        const assignment = await Assignment.findOneAndUpdate(
+            {_id: assignmentId, 'grades.student': userId},{
+                $set: {
+                    'grades.$.submission.file': file,
+                    'grades.$.submission.date': new Date()
+                },
+                $push: {'grades.$.submission.comments': comment}
+            },
+            {new: true}
+        );
+        if (!assignment) {
+            const grade = {
+                score: null, 
+                student: userId,
+                feedback: "", 
+                submission: {
+                    file: file, 
+                    date: new Date(), 
+                    comments: [comment]
+                }
+            };
+            const newAssignment = await Assignment.findByIdAndUpdate(
+                assignmentId,
+                {$push: {grades: grade}},
+                {new: true}
+            );
+            res.status(200).json(newAssignment);
+        }
+        else res.status(200).json(assignment);
+    }
+    catch (err) {
+        res.status(400).json(err);
+    }
+})
 
 module.exports = router;
