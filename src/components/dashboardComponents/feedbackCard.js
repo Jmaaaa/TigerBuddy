@@ -32,7 +32,6 @@ const FeedbackCard = ({ feedback }) => {
     return (
         <div className="d-flex flex-column me-2">
             {feedback.map((data, idx) => {
-                console.log(JSON.stringify(data));
                 return (
                         <Link to={`../courses/${data.course}/assignments/${data.name}`} 
                             className="d-flex flex-row w-100 p-3 mb-2 bg-light bg-gradient rounded text-decoration-none text-dark" key={idx}>

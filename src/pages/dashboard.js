@@ -8,6 +8,8 @@ const Dashboard = () => {
     const [courses, setCourses] = useState([]);
     const [announcements, setAnnouncements] = useState([]);
     const [feedback, setFeedback] = useState([]);
+    const [calenPre, setcalenPre] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).userId;
@@ -20,6 +22,7 @@ const Dashboard = () => {
 
                 let announce = [];
                 let assign = [];
+                let toDo = [];
                 for (const course of response.data) {
                     // console.log(JSON.stringify(course));
                     if (course.announcements) {
@@ -34,7 +37,9 @@ const Dashboard = () => {
                     
                     if (course.assignments) {
                         for (const assignment of course.assignments) {
-                            const {grade, code, name, instructor} = assignment;
+                            const {grade, name, instructor, dueDate} = assignment;
+                            toDo.push({code:course.code,name,dueDate,grade});
+
                             if (grade === null || grade === undefined || grade.score === null)
                                 continue;
                             
@@ -48,17 +53,22 @@ const Dashboard = () => {
                     }
 
                 }
+                setcalenPre(toDo);
                 setAnnouncements(announce);
                 setFeedback(assign);
+                setIsLoading(false);
             }
             catch(err){
                 console.log(err);
+                setIsLoading(false);
             }
         };
         getUserInfo();
     },[userId]);
 
-    
+    if (isLoading) {
+        return <div></div>;
+    }
 
     return (
         <div className="d-flex flex-column flex-fill">
@@ -97,7 +107,7 @@ const Dashboard = () => {
                         Upcoming Schedule
                         </h2>
                         <div className="container d-flex flex-column">
-                            <CalendarPreview/>
+                            <CalendarPreview assignmentInfo={calenPre}/>
                         </div>
                     </div>
 

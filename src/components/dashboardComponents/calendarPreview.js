@@ -1,40 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { assignmentData } from "../data";
 import { Link } from "react-router-dom";
 
-const CalendarPreview = ({ small=false }) => {
+const CalendarPreview = ({ small=false, assignmentInfo }) => {
+    const assignmentData = assignmentInfo
     const [gotThisWeek, setGotThisWeek] = useState(false);
     const [today] = useState(new Date());
     const [thisWeek, setThisWeek] = useState([]);
+    
 
     useEffect(() => {
+        
         if (gotThisWeek)
             return;
         setGotThisWeek(true);
 
         // Grab assignments due on the server.
         let weekData = [];
-
+        
         for (let i = 0; i < 12; i++) {
+            
             let curDay = new Date(today);
             curDay.setDate(today.getDate() + i);
             
-            let assignments = [];
 
-            // Crappy linear search.
-            for (const [key, data] of Object.entries(assignmentData)) {
-                for (const assignment of data) {
-                    // console.log(JSON.stringify(assignment));
-                    let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
-                    let due = new Date(dateStr);
-                    if (due.getMonth() === curDay.getMonth() && due.getDate() === curDay.getDate() && due.getFullYear() === curDay.getFullYear()) {
-                        assignments.push({
-                            name: assignment.assignment,
-                            course: key,
-                            due: due,
-                            submitted: assignment.submitted
-                        });
-                    }
+            let assignments = [];
+            
+            // Crappy linear search. {
+            for (const assignment of assignmentData) {
+                // console.log(JSON.stringify(assignment));
+                const{code, name, dueDate, grade} = assignment;
+                
+                let due = new Date(dueDate);
+                if (due.getMonth() === curDay.getMonth() && due.getDate() === curDay.getDate() && due.getFullYear() === curDay.getFullYear()) {
+                    assignments.push({
+                        name: name,
+                        code: code,
+                        due: due,
+                        submitted: (grade!==undefined && grade !==null && grade.submission !== null)
+                    });
+                    
                 }
             }
             // Fetch assignments for this day.
@@ -63,7 +67,6 @@ const CalendarPreview = ({ small=false }) => {
                 assignments: assignments
             });
         }
-
         setThisWeek(weekData);
     }, [today, gotThisWeek]);
 
@@ -86,8 +89,8 @@ const CalendarPreview = ({ small=false }) => {
                                 }).format(assign.due);
 
                                 return (
-                                    <Link to={`../courses/${assign.course}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
-                                        <div className={`${(assign.submitted ? "bg-primary" : "bg-secondary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
+                                    <Link to={`../courses/${assign.code}/assignments/${assign.name}`} className="text-decoration-none" key={aindex}>
+                                        <div className={`${(assign.submitted ? "bg-success" : "bg-primary")} rounded px-2 py-1 mb-1 text-light flex-shrink-1 d-flex flex-row`} style={{fontSize:"12px", userSelect:"none"}}>
                                             <span className="text-nowrap flex-shrink-1 flex-grow-1 font-weight-bold" style={{overflow: "hidden"}}>{assign.name}</span>
                                             <span className="pl-2 text-nowrap flex-shrink-0">{dueTime.toString()}</span>
                                         </div>
