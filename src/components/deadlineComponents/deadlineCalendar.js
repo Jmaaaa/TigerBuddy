@@ -29,6 +29,7 @@ const DeadlineCalendar = ({ deadlines }) => {
             try{
                 // const response = await axios.get(`/api/courses/user/${userId}`);
                 let assignments = [];
+                console.log(deadlines);
                 for (const [code, course] of Object.entries(deadlines)) {
                     for (const assignment of course) {
                         let copy = assignment;
@@ -109,14 +110,14 @@ const DeadlineCalendar = ({ deadlines }) => {
                             // Crappy linear search.
                             for (const assignment of assignments) {
                                 // console.log(JSON.stringify(assignment));
-                                let dateStr = `${assignment.dateDue}T${assignment.timeDue}`;
-                                let due = new Date(dateStr);
+                                const {name, dueDate,grade, code} = assignment;
+                                let due = new Date(dueDate);
                                 if (due.getMonth() === currentDay.getMonth() && due.getDate() === currentDay.getDate() && due.getFullYear() === currentDay.getFullYear()) {
                                     dayAssignments.push({
-                                        name: assignment.assignment,
-                                        // course: key,
+                                        name: name,
+                                        code: code,
                                         due: due,
-                                        submitted: assignment.submitted
+                                        submitted: (grade!==undefined && grade !==null && grade.submission !== null)
                                     });
                                     // console.log("added assignment");
                                 }
@@ -132,7 +133,7 @@ const DeadlineCalendar = ({ deadlines }) => {
                                             <h6 className="card-title">{currentDay.getDate()} <span className="fw-normal">{itsToday? "Today":""}</span></h6>
 
                                             {dayAssignments.map((assignment, index) => {
-                                                return (<div onClick={() => goToAssignment(assignment)} key={index} className={`${(assignment.submitted ? "bg-light" : "bg-primary text-white")} mt-1 fw-normal user-select-none`} style={{ fontSize: '12px', padding: '0.25rem', borderRadius: '0.2rem', cursor: 'pointer' }}>
+                                                return (<div onClick={() => goToAssignment(assignment)} key={index} className={`${(assignment.submitted ? "bg-success text-white" : "bg-primary text-white")} mt-1 fw-normal user-select-none`} style={{ fontSize: '12px', padding: '0.25rem', borderRadius: '0.2rem', cursor: 'pointer' }}>
                                                     
                                                     {assignment.name}
                                                 </div>)
