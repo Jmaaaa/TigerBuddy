@@ -3,11 +3,7 @@ import { courseAnnouncementsData } from "../data";
 import { useOutletContext } from "react-router-dom";
 
 const CourseAnnouncements = () => {
-    const course = useOutletContext();
-    if(!course){
-
-    }
-    const { announcements} = course;
+    const {announcements} = useOutletContext();
 
     const [openIndex, setOpenIndex] = useState(null);
 
@@ -16,38 +12,28 @@ const CourseAnnouncements = () => {
     };
 
     return (
-        <div className="container mt-4">
-            {announcements.length > 0 ? (
-                <div className="list-group">
-                    {announcements.map((announcement, index) => (
-                        <div key={index} className="mb-3">
-                            <button
-                                className="list-group-item list-group-item-action"
-                                onClick={() => toggleDescription(index)}
-                                aria-expanded={openIndex === index}
-                                style={{ cursor: 'pointer', width: '100%', textAlign: 'left' }}
-                            >
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <span className="font-weight-bold">{announcement.name}</span>
-                                    <div className="d-flex align-items-center">
-                                        <span className="text-muted mr-2">Date: {new Date(announcement.date).toDateString()}</span>
-                                        <span className={`ml-2 ${openIndex === index ? 'rotate-icon' : ''}`}>
-                                            <i className={`bi ${openIndex === index ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                {openIndex === index && (
-                                    <div className="mt-2">
-                                        <p className="p-2 mb-0 bg-light rounded">{announcement.description}</p>
-                                    </div>
-                                )}
-                            </button>
+        <div className="d-flex flex-column gap-3">
+            {announcements.map(({name, description, date}, index) => (
+                <div
+                    key={index} 
+                    className="card"
+                    onClick={() => toggleDescription(index)}
+                    aria-expanded={openIndex === index}
+                >
+                    <div className={`card-header  h5 d-flex gap-3 justify-content-between align-items-center ${openIndex === index ? "": "border-bottom-0"}`}>
+                        <div className="d-flex flex-fill flex-wrap gap-1 justify-content-between align-items-center">
+                            <div>{name}</div>
+                            <div className="text-muted fw-normal h6 m-0">{new Date(date).toDateString()}</div>
                         </div>
-                    ))}
+                        <i className={`bi ps-1 ${openIndex === index ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+                    </div>
+                    {openIndex === index && (
+                        <div className="card-body">
+                            <p className="card-text">{description}</p>
+                        </div>
+                    )}
                 </div>
-            ) : (
-                <p>No announcements available for this course.</p>
-            )}
+            ))}
         </div>
     );
 };

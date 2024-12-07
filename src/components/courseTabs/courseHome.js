@@ -1,7 +1,5 @@
 import React from "react";
 import { useParams, useOutletContext } from "react-router-dom";
-import { overviewData } from "../../components/data.js"; 
-import './courseHome.css';
 
 const CourseHome = () => {
     const {instructor, homeInfo} = useOutletContext();
