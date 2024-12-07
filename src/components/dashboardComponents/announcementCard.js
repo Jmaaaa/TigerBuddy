@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { courseAnnouncementsData, nameData, profData } from "../data";
 import announcement from "../../assets/announcement.png";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,5 @@
 const express = require('express');
 const Assignment = require('../models/Assignment');
-const { route } = require('./course');
 const router = express.Router();
 
 router.post('/add', async (req,res) => {
