@@ -68,7 +68,6 @@ router.get('/:code/user/:userId', async (req,res) => {
         const course = await Course.findOne({code: code, students: userId})
             .populate({
                 path:'assignments',
-                select: 'name weight grades',
             }).lean();
 
         const userAssignments = course.assignments
@@ -78,15 +77,15 @@ router.get('/:code/user/:userId', async (req,res) => {
 
                 if(grade === undefined) {
                     return {
-                        id: _id, name: name, 
-                        description: description, dueDate: dueDate,
+                        id: _id, name: name, dueDate: dueDate,
+                        description: description, 
                         weight: weight, grade: null
                     };
                 }
 
                 return {
-                    id: _id, name: name, 
-                    description: description, dueDate: dueDate,
+                    id: _id, name: name, dueDate: dueDate,
+                    description: description, 
                     weight: weight, grade: grade
                 };                
             })

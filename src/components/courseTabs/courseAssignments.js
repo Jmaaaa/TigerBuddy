@@ -2,8 +2,7 @@ import React from "react";
 import { useOutletContext, Link } from "react-router-dom";
 
 const CourseAssignments = () => {
-    const assignments = useOutletContext();
-
+    const {assignments} = useOutletContext();
     
 
     return (
@@ -13,6 +12,7 @@ const CourseAssignments = () => {
                     {assignments.map(({name, description, dueDate, submission}) => {
 
                         const date = new Date(dueDate);
+                        
                         const datekey = date.toISOString()
                         const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                         
