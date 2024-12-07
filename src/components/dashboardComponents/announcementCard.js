@@ -3,10 +3,12 @@ import { courseAnnouncementsData, nameData, profData } from "../data";
 import announcement from "../../assets/announcement.png";
 import { Link } from "react-router-dom";
 
-const AnnouncementCard = () => {
-    const [gotAnnouncements, setGotAnnouncements] = useState(false);
-    const [announcements, setAnnouncements] = useState([]);
+const AnnouncementCard = ({ announcements }) => {
+    // console.log(JSON.stringify(announcements));
+    // const [gotAnnouncements, setGotAnnouncements] = useState(false);
+    // const [announcements, setAnnouncements] = useState([]);
     
+    /*
     useEffect(() => {
         if (gotAnnouncements)
             return;
@@ -29,6 +31,7 @@ const AnnouncementCard = () => {
         // Don't recursive update.
         setAnnouncements(allAnnouncements);
     },[gotAnnouncements]);
+    */
     
     return (
         <div className="d-flex flex-column me-2">
@@ -38,9 +41,9 @@ const AnnouncementCard = () => {
                         <div className="d-flex flex-row w-100 p-3 mb-2 bg-light bg-gradient rounded">
                             <div><img src={announcement} alt="annoncement-icon" width="32" className="rounded"/></div>
                             <div className="d-flex flex-column ms-3">
-                                <h5 className="mb-1">{data.title}</h5>
-                                <h6 className="mb-1">2024 {nameData[data.course]} for {profData[data.course]}</h6>
-                                <p className="small mb-0">{data.text}</p>
+                                <h5 className="mb-1">{data.name}</h5>
+                                <h6 className="mb-1">2024 {data.courseName} for {data.courseProf}</h6>
+                                <p className="small mb-0">{data.description}</p>
                             </div>
                         </div>
                     </Link>

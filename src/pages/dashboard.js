@@ -6,6 +6,9 @@ import axios from 'axios';
 
 const Dashboard = () => {
     const [courses, setCourses] = useState([]);
+    const [announcements, setAnnouncements] = useState([]);
+    const [feedback, setFeedback] = useState([]);
+
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).userId;
     
@@ -14,6 +17,38 @@ const Dashboard = () => {
             try{
                 const response = await axios.get(`/api/courses/user/${userId}`);
                 setCourses(response.data);
+
+                let announce = [];
+                let assign = [];
+                for (const course of response.data) {
+                    // console.log(JSON.stringify(course));
+                    if (course.announcements) {
+                        for (const announcement of course.announcements) {
+                            let copy = announcement;
+                            copy.course = course.code;
+                            copy.courseName = course.name;
+                            copy.courseProf = course.instructor;
+                            announce.push(copy);
+                        }
+                    }
+                    
+                    if (course.assignments) {
+                        for (const assignment of course.assignments) {
+                            if (!assignment.score)
+                                continue;
+                            
+                            let copy = assignment;
+                            copy.course = course.code;
+                            copy.courseName = course.name;
+                            copy.courseProf = course.instructor;
+                            assign.push(copy);
+                            // console.log(JSON.stringify(assignment));
+                        }
+                    }
+
+                }
+                setAnnouncements(announce);
+                setFeedback(assign);
             }
             catch(err){
                 console.log(err);
@@ -44,7 +79,7 @@ const Dashboard = () => {
                             Announcements
                             </h2>
                             <div className="p-2 d-flex flex-column flex-fill overflow-auto border-top border-bottom">
-                                <AnnouncementCard/>
+                                <AnnouncementCard announcements={announcements}/>
                             </div>
                         </div>
                         <div className="container m-3 d-flex flex-column col" style={{minWidth: "20rem", maxHeight: "30rem"}}>
@@ -52,7 +87,7 @@ const Dashboard = () => {
                             Feedback
                             </h2>
                             <div className="p-2 d-flex flex-column  flex-fill overflow-auto border-top border-bottom">
-                                <FeedbackCard/>
+                                <FeedbackCard feedback={feedback}/>
                             </div>
                         </div>
                     </div>
