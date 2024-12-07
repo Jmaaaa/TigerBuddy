@@ -54,7 +54,7 @@ const Course = () => {
                     <ul className="nav flex-column gap-2 sticky-top">
                         {pages.map(({name,path,icon}, idx) => (
                             <li key={idx} className="nav-item">
-                                <Link to={`./${path}`} state={{course}} 
+                                <Link to={`./${path}`} 
                                 className={`nav-link ${(curPage.endsWith(path) ? 'text-primary' : 'text-secondary')} py-2 px-1 text-decoration-none`}>
                                     <div className="d-flex flex-row justify-content-left align-items-center gap-3">
                                         <i className={`bi bi-${icon} h4`}/>

@@ -1,30 +1,33 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import logo512 from "../assets/logo512.png"
 
 const Navbar = () => {
+
+    const links = [
+        {name: "Dashboard", path: "/dashboard"},
+        {name: "Deadlines", path: "/deadlines"},
+        {name: "Grades", path: "/grades"},
+        {name: "Sign Out", path: "/login"}
+    ];
+
+    const curPage = useLocation().pathname;
+
     return (
         <>
-            <div className="navbar navbar-expand-lg bg-primary sticky-top">
-                <div className="container-fluid d-flex">
-                    <a className="navbar-brand d-flex align-items-center" href="#/dashboard">
-                        <span className="h1 fw-bolder ms-5"><span className="text-white">Tiger</span><span className="color-gold">Buddy</span></span>
+            <div className="navbar sticky-top navbar-dark bg-primary">
+                <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <a className="navbar-brand d-flex align-items-center mx-5" href="#/dashboard">
+                        <span className="h1 fw-bolder"><span className="text-white">Tiger</span><span className="color-gold">Buddy</span></span>
                         <img src={logo512} width="64" height="64" alt="logo" className="ms-2"></img>
                     </a>
 
-                    <ul className="navbar-nav ms-auto me-4 d-flex flex-row gap-3 ">
-                        <li className="nav-item">
-                            <Link to="/dashboard" className="nav-link text-white">Dashboard</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/deadlines" className="nav-link text-white">Deadlines</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/grades" className="nav-link text-white">Grades</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/login" className="nav-link text-white">Sign Out</Link>
-                        </li>
+                    <ul className="navbar-nav mx-3 d-flex flex-row gap-3">
+                        {links.map(({name,path},i) => (
+                            <li key={i}className="nav-item">
+                                <Link to={path} className={`nav-link ${(curPage.endsWith(path))? "text-white": ""}`}>{name}</Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
