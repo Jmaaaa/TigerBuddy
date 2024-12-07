@@ -14,8 +14,8 @@ const CourseGradeTable = ({course}) => {
 
     return(
         
-        <div className="d-flex">
-            <table className="table table-hover border m-1 w-100">
+        <div className="d-flex border border-2 rounded-2 overflow-hidden">
+            <table className="table table-hover mb-0">
                 <thead className="table-light">
                     <tr>
                         <th scope="col" className="p-2">Grade Item </th>
@@ -39,7 +39,7 @@ const CourseGradeTable = ({course}) => {
                 })}
                 </tbody>
                 {inCourses && (
-                    <tfoot className="table-light table-group-divider fw-bold">
+                    <tfoot className="table-light table-group-divider fw-bold" style={{borderBottomColor: "transparent"}}>
                         <tr>
                             <td colSpan={2}></td>
                             <td className="text-end">Course Total:</td>

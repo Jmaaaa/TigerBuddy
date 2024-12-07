@@ -2,19 +2,19 @@ import React from "react";
 import { courseModules } from "../data"; 
 import { useParams } from "react-router-dom";
 
-const CourseModulePage = ({course}) => {
+const CourseModulePage = () => {
     const { code: courseName } = useParams();
     const modules = courseModules[courseName] || [];
 
     return (
-        <div className="container mt-4">
+        <div className="">
 
             {modules.length > 0 ? (
                 modules.map((module, index) => (
                     <div key={module.moduleId} className="mb-4">
                         <div className="card">
                             <div className="card-header">
-                                <h2 className="mb-0">{module.title}</h2>
+                                <h2 className="mb-1">{module.title}</h2>
                                 <small className="text-muted">{module.description}</small>
                             </div>
                             <div className="card-body">

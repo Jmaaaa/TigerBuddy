@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { courseAnnouncementsData } from "../data"; 
 import { useOutletContext } from "react-router-dom";
 
 const CourseAnnouncements = () => {
