@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useOutletContext  } from 'react-router-dom';
 import CourseGradeTable from "./courseGradeTable";
 
 const CourseGrades = () => {
-    const location = useLocation();
-    const course = location.state?.course;
+    const course = useOutletContext();
 
     return (
        <div>

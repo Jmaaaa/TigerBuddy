@@ -1,32 +1,32 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { overviewData } from "../../components/data.js"; 
 import './courseHome.css';
 
-const CourseHome = ({course}) => {
+const CourseHome = () => {
+    const course = useOutletContext();
     const { code: courseName } = useParams();
 
 
     const courseOverview = overviewData[courseName] || [];
 
     return (
-        <div className="container mt-4">
-            <div className="course-homepage">
-                <h1>Welcome to {courseName}!</h1>
-
-                <h2>Course Overview:</h2>
-                {courseOverview.length > 0 ? (
-                    <div className="course-overview">
-                        <p><strong>Description:</strong> {courseOverview[0]?.description}</p>
-                        <p><strong>Key Topics:</strong> {courseOverview[1]?.keyTopics}</p>
-                        <p><strong>Expected Outcomes:</strong> {courseOverview[2]?.outcomes}</p>
-                        <p><strong>Instructor:</strong> {courseOverview[3]?.instructor}</p>
-                        <p><strong>Office Hours:</strong> {courseOverview[4]?.officeHours}</p>
-                    </div>
-                ) : (
-                    <p>No overview available for this course.</p>
-                )}
-            </div>
+        <div>
+            <div className="h3 mb-3">Course Overview</div>
+            {courseOverview.length > 0 ? (
+                <div>
+                    <p><strong>Instructor:</strong> {courseOverview[3]?.instructor}</p>
+                    <p><strong>Description:</strong> {courseOverview[0]?.description}</p>
+                    <p><strong>Key Topics:</strong> {courseOverview[1]?.keyTopics}</p>
+                    <p><strong>Expected Outcomes:</strong> {courseOverview[2]?.outcomes}</p>
+                    <div className="h3 mb-3">Contact Information</div>
+                    <p><strong>Phone:</strong> </p>
+                    <p><strong>Email:</strong></p>
+                    <p><strong>Office Hours:</strong> {courseOverview[4]?.officeHours}</p>
+                </div>
+            ) : (
+                <p>No overview available for this course.</p>
+            )}
         </div>
     );
 };

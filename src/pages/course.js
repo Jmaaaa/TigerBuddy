@@ -7,6 +7,7 @@ import axios from 'axios';
 const Course = () => {
     const { code } = useParams();
     const [course, setCourse] = useState({});
+    const [isLoading, setIsLoading] = useState(true); // Loading state
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).userId;
     
@@ -15,9 +16,11 @@ const Course = () => {
             try{
                 const response = await axios.get(`/api/courses/${code}/user/${userId}`);
                 setCourse(response.data);
+                setIsLoading(false);
             }
             catch(err){
                 console.log(err);
+                setIsLoading(false);
             }
         };
         getUserInfo();
@@ -34,6 +37,10 @@ const Course = () => {
         { name: 'Assignments', path:'assignments', icon: 'pencil-square'},
         { name: 'Grades', path: 'grades', icon: 'file-earmark-check-fill'}
     ];
+
+    if (isLoading) {
+        return <div></div>;
+    }
 
     return (
         <div className="d-flex flex-column flex-fill">
@@ -61,8 +68,8 @@ const Course = () => {
                 </div>
                 <div className="container">
                     <div className="d-flex flex-column my-4 gap-3" style={{margin:"0 2%"}}>
-                        <h1>{pathStrings.pop()}</h1>
-                        <Outlet/>
+                        <h1 className="border-bottom pb-2">{curPage.endsWith("home")? "Course Home" :pathStrings.pop()}</h1>
+                        <Outlet context={course}/>
                     </div>
                 </div>
             </div>

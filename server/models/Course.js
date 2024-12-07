@@ -8,8 +8,16 @@ const courseSchema = new Schema({
   hours: { type: Number },
   students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   homeInfo: { 
-    description: { type: String },
-    officeHours: { type: String }
+    overview: {
+      description: { type: String},
+      keyTopics: {type: String},
+      expectedOutcomes: {type: String}
+    },
+    contact:{
+      phone: {type: String},
+      email: {type: String},
+      officeHours: { type: String }
+    }
   },
   announcements: [{
     name: { type: String, required: true },

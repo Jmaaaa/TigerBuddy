@@ -97,7 +97,7 @@ const Grades = () => {
                                         <td colSpan={5} className="p-0">
                                             <div className="collapse" id={`${index}-subtable`}>
                                                 <CourseGradeTable course={course}/>
-                                                <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}/grades`} state={{course}}>Go to course page</Link>)</p>
+                                                <p className="m-1 mx-3 p-0">(<Link to={`../courses/${code}/grades`}>Go to course page</Link>)</p>
                                             </div>
                                         </td>
                                     </tr>

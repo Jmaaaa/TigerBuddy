@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { courseAnnouncementsData } from "../data"; 
-import { useLocation } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 const CourseAnnouncements = () => {
+    const course = useOutletContext();
+    if(!course){
 
-    const location = useLocation();
-    const course = location.state?.course;
+    }
     const { announcements} = course;
 
     const [openIndex, setOpenIndex] = useState(null);
