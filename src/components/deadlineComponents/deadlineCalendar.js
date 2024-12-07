@@ -84,10 +84,10 @@ const DeadlineCalendar = ({ deadlines }) => {
                     <i className="bi bi-arrow-right text-primary h1"></i>
                 </button>
             </div>
-            <div className="container">
+            <div className="container overflow-auto">
                 <div className="row flex-nowrap">
                     {weekDays.map((day,i)=>(
-                        <div key={i} className="col fw-bold text-center p-0">{day}</div>
+                        <div key={i} className="col fw-bold text-center p-0" style={{minWidth: "7rem"}}>{day}</div>
                     ))}
                 </div>
                 {[...Array(6)].map((_,i) => (
@@ -126,13 +126,13 @@ const DeadlineCalendar = ({ deadlines }) => {
                             const dimmed = currentDay.getMonth() !== month;
                             const itsToday = currentDay.getFullYear() === today.getFullYear() && currentDay.getMonth() === today.getMonth() && currentDay.getDate() === today.getDate();
                             return(
-                                <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "3rem"}}>
+                                <div key={j} className="col d-flex p-0 m-0" style={{minWidth: "7rem"}}>
                                     <div className={`card border-primary rounded-2 m-1 p-2 text-right flex-fill ${itsToday? "bg-primary-subtle": dimmed? "bg-dark-subtle":"" }  `}>
                                         <div className="card-body p-0">
-                                            <h6 className="card-title">{currentDay.getDate()} {itsToday? "Today":""}</h6>
+                                            <h6 className="card-title">{currentDay.getDate()} <span className="fw-normal">{itsToday? "Today":""}</span></h6>
 
                                             {dayAssignments.map((assignment, index) => {
-                                                return (<div onClick={() => goToAssignment(assignment)} key={index} className={`${(assignment.submitted ? "bg-light" : "bg-primary text-white")} mt-1 fw-bold user-select-none`} style={{ fontSize: '10px', padding: '0.25rem', borderRadius: '0.2rem', cursor: 'pointer' }}>
+                                                return (<div onClick={() => goToAssignment(assignment)} key={index} className={`${(assignment.submitted ? "bg-light" : "bg-primary text-white")} mt-1 fw-normal user-select-none`} style={{ fontSize: '12px', padding: '0.25rem', borderRadius: '0.2rem', cursor: 'pointer' }}>
                                                     
                                                     {assignment.name}
                                                 </div>)
