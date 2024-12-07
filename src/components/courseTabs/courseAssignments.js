@@ -16,9 +16,10 @@ const CourseAssignments = () => {
                 <div>
                     {assignments.length > 0 ? (
                         <div className="list-group">
-                            {assignments.map(({name, description, dueDate, submission}) => {
-
+                            {assignments.map(({name, description, dueDate, grade}) => {
+                                const {submission} = (grade === null)? {submission: null} : grade;
                                 const date = new Date(dueDate);
+                                const submitted = (submission !== null && submission !== undefined);
                                 
                                 const datekey = date.toISOString()
                                 const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -35,10 +36,8 @@ const CourseAssignments = () => {
                                                 Due: {date.toLocaleString('en-US',{timeZone: "GMT"})}
                                             </p>
                                         </div>
-                                        <span
-                                            className={`badge ${submission ? 'badge-success' : 'badge-warning'} badge-pill text-black`}
-                                        >
-                                            {submission ? "Submitted" : "Not Submitted"}
+                                        <span className={`px-2 py-1 rounded-pill ${submitted ? 'bg-success text-white' : 'text-secondary'}`}>
+                                            {submitted ? "Submitted" : "Not Submitted"}
                                         </span>
                                     </Link>
                                 );
