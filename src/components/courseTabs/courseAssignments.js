@@ -1,34 +1,41 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import { assignmentData } from "../../components/data.js";
+import { useOutletContext, Link } from "react-router-dom";
 
-const CourseAssignments = ({course}) => {
-    const { code: courseName } = useParams();
-    const assignments = assignmentData[courseName] || [];
+const CourseAssignments = () => {
+    const assignments = useOutletContext();
+
+    
 
     return (
         <div>
             {assignments.length > 0 ? (
                 <div className="list-group">
-                    {assignments.map((assignment, index) => (
-                        <Link
-                            key={index}
-                            to={`./${assignment.assignment}`}
-                            className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                        >
-                            <div>
-                                <strong>{assignment.assignment}</strong>
-                                <p className="mb-0 text-muted">
-                                    Due: {assignment.dateDue} at {assignment.timeDue}
-                                </p>
-                            </div>
-                            <span
-                                className={`badge ${assignment.submitted ? 'badge-success' : 'badge-warning'} badge-pill text-black`}
+                    {assignments.map(({name, description, dueDate, submission}) => {
+
+                        const date = new Date(dueDate);
+                        const datekey = date.toISOString()
+                        const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        
+                        return(
+                            <Link
+                                key={datekey}
+                                to={`./${name}`}
+                                className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                             >
-                                {assignment.submitted ? "Submitted" : "Not Submitted"}
-                            </span>
-                        </Link>
-                    ))}
+                                <div>
+                                    <strong>{name}</strong>
+                                    <p className="mb-0 text-muted">
+                                        Due: {date.toLocaleString('en-US',{timeZone: clientTimezone})}
+                                    </p>
+                                </div>
+                                <span
+                                    className={`badge ${submission ? 'badge-success' : 'badge-warning'} badge-pill text-black`}
+                                >
+                                    {submission ? "Submitted" : "Not Submitted"}
+                                </span>
+                            </Link>
+                        );
+                    })}
                 </div>
             ) : (
                 <p>No assignments available for this course.</p>

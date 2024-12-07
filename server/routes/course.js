@@ -71,22 +71,34 @@ router.get('/:code/user/:userId', async (req,res) => {
                 select: 'name weight grades',
             }).lean();
 
-        const userGrades = course.assignments
+        const userAssignments = course.assignments
             .map((assignment) => {
+                const {_id, name, description, dueDate, weight} = assignment;
                 const grade = assignment.grades.find((grade) => grade.student.toString() === userId);
 
-                if(grade) return {id: assignment._id, name: assignment.name, score: grade.score, weight: assignment.weight}
-                return {id: assignment._id, name: assignment.name, score: null, weight: assignment.weight};
+                if(grade === undefined) {
+                    return {
+                        id: _id, name: name, 
+                        description: description, dueDate: dueDate,
+                        weight: weight, grade: null
+                    };
+                }
+
+                return {
+                    id: _id, name: name, 
+                    description: description, dueDate: dueDate,
+                    weight: weight, grade: grade
+                };                
             })
 
 
-        const totalWeight = userGrades.reduce((acc, grade) => {
-            const {score, weight} = grade;
+        const totalWeight = userAssignments.reduce((acc, {grade, weight}) => {
+            const score = (grade!==null)? grade.score : null;
             return acc + ((score===null)? 0 : weight);
         },0);
         
-        const weightedGrade = userGrades.reduce((acc, grade) => {
-            const {score, weight} = grade;
+        const weightedGrade = userAssignments.reduce((acc, {grade, weight}) => {
+            const score = (grade!==null)? grade.score : null;
             return acc + ((score===null)? 0 :(score * (weight / totalWeight)));
         }, 0);
 
@@ -94,7 +106,7 @@ router.get('/:code/user/:userId', async (req,res) => {
             id: course._id, name: course.name, code: course.code,
             instructor: course.instructor, hours: course.hours,
              totalWeight: totalWeight, courseGrade: weightedGrade ,
-              assignments: userGrades, announcements: course.announcements, 
+              assignments: userAssignments, announcements: course.announcements, 
               homeInfo: course.homeInfo, modules: course.modules
         };
 
@@ -124,8 +136,8 @@ router.get('/user/:userId', async (req,res) => {
                 .map((assignment) => {
                 const grade = assignment.grades.find((grade) => grade.student.toString() === userId);
 
-                if(grade) return {id: assignment._id, name: assignment.name, score: grade.score, weight: assignment.weight}
-                return {id: assignment._id, name: assignment.name, score: null, weight: assignment.weight};
+                if(grade) return {id: assignment._id, name: assignment.name, score: grade.score, weight: assignment.weight, submitted: (grade.submission? true : false)}
+                return {id: assignment._id, name: assignment.name, score: null, weight: assignment.weight, submitted: false};
                 })
 
 

@@ -12,6 +12,7 @@ const assignmentSchema = new Schema({
         feedback: { type: String },
         submission: {
             file: { type: String},
+            date: { type: Date},
             comments: [{ type: String }]
         }
     }]
