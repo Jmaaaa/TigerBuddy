@@ -61,6 +61,7 @@ router.patch('/addHours',async (req,res)=> {
     }
 });
 
+//get one course's info for one user
 router.get('/:code/user/:userId', async (req,res) => {
     const { code, userId } = req.params;
     try{
@@ -93,7 +94,7 @@ router.get('/:code/user/:userId', async (req,res) => {
             id: course._id, name: course.name, code: course.code,
             instructor: course.instructor, hours: course.hours,
              totalWeight: totalWeight, courseGrade: weightedGrade ,
-              assignments: userGrades
+              assignments: userGrades, announcements: course.announcements
         };
 
         res.status(200).json(detailedCourse);
@@ -104,7 +105,7 @@ router.get('/:code/user/:userId', async (req,res) => {
     }
 });
 
-
+//Get all course info for one user
 router.get('/user/:userId', async (req,res) => {
     const { userId } = req.params;
     try{
@@ -136,10 +137,12 @@ router.get('/user/:userId', async (req,res) => {
               return acc + ((score===null)? 0 :(score * (weight / totalWeight)));
             }, 0);
 
-            return {id: course._id, name: course.name, code: course.code,
+            return {
+                id: course._id, name: course.name, code: course.code,
                  instructor: course.instructor, hours: course.hours,
                   totalWeight: totalWeight, courseGrade: weightedGrade ,
-                   assignments: userGrades};
+                   assignments: userGrades, announcements: course.announcements
+            };
         })
 
         res.status(200).json(detailedCourses);
@@ -150,7 +153,28 @@ router.get('/user/:userId', async (req,res) => {
     }
 });
 
+router.patch('/addAnnouncements', async (req,res) => {
+    const reqData = req.body
+    try{
+        for(const code in reqData){
+            const announcements = reqData[code].map(({title, announcement, date},i) => (
+                {name: title, description: announcement, date: new Date(date)}
+            ));
+            const course = await Course.findOneAndUpdate(
+                {code: code},
+                {$set: {announcements: announcements}},
+                {new: true}
+
+            );
 
 
+        }
+        res.status(200).json({message: "we did it"})
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+});
 
 module.exports = router;

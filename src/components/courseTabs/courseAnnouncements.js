@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { courseAnnouncementsData } from "../data"; 
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const CourseAnnouncements = ({course}) => {
-    const { code: courseName } = useParams();
-    const announcements = courseAnnouncementsData[courseName] || [];
+const CourseAnnouncements = () => {
+
+    const location = useLocation();
+    const course = location.state?.course;
+    const {code, announcements} = course;
+
     const [openIndex, setOpenIndex] = useState(null);
 
     const toggleDescription = (index) => {

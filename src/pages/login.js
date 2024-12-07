@@ -37,7 +37,7 @@ const Login = () => {
             
             <div className="navbar navbar-expand-lg bg-white sticky-top">
                 <div className="container-fluid">
-                    <a className="navbar-brand d-flex align-items-center" href="#">
+                    <a className="navbar-brand d-flex align-items-center" href="/">
                         <span className="h1 fw-bolder ms-5"><span className="color-purple">Tiger</span><span className="color-gold">Buddy</span></span>
                         <img src={logo512} width="64" height="64" alt="logo" className="ms-2"></img>
                     </a>
