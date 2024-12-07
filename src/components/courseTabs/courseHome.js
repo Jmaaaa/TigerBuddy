@@ -4,29 +4,29 @@ import { overviewData } from "../../components/data.js";
 import './courseHome.css';
 
 const CourseHome = () => {
-    const course = useOutletContext();
-    const { code: courseName } = useParams();
+    const {instructor, homeInfo} = useOutletContext();
+    const {overview, contact} = homeInfo;
 
-
-    const courseOverview = overviewData[courseName] || [];
 
     return (
-        <div>
-            <div className="h3 mb-3">Course Overview</div>
-            {courseOverview.length > 0 ? (
-                <div>
-                    <p><strong>Instructor:</strong> {courseOverview[3]?.instructor}</p>
-                    <p><strong>Description:</strong> {courseOverview[0]?.description}</p>
-                    <p><strong>Key Topics:</strong> {courseOverview[1]?.keyTopics}</p>
-                    <p><strong>Expected Outcomes:</strong> {courseOverview[2]?.outcomes}</p>
-                    <div className="h3 mb-3">Contact Information</div>
-                    <p><strong>Phone:</strong> </p>
-                    <p><strong>Email:</strong></p>
-                    <p><strong>Office Hours:</strong> {courseOverview[4]?.officeHours}</p>
+        <div className="d-flex gap-4 justify-content-between flex-wrap">
+            <div className="card flex-grow-1" style={{ flexBasis: '40rem' }}>
+                <div className="h3 card-header">Course Overview</div>
+                <div className="card-body">
+                    <p><strong>Instructor:</strong> {instructor}</p>
+                    <p><strong>Description:</strong> {overview.description}</p>
+                    <p><strong>Key Topics:</strong> {overview.keyTopics}</p>
+                    <p><strong>Expected Outcomes:</strong> {overview.outcomes}</p>
                 </div>
-            ) : (
-                <p>No overview available for this course.</p>
-            )}
+            </div>
+            <div className="card flex-grow-1" style={{ flexBasis: '20rem' }}>
+                <div className="h3 card-header">Contact Information</div>
+                <div className="card-body">
+                    <p><strong>Phone:</strong> {contact.phone}</p>
+                    <p><strong>Email:</strong> {contact.email}</p>
+                    <p><strong>Office Hours:</strong> {contact.officeHours}</p>
+                </div>
+            </div>
         </div>
     );
 };

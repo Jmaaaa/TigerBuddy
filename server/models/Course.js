@@ -11,7 +11,7 @@ const courseSchema = new Schema({
     overview: {
       description: { type: String},
       keyTopics: {type: String},
-      expectedOutcomes: {type: String}
+      outcomes: {type: String}
     },
     contact:{
       phone: {type: String},

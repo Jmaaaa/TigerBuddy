@@ -94,7 +94,8 @@ router.get('/:code/user/:userId', async (req,res) => {
             id: course._id, name: course.name, code: course.code,
             instructor: course.instructor, hours: course.hours,
              totalWeight: totalWeight, courseGrade: weightedGrade ,
-              assignments: userGrades, announcements: course.announcements
+              assignments: userGrades, announcements: course.announcements, 
+              homeInfo: course.homeInfo
         };
 
         res.status(200).json(detailedCourse);
@@ -163,6 +164,39 @@ router.patch('/addAnnouncements', async (req,res) => {
             const course = await Course.findOneAndUpdate(
                 {code: code},
                 {$set: {announcements: announcements}},
+                {new: true}
+
+            );
+
+
+        }
+        res.status(200).json({message: "we did it"})
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+});
+
+router.patch('/addHomes', async (req,res) => {
+    const reqData = req.body
+    try{
+        for(const {courseCode, description, keyTopics, outcomes,officeHours,phone,email} of reqData){
+            const overview = {
+                description: description,
+                keyTopics: keyTopics,
+                outcomes: outcomes
+            };
+            const contact = {
+                phone: phone,
+                email: email,
+                officeHours: officeHours
+            };
+            const homeInfo = {overview: overview, contact: contact}
+            
+            const newHomeInfo = await Course.findOneAndUpdate(
+                {code: courseCode},
+                {$set: {homeInfo: homeInfo}},
                 {new: true}
 
             );
