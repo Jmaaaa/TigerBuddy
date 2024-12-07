@@ -34,7 +34,8 @@ const Dashboard = () => {
                     
                     if (course.assignments) {
                         for (const assignment of course.assignments) {
-                            if (!assignment.score)
+                            const {grade, code, name, instructor} = assignment;
+                            if (grade === null || grade === undefined || grade.score === null)
                                 continue;
                             
                             let copy = assignment;

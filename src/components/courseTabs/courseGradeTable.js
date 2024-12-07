@@ -33,10 +33,7 @@ const CourseGradeTable = ({course}) => {
                                 <td className="p-2">{name}</td>
                                 <td className="p-2">{weight}% ({score!==null? (weight/totalWeight*100).toFixed(1) : 0}%)</td>
                                 <td className="p-2">0-100</td>
-                                <td className="p-2">{
-                                        (inCourses)? (grade? `${grade.score} (${getLetterGrade(grade.score)})`: "-" ) : 
-                                        score!==null? `${score} (${getLetterGrade(score)})` : "-"
-                                    }
+                                <td className="p-2">{(grade && grade.score !== null)? `${grade.score} (${getLetterGrade(grade.score)})`: "-" }
                                 </td>
                             </tr>   
                         )

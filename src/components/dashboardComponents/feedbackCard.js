@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { assignmentData, nameData, profData } from "../data";
 import feedbackImg from "../../assets/feedback.png";
+import { getLetterGrade } from "../../pages/grades";
 
 const FeedbackCard = ({ feedback }) => {
     // const [gotFeedback, setGotFeedback] = useState(false);
@@ -38,9 +39,9 @@ const FeedbackCard = ({ feedback }) => {
                             <h5 className="mb-1">{data.name}</h5>
                             <h6 className="mb-1">2024 {data.courseName} for {data.courseProf}</h6>
                             <span className="d-flex flex-row">
-                                <p className="small my-0">({data.score})</p>
+                                <p className="small my-0">{data.grade.score} ({getLetterGrade(data.grade.score)})</p>
                                 {/* <p className="small ms-1 my-0">{data.text}</p> */}
-                                <p className="small ms-1 my-0">Good job!</p>
+                                <p className="small ms-3 my-0">{data.grade.feedback}</p>
                             </span>
                             
                         </div>
