@@ -17,6 +17,8 @@ const AssignmentPage = () => {
     const dateDue = new Date(dueDate);
     const dateSubmit = new Date(date);
 
+    const late = new Date() > dateDue;
+
     const token = localStorage.getItem('token');
     const userId = jwtDecode(token).userId;
 
@@ -71,9 +73,12 @@ const AssignmentPage = () => {
                 <div className="card-body">
                     <table className="table">
                         <tbody>
-                            <tr>
-                                <th className="col-2">Due Date:</th>
-                                <td className="col-4">{dateDue.toLocaleString('en-US',{timeZone: "GMT"})}</td>
+                            <tr className="align-items-center">
+                                <th className="col-2 ">Due Date:</th>
+                                <td className="col-4">
+                                    {dateDue.toLocaleString('en-US',{timeZone: "GMT"})}
+                                    {late&&!submitted?(<span className='bg-danger text-white ms-3 px-2 py-1 rounded-pill'>LATE</span>) : ("")}
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">Submission Status:</th>
@@ -81,7 +86,7 @@ const AssignmentPage = () => {
                                     <span className={`${submitted ? 'bg-success text-white px-2 py-1 rounded-pill' : 'text-secondary'}`}>
                                             {submitted ? "Submitted" : ""}
                                     </span>
-                                    {submitted?` ${file===""? "": `"${file}"`} on ${dateSubmit.toLocaleString('en-US',{timeZone: "GMT"})}`:"No Submission"}
+                                    {submitted?` ${file===""? "": `"${file}"`} on ${dateSubmit.toLocaleString('en-US',{timeZone: "CST"})}`:"No Submission"}
                                 </td>
                             </tr>
                             <tr>
