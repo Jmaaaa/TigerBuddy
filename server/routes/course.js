@@ -95,7 +95,7 @@ router.get('/:code/user/:userId', async (req,res) => {
             instructor: course.instructor, hours: course.hours,
              totalWeight: totalWeight, courseGrade: weightedGrade ,
               assignments: userGrades, announcements: course.announcements, 
-              homeInfo: course.homeInfo
+              homeInfo: course.homeInfo, modules: course.modules
         };
 
         res.status(200).json(detailedCourse);
