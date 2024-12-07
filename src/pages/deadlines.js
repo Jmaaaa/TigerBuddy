@@ -53,6 +53,10 @@ const Deadlines = () => {
         (selectedClass !== "all" && code === selectedClass)
     );
 
+    if (isLoading) {
+        return <div></div>;
+    }
+
     return (
         <div className="d-flex flex-column flex-fill">
             <div className="container-fluid p-4 ps-5 d-flex align-items-center bg-light">
