@@ -6,7 +6,7 @@ const CourseAnnouncements = () => {
 
     const location = useLocation();
     const course = location.state?.course;
-    const {code, announcements} = course;
+    const { announcements} = course;
 
     const [openIndex, setOpenIndex] = useState(null);
 
@@ -27,9 +27,9 @@ const CourseAnnouncements = () => {
                                 style={{ cursor: 'pointer', width: '100%', textAlign: 'left' }}
                             >
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <span className="font-weight-bold">{announcement.title}</span>
+                                    <span className="font-weight-bold">{announcement.name}</span>
                                     <div className="d-flex align-items-center">
-                                        <span className="text-muted mr-2">Date: {announcement.date}</span>
+                                        <span className="text-muted mr-2">Date: {new Date(announcement.date).toDateString()}</span>
                                         <span className={`ml-2 ${openIndex === index ? 'rotate-icon' : ''}`}>
                                             <i className={`bi ${openIndex === index ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
                                         </span>
@@ -37,7 +37,7 @@ const CourseAnnouncements = () => {
                                 </div>
                                 {openIndex === index && (
                                     <div className="mt-2">
-                                        <p className="p-2 mb-0 bg-light rounded">Description: {announcement.announcement}</p>
+                                        <p className="p-2 mb-0 bg-light rounded">{announcement.description}</p>
                                     </div>
                                 )}
                             </button>
