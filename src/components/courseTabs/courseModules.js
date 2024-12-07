@@ -7,8 +7,7 @@ const CourseModulePage = () => {
     const modules = courseModules[courseName] || [];
 
     return (
-        <div className="">
-
+        <div>
             {modules.length > 0 ? (
                 modules.map((module, index) => (
                     <div key={module.moduleId} className="mb-4">

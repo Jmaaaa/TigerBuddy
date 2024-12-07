@@ -211,4 +211,34 @@ router.patch('/addHomes', async (req,res) => {
     }
 });
 
+router.patch('/addModules', async (req,res) => {
+    const reqData = req.body
+    try{
+        for(const code in reqData){
+            const modules = reqData[code].map(
+                ({moduleId, title, description, content, completed},i) =>{
+                    const index = moduleId;
+                    const name = title;
+                    const materials = content.map(({type, title},j)=>(
+                        {matName: title, type: type, viewed: completed}
+                    ));
+                    return(
+                        {index: index, name: name, description: description, materials: materials}
+                    );
+                }
+            );
+            const course = await Course.findOneAndUpdate(
+                {code: code},
+                {$set: {modules: modules}},
+                {new: true}
+            );
+        }
+        res.status(200).json({message: "we did it"})
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+});
+
 module.exports = router;

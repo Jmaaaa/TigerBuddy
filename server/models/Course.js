@@ -24,12 +24,14 @@ const courseSchema = new Schema({
     description: { type: String },
     date: { type: Date }
   }],
-  cModules: [{ 
+  modules: [{ 
+    index: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
     description: { type: String },
     materials: [{
       matName: {type: String},
-      type: {type: String}
+      type: {type: String},
+      viewed: {type: Boolean, default: false}
     }],
   }],
   assignments: [{ type: Schema.Types.ObjectId, ref: 'Assignment' }]
