@@ -1,15 +1,23 @@
 import React, { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { assignmentData, getGrade } from "../../components/data"; 
+import { useOutletContext } from "react-router-dom";
+import { getLetterGrade } from "../../pages/grades";
 
-const AssignmentPage = ({course}) => {
-    const { code, assignmentName } = useParams();
-    const assignment = assignmentData[code]?.find((item) => item.assignment === assignmentName) || {};
+const AssignmentPage = () => {
+    const {id,name, description, dueDate, grade} = useOutletContext();
+    const {score, feedback, submission} = (grade === undefined || grade === null)? 
+        {score: null, feedback: "", submission: null} : grade;
+    const {file, date, comments} = (submission === null)? {file: "", date: null, comments: ""}: submission;
+
+    const graded = (score !== null);
+    const submitted = (submission !== null);
+
+    const dateDue = new Date(dueDate);
+    const dateSubmit = new Date(date);
 
     const [image, setImage] = useState("");
     const [comment, setComment] = useState("");
     const [savedComment, setSavedComment] = useState("");
-    const [submitted, setSubmitted] = useState("");
+    const [submittedd, setSubmitted] = useState("");
     const [submitError, setSubmitError] = useState("");
     const inputFile = useRef(null);
 
@@ -40,35 +48,34 @@ const AssignmentPage = ({course}) => {
     
 
     return (
-        <div className="container mt-4">
+        <div>
             <div className="card mb-4">
                 <div className="card-body">
                     <table className="table">
                         <tbody>
                             <tr>
                                 <th scope="row">Due Date:</th>
-                                <td>{assignment.dateDue} at {assignment.timeDue}</td>
+                                <td>{dateDue.toLocaleString('en-US',{timeZone: "GMT"})}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Submission Status:</th>
-                                <td>{assignment.submitted || submitted ? `Submitted ${submitted}` : "Not Submitted"}</td>
+                                <td>{submitted?`Submitted ${file===""? "": `"${file}"`} on ${dateSubmit.toLocaleString('en-US',{timeZone: "GMT"})}`:"No Submission"}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Grade:</th>
-                                <td>{assignment.graded? getGrade(assignment.percent) : "-"}</td>
+                                <td>{graded? `${score} (${getLetterGrade(score)})` : "-"}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Description:</th>
-                                <td className="w-75"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et lacinia odio. Pellentesque cursus libero ut dolor accumsan vehicula. Maecenas pulvinar egestas fringilla. Mauris arcu nibh, volutpat eget ligula venenatis, ornare ullamcorper nibh. Fusce in gravida sapien. Vestibulum sit amet purus sapien. Nullam aliquam ipsum ut mauris tristique tempus.</td>
+                                <td colSpan={2}>Description{description}</td>
                             </tr>
                         </tbody>
                     </table>
-                    {assignment.graded ? 
+                    {graded? 
                     <div>
-                        <p className="mb-2">Submissions for {assignmentName} are closed.</p>
-                        <p style={{ whiteSpace: 'pre-wrap'}}>Comments: {assignment.graded? "(none)":savedComment}</p>
+                        <p className="mb-2">Submissions for {name} are closed.</p>
+                        <p style={{ whiteSpace: 'pre-wrap'}}>Comments: {graded? "(none)":savedComment}</p>
                     </div>    : 
-                    <div className={assignment.graded ? "d-none" : "d-flex justify-content-between"}>
+                    <div className={graded? "d-none" : "d-flex justify-content-between"}>
                         <div className="mt-3 w-50">
                             <div className="mb-2">
                                 <input
@@ -90,21 +97,12 @@ const AssignmentPage = ({course}) => {
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                                 className="p-2"
-                                style={{
-                                    width: "100%",
-                                    height: "150px",
-                                    boxSizing: "border-box",
-                                    border: "2px solid #ccc",
-                                    borderRadius: "4px",
-                                    backgroundColor: "#f8f8f8",
-                                    resize: "none",
-                                }}
                             />
                         </div>
                         <div className="mt-3 align-self-end">
                             <p className="m-2 d-inline">{submitError}</p>
                             <button className="btn btn-success d-inline" onClick={onSubmitClick}>
-                                { assignment.submitted || submitted ? "Re-Submit" : "Submit"}
+                                { submitted ? "Re-Submit" : "Submit"}
                             </button>
                         </div>
                     </div>}

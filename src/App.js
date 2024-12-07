@@ -25,8 +25,9 @@ function App() {
                         <Route path="home" element={<CourseHome />}/>
                         <Route path="announcements" element={<CourseAnnouncements />}/>
                         <Route path="modules" element={<CourseModules />}></Route>
-                        <Route path="assignments" element={<CourseAssignments />}/>
-                        <Route path="assignments/:assignmentName" element={<AssignmentPage/>}/>
+                        <Route path="assignments" element={<CourseAssignments />}>
+                            <Route path=":assignmentName" element={<AssignmentPage/>}/>
+                        </Route>
                         <Route path="grades" element={<CourseGrades />}/>
                     </Route>
                 </Route>
