@@ -70,7 +70,10 @@ const Grades = () => {
                 <table className="table border table-hover"style={{maxWidth: "80rem"}}>
                     <thead className="table-light">
                         <tr>
-                            <th scope="col" className="p-2 ">Course</th>
+                            <th scope="col" className="p-2 d-flex flex-row gap-3">
+                                <i className="bi bi-chevron-down invisible ms-2"/>
+                                <div>Course</div>
+                            </th>
                             <th scope="col" className="p-2">Instructor</th>
                             <th scope="col" className="p-2">Grade</th>
                             <th scope="col" className="p-2">Hours</th>
@@ -87,7 +90,9 @@ const Grades = () => {
                                     style={{cursor: "pointer"}}
                                     className={activeRows[index] ? "table-active" : ""}
                                     onClick={()=>toggleActive(index)}>
-                                        <td className="p-2">{code}</td>
+                                        <td className="p-2 d-flex flex-row gap-3">
+                                            <i className={`ms-2 bi ${activeRows[index] ? "bi-chevron-down": "bi-chevron-up" }`}/>
+                                            <div>{code}</div></td>
                                         <td className="p-2">{instructor}</td>
                                         <td className="p-2">{courseGrade.toFixed(1)} ({getLetterGrade(courseGrade)})</td>
                                         <td className="p-2">{hours.toFixed(1)}</td>
@@ -114,7 +119,7 @@ const Grades = () => {
                                             acc.hours += hours;
                                             acc.points += getPointGrade(courseGrade) * hours;
                                             return acc;
-                                        }, { hours: 0, points: 0 }); // Initialize accumulator
+                                        }, { hours: 0, points: 0 });
 
                                         return (
                                             <>

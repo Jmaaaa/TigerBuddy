@@ -25,7 +25,7 @@ const CourseAnnouncements = () => {
                             <div>{name}</div>
                             <div className="text-muted fw-normal h6 m-0">{new Date(date).toDateString()}</div>
                         </div>
-                        <i className={`bi ps-1 ${openIndex === index ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+                        <i className={`bi ps-1 ${openIndex === index ? 'bi-chevron-up' : 'bi-chevron-down'}`}/>
                     </div>
                     {openIndex === index && (
                         <div className="card-body">
