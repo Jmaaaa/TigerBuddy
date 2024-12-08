@@ -33,7 +33,7 @@ const CourseAssignments = () => {
                                         <div>
                                             <strong>{name}</strong>
                                             <p className="mb-0 text-muted">
-                                                Due: {date.toLocaleString('en-US',{timeZone: "GMT"})}
+                                                Due: {date.toLocaleString('en-US',{timeZone: clientTimezone})}
                                             </p>
                                         </div>
                                         <span className={`px-2 py-1 rounded-pill ${submitted ? 'bg-success text-white' : 'text-secondary'}`}>

@@ -6,6 +6,7 @@ const DeadlineCard = ({ code, deadline }) => {
     const{name, description, dueDate, grade} = deadline;
     const dateDue = new Date(dueDate);
     const submitted = (grade!==undefined && grade !==null && grade.submission !== null);
+    const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const [timeRemaining, setTimeRemaining] = useState("");
     const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ const DeadlineCard = ({ code, deadline }) => {
         <div className="card bg-light animated-shadow row" onClick={() => goToAssignment()}>
             <div className="card-body">
                 <h3>{name}</h3>
-                <p>Due Date: {dateDue.toLocaleString('en-US',{timeZone: "CST"})} ({timeRemaining})</p>
+                <p>Due Date: {dateDue.toLocaleString('en-US',{timeZone: clientTimezone})} ({timeRemaining})</p>
                 <p>Course: {course}</p>
                 <p>Status: {submitted ? "Submitted" : "Not Submitted"}</p>
             </div>
