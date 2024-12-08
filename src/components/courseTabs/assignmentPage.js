@@ -114,9 +114,13 @@ const AssignmentPage = () => {
                     {graded? 
                     <div>
                         <p className="mb-2">Submissions for {name} are closed.</p>
-                        <p style={{ whiteSpace: 'pre-wrap'}}>Comments:</p>
-                        <div className="mx-1">
-                                {comments.map((comment,i)=>(<p key={i}>{comment}</p>))}
+                        <div className="ms-2 my-1 p-o">Comments:</div> 
+                        <div className="overflow-auto rounded border p-2" style={{maxHeight:"10rem"}}>
+                            {comments.map((comment,i)=>(
+                                <div key={i} className="d-flex">
+                                    <div className="d-inlin p-2 mt-1 rounded-2 bg-secondary-subtle" >{comment}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>    : 
                     <>
@@ -136,20 +140,28 @@ const AssignmentPage = () => {
                                         {image && <p className="m-2 d-inline">&quot;{image.name}&quot; uploaded</p>}
                                     </div>
                                 </div>
-                                <p style={{ whiteSpace: 'pre-wrap'}}>Comments:</p> 
-                                <div className="mx-1">
-                                    {comments.map((comment,i)=>(<p key={i}>{comment}</p>))}
-                                </div>
+                                
                             </div>
                         </div>
                         <div className="d-flex justify-content-between flex-wrap gap-3">
-                            <textarea
-                                placeholder="Comment"
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                                className="form-control"
-                                style={{maxWidth: "40rem"}}
-                            />
+                            <div className="d-flex flex-column flex-fill">
+                                
+                                <div className="ms-2 my-1 p-o">Comments:</div> 
+                                    <div className="overflow-auto rounded border p-2" style={{maxHeight:"10rem"}}>
+                                        {comments.map((comment,i)=>(
+                                            <div key={i} className="d-flex">
+                                                <div className="d-inlin p-2 mt-1 rounded-2 bg-secondary-subtle" >{comment}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                <textarea
+                                    placeholder="Comment"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    className="form-control mt-3"
+                                    style={{maxWidth: "40rem"}}
+                                />
+                            </div>
                             <div className="d-flex flex-column flex-fill justify-content-end">
                                 <div className="m-2 text-end">{submitError}</div>
                                 <div className="d-flex justify-content-end">
