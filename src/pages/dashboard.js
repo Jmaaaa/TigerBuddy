@@ -77,7 +77,7 @@ const Dashboard = () => {
                     Welcome
                 </h1>
             </div>
-            <div className="d-flex flex-row flex-wrap col" style={{margin:"0 3%"}}>
+            <div className="d-flex flex-row flex-wrap col" style={{margin:"0 3% 3%"}}>
                 <div className=" d-flex flex-column col" style={{minWidth: "20rem", minHeight: "40rem", maxWidth: "25rem"}}>
                     {courses.map((course,index) => (
                         <CourseCard key={index} course={course} className="row"/>
