@@ -8,9 +8,9 @@ const CourseCard = ({course}) => {
     const letterGrade = getLetterGrade(courseGrade);
 
     return(
-        <Link to={`../courses/${code}`} className="h-100 m-2 text-reset text-decoration-none">
+        <Link to={`../courses/${code}`} className="d-flex flex-column flex-fill m-2 text-reset text-decoration-none">
             
-            <div className="border m-2 animated-shadow rounded overflow-hidden flex-column h-100">
+            <div className="border m-2 animated-shadow rounded overflow-hidden flex-column flex-fill" style={{height: "8rem"}}>
                 <div className="overflow-hidden h-50" style={{backgroundImage: `url(${courseImage})`}}>
                 </div>
                 <div className="m-2 h-50">
