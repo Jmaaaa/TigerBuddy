@@ -61,6 +61,7 @@ const AssignmentPage = () => {
             setImage("");
             setComment("");
             console.log('Submission successful:', response.data);
+            window.location.reload();
         }
         catch(err){
             console.log(err);

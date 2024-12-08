@@ -73,8 +73,8 @@ const Dashboard = () => {
     return (
         <div className="d-flex flex-column flex-fill">
             <div className="container-fluid p-4 ps-5 d-flex align-items-center bg-light">
-                <h1>
-                    Welcome to the dashboard
+                <h1 className="mx-5">
+                    Welcome
                 </h1>
             </div>
             <div className="d-flex flex-row flex-wrap col" style={{margin:"0 3%"}}>
