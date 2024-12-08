@@ -76,9 +76,9 @@ const CalendarPreview = ({ small=false, assignmentInfo }) => {
             {thisWeek && thisWeek.map((data, idx) => {
                 return (
                 <div className={`${!small && "col-md-3 col-lg-2"} ${small && "col-3"} p-1`} key={idx}>
-                    <div className="w-100 h-100 p-2 d-flex flex-column border border-primary rounded" style={{overflow:"hidden"}}>
+                    <div className={`w-100 h-100 p-2 d-flex flex-column border border-primary rounded ${idx===0? "bg-primary-subtle":""}`} style={{overflow:"hidden"}}>
                         <span className="flex-shrink-0 mb-1 user-select-none">
-                            {data.day.getDate()}
+                            {data.day.getDate()} {idx===0? "Today":""}
                         </span>
                         
                         <div className="flex-grow-1 d-flex flex-column justify-content-end w-100">
