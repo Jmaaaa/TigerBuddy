@@ -29,7 +29,6 @@ const DeadlineCalendar = ({ deadlines }) => {
             try{
                 // const response = await axios.get(`/api/courses/user/${userId}`);
                 let assignments = [];
-                console.log(deadlines);
                 for (const [code, course] of Object.entries(deadlines)) {
                     for (const assignment of course) {
                         let copy = assignment;
