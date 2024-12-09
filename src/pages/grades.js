@@ -66,7 +66,7 @@ const Grades = () => {
             <div className="container-fluid p-4 ps-5 d-flex align-items-center bg-light">
                 <h1>Grade Summary</h1>
             </div>
-            <div className="d-flex justify-content-center mt-5 border border-2 rounded-2 overflow-auto" style={{margin:"0 5% 10%",}}>
+            <div className="d-flex mt-5 border border-2 rounded-2 overflow-auto" style={{margin:"0 5% 10%"}}>
                 <table className="table table-hover mb-0">
                     <thead className="table-light">
                         <tr>
@@ -94,7 +94,7 @@ const Grades = () => {
                                     onClick={()=>toggleActive(index)}>
                                         <td className="p-2">
                                             <div className="d-flex flex-row gap-3">
-                                                <i className={`ms-2 bi ${activeRows[index] ? "bi-chevron-down": "bi-chevron-up" }`}/>
+                                                <i className={`ms-2 bi ${activeRows[index] ? "bi-chevron-up" : "bi-chevron-down"}`}/>
                                                 <div>{code}</div>
                                             </div>
                                         </td>

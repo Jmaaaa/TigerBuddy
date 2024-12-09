@@ -26,12 +26,12 @@ const CourseGradeTable = ({course}) => {
                 </thead>
                 <tbody className="table-group-divider">
                     {assignments.map((assignment, i) => {
-                        const{name, score, grade, weight} = assignment;
+                        const{name, grade, weight} = assignment;
                         return(
                             <tr key={i} onClick={() => goToAssignment(name)} 
                             style={{cursor: "pointer"}}>
                                 <td className="p-2">{name}</td>
-                                <td className="p-2">{weight}% ({score!==null? (weight/totalWeight*100).toFixed(1) : 0}%)</td>
+                                <td className="p-2">{weight}% ({grade && grade.score !==null? (weight/totalWeight*100).toFixed(1) : 0}%)</td>
                                 <td className="p-2">0-100</td>
                                 <td className="p-2">{(grade && grade.score !== null)? `${grade.score} (${getLetterGrade(grade.score)})`: "-" }
                                 </td>
